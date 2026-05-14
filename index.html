@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Genoa Local Experiences — Private tours in Genoa & Liguria</title>
+<meta name="description" content="Private experiences in Genoa & Liguria. Hidden places, authentic food, personal touch."/>
+<style>
+/* ═══════════════════════════════════════
+   GLOBAL
+═══════════════════════════════════════ */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#b8935a;--gold-h:#c9a46e;--gold-pale:#f5efe6;--gold-faint:#faf6f0;
+  --ink:#17120c;--ink-warm:#2a2018;--ink-mid:#3d3025;
+  --stone:#7a7268;--stone-light:#a09890;
+  --line:#ece6dd;--cream:#faf7f3;--white:#fff;
+  --soft-white:rgba(255,255,255,0.86);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--white);color:var(--ink);line-height:1.6}
+
+/* pages */
+.page{display:none}
+.page.active{display:block}
+
+/* ── NAV ── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:0.5px solid var(--line);background:rgba(255,255,255,0.97);position:sticky;top:0;z-index:200}
+.logo{cursor:pointer}
+.logo-name{font-family:'Georgia',serif;font-size:16px;font-weight:400;color:var(--ink)}
+.logo-loc{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--stone);margin-top:2px}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone);text-decoration:none;cursor:pointer;transition:color 0.2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-back{font-size:11px;color:var(--stone);cursor:pointer;display:flex;align-items:center;gap:6px;transition:color 0.2s}
+.nav-back:hover{color:var(--ink)}
+
+/* ── BUTTONS ── */
+.btn-gold{background:var(--gold);color:#fff;border:none;padding:16px 34px;font-size:13px;letter-spacing:0.09em;text-transform:uppercase;cursor:pointer;border-radius:7px;text-decoration:none;display:inline-block;font-weight:600;transition:background 0.2s,transform 0.18s,box-shadow 0.2s}
+.btn-gold:hover{background:var(--gold-h);transform:translateY(-2px);box-shadow:0 10px 28px rgba(184,147,90,0.38)}
+.btn-gold.lg{font-size:14px;padding:18px 40px}
+.btn-ghost{background:transparent;color:var(--soft-white);border:1px solid rgba(255,255,255,0.36);padding:15px 28px;font-size:13px;letter-spacing:0.09em;text-transform:uppercase;cursor:pointer;border-radius:7px;display:inline-flex;align-items:center;gap:8px;text-decoration:none;transition:border-color 0.25s,background 0.25s}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.72);background:rgba(255,255,255,0.07)}
+.btn-outline{display:inline-block;border:1px solid var(--gold);color:var(--gold);padding:14px 28px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;border-radius:7px;cursor:pointer;background:transparent;transition:all 0.22s;text-decoration:none}
+.btn-outline:hover{background:var(--gold);color:#fff}
+
+/* ── SECTIONS ── */
+.sec{padding:100px 56px}
+.sec-alt{background:var(--cream)}
+.sec-label{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.sec-title{font-family:'Georgia',serif;font-size:38px;font-weight:400;color:var(--ink);margin-bottom:20px;line-height:1.18}
+.sec-h2{font-family:'Georgia',serif;font-size:30px;font-weight:400;color:var(--ink);margin-bottom:8px;line-height:1.2}
+.sec-rule{width:28px;height:1px;background:var(--gold);margin-bottom:60px}
+.sec-rule.c{margin-left:auto;margin-right:auto}
+.body-text{font-size:14px;color:var(--stone);line-height:1.8;margin-bottom:20px}
+
+/* ═══════════════════════════════════════
+   HOMEPAGE
+═══════════════════════════════════════ */
+.hero{position:relative;height:620px;overflow:hidden;display:flex;align-items:flex-end}
+/* ↓ ЗАМЕНИ hero.jpg на своё фото */
+.hero-photo{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1592239018463-47e84b139dac?w=1400&q=85&auto=format&fit=crop') center/cover;filter:sepia(22%) saturate(1.15) brightness(0.58)}
+.hero-grade{position:absolute;inset:0;background:linear-gradient(to top,rgba(18,11,4,0.88) 0%,rgba(18,11,4,0.26) 52%,rgba(18,11,4,0.06) 100%)}
+.hero-warm{position:absolute;inset:0;background:linear-gradient(150deg,rgba(100,60,10,0.28) 0%,transparent 55%)}
+.hero-inner{position:relative;width:100%;display:flex;align-items:flex-end;justify-content:space-between;padding:0 56px 80px}
+.hero-left{max-width:580px}
+.hero-eyebrow{font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:26px}
+.hero-h1{font-family:'Georgia',serif;font-size:62px;font-weight:400;color:#fff;line-height:1.05;letter-spacing:-0.015em;margin-bottom:22px}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:400px;margin-bottom:44px}
+.hero-btns{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-badge{background:rgba(28,20,13,0.62);backdrop-filter:blur(8px);border:0.5px solid rgba(255,255,255,0.14);border-radius:10px;padding:22px 26px;text-align:center;min-width:166px;margin-bottom:4px}
+.badge-stars{color:var(--gold);font-size:14px;letter-spacing:3px;margin-bottom:8px}
+.badge-score{font-family:'Georgia',serif;font-size:32px;color:var(--soft-white);line-height:1}
+.badge-count{font-size:10px;color:rgba(255,255,255,0.42);letter-spacing:0.1em;text-transform:uppercase;margin-top:5px}
+.badge-quote{font-family:'Georgia',serif;font-size:11.5px;font-style:italic;color:rgba(255,255,255,0.48);margin-top:10px;line-height:1.45;max-width:145px}
+
+.rating-card-top{background:linear-gradient(180deg,rgba(42,32,24,0.88),rgba(24,17,11,0.82));backdrop-filter:blur(6px);border:1px solid rgba(184,147,90,0.22);border-radius:12px;padding:36px 40px;display:flex;align-items:center;justify-content:center;gap:40px;position:relative;overflow:hidden;box-shadow:0 18px 45px rgba(35,22,10,0.14);max-width:560px;margin:0 auto 56px}
+.rating-card-top::before{content:'';position:absolute;top:0;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(184,147,90,0.75),transparent)}
+.rct-num{font-family:'Georgia',serif;font-size:56px;color:var(--soft-white);line-height:1}
+.rct-stars{color:var(--gold);font-size:15px;letter-spacing:4px;margin-top:8px}
+.rct-div{width:0.5px;height:60px;background:rgba(255,255,255,0.1)}
+.rct-travelers{font-size:13px;color:var(--soft-white);margin-bottom:6px}
+.rct-via{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);opacity:0.8}
+
+.reviews-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.rev-card{background:var(--white);border:0.5px solid var(--line);border-radius:8px;padding:36px 30px;display:flex;flex-direction:column;justify-content:space-between;transition:transform 0.28s,box-shadow 0.28s}
+.rev-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(60,40,10,0.09)}
+.rev-stars{color:var(--gold);font-size:12px;letter-spacing:3px;margin-bottom:20px}
+.rev-text{font-family:'Georgia',serif;font-size:15px;font-style:italic;color:#5a5048;line-height:1.8;flex:1;margin-bottom:28px}
+.rev-author{display:flex;align-items:center;gap:12px}
+.rev-av{width:38px;height:38px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gold);flex-shrink:0}
+.rev-name{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--stone)}
+
+.tours-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tour-card{background:var(--white);border:0.5px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;transition:transform 0.28s,box-shadow 0.28s;text-decoration:none;color:inherit;display:block}
+.tour-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(60,40,10,0.12)}
+.tour-img{height:222px;position:relative;overflow:hidden;background:#c8bfb2}
+.tour-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s;filter:sepia(10%) brightness(0.95)}
+.tour-card:hover .tour-img img{transform:scale(1.04)}
+.tour-img-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(18,10,3,0.42) 0%,transparent 55%)}
+.tour-body{padding:28px 26px 30px}
+.tour-name{font-family:'Georgia',serif;font-size:20px;color:var(--ink);margin-bottom:10px;line-height:1.25}
+.tour-desc{font-size:13px;color:var(--stone);line-height:1.62;margin-bottom:14px}
+.tour-meta{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#b0a89e;margin-bottom:16px}
+.tour-price{font-family:'Georgia',serif;font-size:17px;color:var(--gold);margin-bottom:22px}
+.tour-btn{width:100%;padding:13px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:11px;letter-spacing:0.1em;font-weight:500;text-transform:uppercase;border-radius:6px;cursor:pointer;transition:all 0.15s}
+.tour-btn:hover,.tour-card:hover .tour-btn{background:var(--gold);color:#fff}
+
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.why-item{text-align:center;padding:52px 24px;border-right:0.5px solid var(--line)}
+.why-item:last-child{border-right:none}
+.why-icon{width:48px;height:48px;margin:0 auto 20px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;transition:background 0.25s}
+.why-item:hover .why-icon{background:#eddec8}
+.why-title{font-family:'Georgia',serif;font-size:18px;color:var(--ink);margin-bottom:10px}
+.why-text{font-size:13px;color:var(--stone);line-height:1.62}
+
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:460px}
+/* ↓ ЗАМЕНИ about.jpg на своё фото */
+.about-photo{background:url('images/nefset host.jpg') center/cover;filter:sepia(10%) brightness(0.94)}
+.about-body{background:#f3ede2;padding:88px 68px 88px 60px;display:flex;flex-direction:column;justify-content:center}
+.about-eyebrow{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.about-h2{font-family:'Georgia',serif;font-size:34px;font-weight:400;color:var(--ink);margin-bottom:26px;line-height:1.2}
+.about-p{font-size:14px;color:#6b6055;line-height:1.82;margin-bottom:38px}
+
+.cta-band{background:linear-gradient(135deg,rgba(42,32,24,0.96),rgba(24,17,11,0.92));padding:100px 56px;position:relative;overflow:hidden}
+.cta-band::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 18% 30%,rgba(184,147,90,0.16),transparent 40%);pointer-events:none}
+.cta-band::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,147,90,0.45),transparent)}
+.cta-inner{max-width:520px;position:relative;z-index:1}
+.cta-h2{font-family:'Georgia',serif;font-size:40px;font-weight:400;color:var(--soft-white);margin-bottom:16px;line-height:1.15}
+.cta-p{font-size:14px;color:rgba(255,255,255,0.44);max-width:360px;margin-bottom:44px;line-height:1.72}
+.cta-btns{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-bottom:32px}
+.cta-note{font-size:11px;color:rgba(255,255,255,0.22);letter-spacing:0.04em}
+
+/* ═══════════════════════════════════════
+   TOUR DETAIL PAGES
+═══════════════════════════════════════ */
+.slider{position:relative;height:520px;overflow:hidden;background:#2a1e12}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 0.65s ease}
+.slide.active{opacity:1}
+.slide-photo{width:100%;height:100%;object-fit:cover;filter:sepia(15%) saturate(1.1) brightness(0.68)}
+.slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(18,11,4,0.88) 0%,rgba(18,11,4,0.15) 45%,rgba(18,11,4,0.04) 100%)}
+.slide-content{position:absolute;bottom:0;left:0;right:0;padding:48px 56px}
+.slide-eyebrow{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:14px}
+.slide-title{font-family:'Georgia',serif;font-size:46px;font-weight:400;color:#fff;line-height:1.08;margin-bottom:18px}
+.slide-meta{display:flex;gap:28px;flex-wrap:wrap}
+.slide-meta-item{display:flex;align-items:center;gap:7px;font-size:13px;color:rgba(255,255,255,0.72)}
+.slider-nav{position:absolute;bottom:20px;left:56px;display:flex;gap:8px}
+.slider-dot{width:22px;height:2px;background:rgba(255,255,255,0.3);border-radius:1px;cursor:pointer;transition:all 0.25s}
+.slider-dot.on{background:var(--gold);width:34px}
+.slider-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;background:rgba(28,20,13,0.55);backdrop-filter:blur(4px);border:0.5px solid rgba(255,255,255,0.16);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s;z-index:10}
+.slider-arrow:hover{background:rgba(28,20,13,0.82)}
+.slider-arrow.prev{left:20px}.slider-arrow.next{right:20px}
+
+.tab-bar{border-bottom:0.5px solid var(--line);background:var(--white);position:sticky;top:57px;z-index:100}
+.tab-inner{display:flex;padding:0 56px;overflow-x:auto}
+.tab{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone);padding:16px 0;margin-right:32px;cursor:pointer;border-bottom:1.5px solid transparent;transition:color 0.2s,border-color 0.2s;white-space:nowrap;flex-shrink:0}
+.tab.on{color:var(--ink);border-bottom-color:var(--gold)}
+.tab:hover{color:var(--ink)}
+
+.layout{display:grid;grid-template-columns:1fr 320px;gap:56px;padding:64px 56px;align-items:start}
+
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px}
+.exp-item{display:flex;align-items:flex-start;gap:14px;padding:18px;background:var(--cream);border-radius:6px;border:0.5px solid var(--line)}
+.exp-icon{width:36px;height:36px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.exp-title{font-family:'Georgia',serif;font-size:15px;color:var(--ink);margin-bottom:4px}
+.exp-desc{font-size:12px;color:var(--stone);line-height:1.55}
+
+.itin-track{position:relative;padding-left:32px;margin-bottom:56px}
+.itin-track::before{content:'';position:absolute;left:11px;top:12px;bottom:12px;width:0.5px;background:var(--line)}
+.itin-step{position:relative;margin-bottom:32px}
+.itin-step:last-child{margin-bottom:0}
+.itin-dot{position:absolute;left:-32px;top:10px;width:22px;height:22px;border-radius:50%;background:var(--gold-pale);border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center}
+.itin-dot svg{width:10px;height:10px}
+.itin-dot.opt{background:#f0ebe3;border-color:#c8b898}
+.itin-time{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.itin-title{font-family:'Georgia',serif;font-size:17px;color:var(--ink);margin-bottom:6px}
+.itin-desc{font-size:13px;color:var(--stone);line-height:1.65}
+.itin-tag{display:inline-block;font-size:10px;background:var(--gold-pale);color:var(--gold);border-radius:3px;padding:2px 8px;margin-top:6px}
+.itin-tag.opt{background:#f0ebe3;color:#9a8060}
+
+.gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:200px 200px;gap:10px;border-radius:8px;overflow:hidden;margin-bottom:56px}
+.gallery-img{overflow:hidden}
+.gallery-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s;filter:sepia(8%) brightness(0.95)}
+.gallery-img:hover img{transform:scale(1.05)}
+.gallery-img.big{grid-row:1/3}
+
+.detail-rev-item{padding:28px 0;border-bottom:0.5px solid var(--line)}
+.detail-rev-item:last-child{border-bottom:none}
+.detail-rev-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.detail-rev-author{display:flex;align-items:center;gap:12px}
+.detail-rev-av{width:38px;height:38px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gold)}
+.detail-rev-name{font-size:13px;color:var(--ink);font-weight:500}
+.detail-rev-from{font-size:11px;color:var(--stone)}
+.detail-rev-stars{color:var(--gold);font-size:11px;letter-spacing:2px}
+.detail-rev-body{font-family:'Georgia',serif;font-size:14.5px;font-style:italic;color:#5a5048;line-height:1.78}
+
+.faq-item{border-bottom:0.5px solid var(--line)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:20px 0;cursor:pointer;font-family:'Georgia',serif;font-size:16px;color:var(--ink)}
+.faq-q:hover{color:var(--gold)}
+.faq-icon{width:20px;height:20px;flex-shrink:0;transition:transform 0.25s}
+.faq-icon.open{transform:rotate(45deg)}
+.faq-a{font-size:13px;color:var(--stone);line-height:1.75;max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.35s}
+.faq-a.open{max-height:260px;padding-bottom:20px}
+
+.booking-card{background:var(--white);border:0.5px solid var(--line);border-radius:12px;padding:28px;position:sticky;top:120px;box-shadow:0 8px 32px rgba(35,22,10,0.08)}
+.booking-price{font-family:'Georgia',serif;font-size:28px;color:var(--ink);margin-bottom:2px}
+.booking-price span{font-size:13px;color:var(--stone)}
+.booking-price-note{font-size:11px;color:var(--stone-light);margin-bottom:6px}
+.booking-price-alt{font-size:12px;color:var(--gold);margin-bottom:18px}
+.booking-details{border-top:0.5px solid var(--line);border-bottom:0.5px solid var(--line);padding:16px 0;margin-bottom:20px;display:flex;flex-direction:column;gap:12px}
+.booking-row{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--stone)}
+.btn-book{width:100%;padding:15px;background:var(--gold);color:#fff;border:none;border-radius:7px;font-size:12px;letter-spacing:0.09em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:background 0.2s,transform 0.15s;margin-bottom:10px;display:block;text-align:center}
+.btn-book:hover{background:var(--gold-h);transform:translateY(-1px)}
+.btn-wa-book{width:100%;padding:14px;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:7px;font-size:12px;letter-spacing:0.09em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:border-color 0.2s,background 0.2s;text-decoration:none;margin-bottom:16px}
+.btn-wa-book:hover{border-color:var(--gold);background:var(--gold-faint)}
+.booking-deposit{font-size:11px;color:var(--stone-light);text-align:center;line-height:1.55;margin-bottom:16px}
+.pay-row{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+.pay-chip{background:#f5f2ee;border-radius:3px;padding:3px 7px;font-size:9px;color:#9a9088}
+.booking-contact{margin-top:18px;padding-top:18px;border-top:0.5px solid var(--line);font-size:12px;color:var(--stone);text-align:center;line-height:1.6}
+.booking-contact a{color:var(--gold);text-decoration:none}
+
+.mobile-cta{display:none;position:sticky;bottom:0;background:rgba(255,255,255,0.97);border-top:0.5px solid var(--line);padding:14px 20px;gap:10px;z-index:150;backdrop-filter:blur(8px)}
+.mobile-cta .btn-book{margin:0;flex:1}
+.m-wa-btn{padding:14px 18px;background:transparent;border:1px solid var(--line);border-radius:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;transition:background 0.2s;flex-shrink:0}
+.m-wa-btn:hover{background:var(--gold-faint)}
+
+.addon-card{background:var(--cream);border:0.5px solid var(--line);border-radius:8px;padding:22px 24px;display:flex;align-items:flex-start;gap:16px;margin-bottom:40px}
+.addon-icon{width:40px;height:40px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.addon-title{font-family:'Georgia',serif;font-size:15px;color:var(--ink);margin-bottom:4px}
+.addon-desc{font-size:12px;color:var(--stone);line-height:1.55}
+
+.pricing-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px}
+.p-card{border:0.5px solid var(--line);border-radius:8px;padding:22px 20px}
+.p-card.feat{border-color:rgba(184,147,90,0.4);background:var(--gold-faint)}
+.p-label{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--stone);margin-bottom:8px}
+.p-price{font-family:'Georgia',serif;font-size:21px;color:var(--ink);margin-bottom:4px;line-height:1.2}
+.p-price span{font-size:11px;color:var(--stone)}
+.p-desc{font-size:12px;color:var(--stone);line-height:1.55;margin:8px 0 14px}
+.p-row{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--stone);margin-bottom:6px}
+.p-row.no{color:#b0a898}
+
+/* ── FOOTER ── */
+footer{background:var(--white);border-top:0.5px solid var(--line)}
+.foot-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:36px 56px;gap:32px}
+.foot-logo-name{font-family:'Georgia',serif;font-size:15px;color:var(--ink)}
+.foot-logo-loc{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--stone);margin-top:3px}
+.foot-links{display:flex;gap:26px;justify-content:center}
+.foot-link{font-size:12px;color:var(--stone);text-decoration:none;display:flex;align-items:center;gap:6px;cursor:pointer;transition:color 0.2s}
+.foot-link:hover{color:var(--ink)}
+.foot-copy{font-size:11px;color:#ccc;text-align:right}
+
+/* ── MODAL ── */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(18,12,8,0.58);backdrop-filter:blur(6px);z-index:300;align-items:center;justify-content:center;padding:20px}
+.modal-bg.on{display:flex}
+.modal{background:#fff;border-radius:10px;padding:40px;max-width:460px;width:100%;position:relative;max-height:90vh;overflow-y:auto}
+.modal-x{position:absolute;top:16px;right:20px;font-size:20px;cursor:pointer;color:#ccc;background:none;border:none;line-height:1}
+.modal-x:hover{color:var(--ink)}
+.modal-h{font-family:'Georgia',serif;font-size:22px;color:var(--ink);margin-bottom:6px}
+.modal-sub{font-size:13px;color:var(--stone);margin-bottom:24px}
+.mf{display:flex;flex-direction:column;gap:12px}
+.mi{padding:12px 14px;border:0.5px solid var(--line);border-radius:6px;font-size:14px;color:var(--ink);outline:none;transition:border-color 0.2s;background:#fff;width:100%}
+.mi:focus{border-color:var(--gold)}
+.modal-tour-label{background:#f7f5f2;color:var(--stone);cursor:default;font-weight:500;box-sizing:border-box}
+.cal-note{background:var(--gold-faint);border:0.5px solid #e5d9c4;border-radius:6px;padding:16px;text-align:center}
+.cal-note p:first-child{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-mid);margin-bottom:6px;font-weight:500}
+.cal-note p:last-child{font-size:12px;color:var(--stone)}
+.modal-submit{background:var(--gold);color:#fff;border:none;padding:14px;font-size:12px;letter-spacing:0.09em;text-transform:uppercase;border-radius:7px;cursor:pointer;font-weight:500;transition:background 0.15s;width:100%}
+.modal-submit:hover{background:var(--gold-h)}
+.modal-or{text-align:center;font-size:11px;color:#ccc}
+.modal-wa{display:block;text-align:center;font-size:13px;color:var(--gold);text-decoration:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:14px 20px;position:relative}
+  .nav-toggle{display:block;border:none;background:transparent;color:var(--ink);font-size:24px;cursor:pointer;padding:10px 8px}
+  .nav-links{display:flex;flex-direction:column;gap:18px;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:18px 20px;border-bottom:0.5px solid var(--line);max-height:0;overflow:hidden;opacity:0;transition:max-height 0.28s ease,opacity 0.28s ease;box-shadow:0 12px 32px rgba(0,0,0,0.08)}
+  nav.open .nav-links{max-height:240px;opacity:1}
+  .nav-links a{padding:10px 0}
+  .hero-warm{display:none}
+  .sec{padding:64px 24px}
+  .hero-inner{flex-direction:column;align-items:flex-start;padding:0 24px 32px;gap:20px}
+  .hero-h1{font-size:32px;line-height:1.15}
+  .hero{height:420px}
+  .hero-eyebrow{margin-bottom:16px}
+  .hero-sub{margin-bottom:24px;font-size:14px}
+  .rating-card-top{flex-direction:column;gap:20px;padding:28px 24px}
+  .rct-div{width:60px;height:0.5px}
+  .reviews-grid,.tours-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .why-item{border-right:none;border-bottom:0.5px solid var(--line)}
+  .about-wrap{grid-template-columns:1fr}.about-photo{min-height:260px}
+  .about-body{padding:48px 28px}
+  .cta-band{padding:64px 24px}.cta-btns{flex-direction:column;align-items:flex-start}
+  .foot-inner{grid-template-columns:1fr;text-align:center;padding:32px 24px}
+  .foot-links{flex-wrap:wrap;justify-content:center}.foot-copy{text-align:center}
+  .layout{grid-template-columns:1fr;padding:40px 24px}
+  .sidebar{display:none}.mobile-cta{display:flex}
+  .slide-title{font-size:32px}.slide-content{padding:32px 24px}
+  .slider-nav{left:24px}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:160px 160px 160px}
+  .gallery-img.big{grid-row:auto}
+  .exp-grid,.pricing-cards{grid-template-columns:1fr}
+  .addon-card{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     SHARED NAV (changes per page via JS)
+═══════════════════════════════════════ -->
+<nav id="main-nav">
+  <div class="logo" onclick="showPage('home')">
+    <div class="logo-name">Genoa Local Experiences</div>
+    <div class="logo-loc">Genoa &amp; Liguria</div>
+  </div>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">☰</button>
+  <div class="nav-links" id="nav-links">
+    <a onclick="scrollToId('reviews')">Reviews</a>
+    <a onclick="scrollToId('tours')">Tours</a>
+    <a onclick="scrollToId('about')">About</a>
+    <a onclick="openModal('general')">Contact</a>
+  </div>
+  <div id="nav-back" style="display:none">
+    <span class="nav-back" onclick="showPage('home')">← All tours</span>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     PAGE: HOME
+═══════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <div class="hero">
+    <div class="hero-photo"></div>
+    <div class="hero-grade"></div>
+    <div class="hero-warm"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Private experiences · Genoa &amp; Liguria</div>
+        <h1 class="hero-h1">Genoa &amp; Liguria —<br>seen like a local</h1>
+        <p class="hero-sub">Private experiences with hidden places, authentic food and a personal touch — far from typical tours.</p>
+        <div class="hero-btns">
+          <button class="btn-gold" onclick="scrollToId('tours')">Explore tours →</button>
+          <a class="btn-ghost" href="https://wa.me/393203723453" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <div class="badge-stars">★★★★★</div>
+        <div class="badge-score">5.0</div>
+        <div class="badge-count">50+ travelers</div>
+        <div class="badge-quote">"Like exploring with a local friend"</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="reviews" class="sec sec-alt">
+    <div style="text-align:center">
+      <div class="sec-label">What guests say</div>
+      <h2 class="sec-title">Trusted by travelers worldwide</h2>
+      <div class="sec-rule c"></div>
+    </div>
+    <div class="rating-card-top">
+      <div style="text-align:center"><div class="rct-num">5.0</div><div class="rct-stars">★★★★★</div></div>
+      <div class="rct-div"></div>
+      <div><div class="rct-travelers">50+ verified reviews</div><div class="rct-via">via Withlocals</div></div>
+    </div>
+    <div class="reviews-grid">
+      <div class="rev-card">
+        <div><div class="rev-stars">★★★★★</div><p class="rev-text">"Felt like exploring Genoa with a friend, not a guide — relaxed and completely personal."</p></div>
+        <div class="rev-author"><div class="rev-av">LA</div><div class="rev-name">Laura, USA</div></div>
+      </div>
+      <div class="rev-card">
+        <div><div class="rev-stars">★★★★★</div><p class="rev-text">"She showed us hidden spots we would never find on our own. An incredible day."</p></div>
+        <div class="rev-author"><div class="rev-av">MK</div><div class="rev-name">Mark, UK</div></div>
+      </div>
+      <div class="rev-card">
+        <div><div class="rev-stars">★★★★★</div><p class="rev-text">"Perfect mix of culture, local food and beautiful views. Highly recommended!"</p></div>
+        <div class="rev-author"><div class="rev-av">SO</div><div class="rev-name">Sophie, France</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tours" class="sec">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
+      <div><div class="sec-label">Our tours</div><h2 class="sec-title" style="margin-bottom:0">Private experiences<br>in Liguria</h2></div>
+      <p style="font-size:12px;color:var(--stone-light);max-width:200px;text-align:right;line-height:1.6">All experiences are fully private — no shared groups.</p>
+    </div>
+    <div class="sec-rule"></div>
+    <div class="tours-grid">
+      <div class="tour-card" onclick="showPage('genoa')">
+        <div class="tour-img">
+          <!-- ↓ ЗАМЕНИ на своё фото тура Genoa -->
+          <img src="images/genoa must see/IMG_8480.JPG" alt="Genoa Must-Sees & Tastings"/>
+          <div class="tour-img-shade"></div>
+        </div>
+        <div class="tour-body">
+          <div class="tour-name">Genoa Must-Sees &amp; Tastings</div>
+          <p class="tour-desc">Iconic landmarks, hidden corners and authentic food — Genoa beyond the obvious.</p>
+          <div class="tour-meta">3 hours · Private experience</div>
+          <div class="tour-price">From €240 / group of 4</div>
+          <button class="tour-btn">Book now</button>
+        </div>
+      </div>
+      <div class="tour-card" onclick="showPage('portofino')">
+        <div class="tour-img">
+          <!-- ↓ ЗАМЕНИ на своё фото тура Portofino -->
+          <img src="images/portofino/pexels-omar-helal-500649064-16089024.jpg" alt="Portofino & Beyond"/>
+          <div class="tour-img-shade"></div>
+        </div>
+        <div class="tour-body">
+          <div class="tour-name">Portofino &amp; Beyond</div>
+          <p class="tour-desc">Portofino, San Fruttuoso and Camogli — a full day by ferry along the Riviera.</p>
+          <div class="tour-meta">Full day · Private · Ferry included</div>
+          <div class="tour-price">From €650 / group of 4</div>
+          <button class="tour-btn">Plan my trip</button>
+        </div>
+      </div>
+      <div class="tour-card" onclick="showPage('cinqueterre')">
+        <div class="tour-img">
+          <!-- ↓ ЗАМЕНИ на своё фото тура Cinque Terre -->
+          <img src="images/5 terre/daniel-j-schwarz-9dnp5vwRUB8-unsplash.jpg" alt="Cinque Terre Day Experience"/>
+          <div class="tour-img-shade"></div>
+        </div>
+        <div class="tour-body">
+          <div class="tour-name">Cinque Terre Day Experience</div>
+          <p class="tour-desc">Vernazza, Manarola, Riomaggiore — explored properly, at your pace.</p>
+          <div class="tour-meta">Full day · Private · Flexible pace</div>
+          <div class="tour-price">From €650 / group of 4</div>
+          <button class="tour-btn">Plan my day</button>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:28px;font-size:12px;color:#bbb">Prices vary based on group size and customization.</p>
+  </section>
+
+  <div style="height:0.5px;background:var(--line);margin:0 56px"></div>
+
+  <section class="sec sec-alt">
+    <div class="sec-label">Why choose this</div>
+    <h2 class="sec-title">Why book with me</h2>
+    <div class="sec-rule"></div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="why-title">Private</div><p class="why-text">No groups, no rush. Just you and your people.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="why-title">Hidden spots</div><p class="why-text">Discover the real place, not tourist routes.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div>
+        <div class="why-title">Local food</div><p class="why-text">Carefully selected tastings and authentic flavors.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <div class="why-title">Flexible</div><p class="why-text">Tours adapted to your pace and interests.</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="about" class="about-wrap">
+    <!-- ↓ ЗАМЕНИ images/about.jpg на своё фото -->
+    <div class="about-photo"></div>
+    <div class="about-body">
+      <div class="about-eyebrow">YOUR LOCAL HOST</div>
+      <h2 class="about-h2">Hi, I'm Nefset — your local host in Genoa.</h2>
+      <p class="about-p">I've been living in Italy since 2015 and created these private experiences to help you discover the most authentic and beautiful side of Genoa and Liguria.</p>
+      <p class="about-p">Each experience is private, flexible, and tailored to your pace — with hidden corners, local food, and unforgettable views.</p>
+      <a class="btn-outline" href="https://wa.me/393203723453" target="_blank">PLAN YOUR PERFECT DAY</a>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <div class="cta-inner">
+      <h2 class="cta-h2">Ready to explore?</h2>
+      <p class="cta-p">Reserve your spot with a small deposit. Final payment on the day of the tour.</p>
+      <div class="cta-btns">
+        <button class="btn-gold lg" onclick="openModal('general')">Check availability →</button>
+        <a class="btn-ghost" href="https://wa.me/393203723453" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Ask on WhatsApp
+        </a>
+      </div>
+      <p class="cta-note">nefset@proton.me · +39 320 372 3453 · Instagram <a href="https://www.instagram.com/nefset/" target="_blank">@nefset</a></p>
+    </div>
+  </div>
+
+  <footer><div class="foot-inner">
+    <div><div class="foot-logo-name">Genoa Local Experiences</div><div class="foot-logo-loc">Private tours in Genoa &amp; Liguria</div></div>
+    <div class="foot-links">
+      <a class="foot-link" href="https://wa.me/393203723453" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+      <a class="foot-link" href="mailto:nefset@proton.me"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email</a>
+      <a class="foot-link" href="https://www.instagram.com/nefset/" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram</a>
+    </div>
+    <div class="foot-copy">© Genoa Local Experiences</div>
+  </div></footer>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE: GENOA TOUR
+═══════════════════════════════════════ -->
+<div id="page-genoa" class="page">
+  <div class="slider" id="slider-genoa">
+    <!-- ↓ ЗАМЕНИ src на свои фото тура Genoa (5-7 штук) -->
+    <div class="slide active"><img class="slide-photo" src="images/genoa must see/IMG_8480.JPG" alt="Genoa"/><div class="slide-overlay"></div></div>
+    <div class="slide"><img class="slide-photo" src="images/genoa must see/IMG_8763.JPG" alt="Genoa alley"/><div class="slide-overlay"></div></div>
+    <div class="slide"><img class="slide-photo" src="images/genoa must see/aleksandr-popov-p5eiH_T0MnE-unsplash.jpg" alt="Local food"/><div class="slide-overlay"></div></div>
+    <div class="slide"><img class="slide-photo" src="images/genoa must see/julia-karnavusha-w5LDNk4EGSU-unsplash.jpg" alt="Cathedral"/><div class="slide-overlay"></div></div>
+    <div class="slide"><img class="slide-photo" src="images/genoa must see/ryan--pkckNDGs94-unsplash.jpg" alt="View"/><div class="slide-overlay"></div></div>
+    <div class="slide-content">
+      <div class="slide-eyebrow">Private experience · Genoa</div>
+      <div class="slide-title">Genoa Must-Sees<br>&amp; Tastings</div>
+      <div class="slide-meta">
+        <div class="slide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>3 hours</div>
+        <div class="slide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Private experience</div>
+        <div class="slide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>From €240 / group of 4</div>
+      </div>
+    </div>
+    <div class="slider-nav" id="dots-genoa"></div>
+    <div class="slider-arrow prev" onclick="slideNav('genoa',-1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg></div>
+    <div class="slider-arrow next" onclick="slideNav('genoa',1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+  </div>
+  <div class="tab-bar"><div class="tab-inner">
+    <div class="tab on" onclick="scrollToId('g-overview')">Overview</div>
+    <div class="tab" onclick="scrollToId('g-itinerary')">Itinerary</div>
+    <div class="tab" onclick="scrollToId('g-gallery')">Gallery</div>
+    <div class="tab" onclick="scrollToId('g-reviews')">Reviews</div>
+    <div class="tab" onclick="scrollToId('g-faq')">FAQ</div>
+  </div></div>
+  <div class="layout">
+    <div class="main">
+      <div id="g-overview" style="margin-bottom:56px">
+        <div class="sec-label">Overview</div>
+        <h2 class="sec-h2">Experience Genoa like a local</h2>
+        <div class="sec-rule"></div>
+        <p class="body-text">Walk through the heart of the city with a local host, discover hidden streets, hear fascinating stories and enjoy authentic local tastings. A perfect introduction to Genoa — at your own pace, with no group and no rush.</p>
+        <div class="exp-grid">
+          <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></div><div><div class="exp-title">Iconic landmarks &amp; hidden gems</div><p class="exp-desc">See the must-sees and discover places you would never find on your own.</p></div></div>
+          <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div><div><div class="exp-title">Taste authentic local food</div><p class="exp-desc">Focaccia, fresh pesto, farinata — I'll guide you to the right spots and you choose what to try.</p></div></div>
+          <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div><div class="exp-title">Local stories, not boring history</div><p class="exp-desc">Learn the city's stories in a relaxed and engaging way.</p></div></div>
+          <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><div class="exp-title">Tips for the rest of your stay</div><p class="exp-desc">Get local recommendations for restaurants, views and things to do.</p></div></div>
+        </div>
+      </div>
+      <div id="g-itinerary" style="margin-bottom:56px">
+        <div class="sec-label">Itinerary</div>
+        <h2 class="sec-h2">A simple route</h2>
+        <div class="sec-rule"></div>
+        <div class="itin-track">
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="itin-time">Start</div><div class="itin-title">Meeting point</div><p class="itin-desc">We meet in the city center. Exact location confirmed after booking — flexible to your accommodation.</p></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="itin-time">~20 min</div><div class="itin-title">Piazza De Ferrari</div><p class="itin-desc">Genoa's main square — we start here with an overview of the city and its surprising history.</p></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div class="itin-time">~40 min</div><div class="itin-title">San Lorenzo Cathedral</div><p class="itin-desc">A beautiful hidden treasure — one of the oldest cathedrals in Italy, full of stories most tourists never hear.</p></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></div><div class="itin-time">~30 min</div><div class="itin-title">Hidden streets &amp; caruggi</div><p class="itin-desc">The vicioli — narrow medieval alleyways full of local life, stories and real Genoa.</p></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div><div class="itin-time">~30 min</div><div class="itin-title">Local food stop</div><p class="itin-desc">Carefully selected spots for authentic Genoese flavors. You choose what to try — no pressure, just good food.</p></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg></div><div class="itin-time">End</div><div class="itin-title">Castelletto — panoramic view</div><p class="itin-desc">End with a stunning view over the city. The perfect moment to ask your last questions and get personal tips.</p></div>
+        </div>
+      </div>
+      <div id="g-gallery" style="margin-bottom:56px">
+        <div class="sec-label">Gallery</div><h2 class="sec-h2">From the experience</h2><div class="sec-rule"></div>
+        <div class="gallery-grid">
+          <!-- ↓ ЗАМЕНИ на свои фото -->
+          <div class="gallery-img big"><img src="images/genoa must see/aleksandr-popov-p5eiH_T0MnE-unsplash.jpg" alt="" style="height:100%"/></div>
+          <div class="gallery-img"><img src="images/genoa must see/07DFC1A1-F08C-4DB6-B1F4-436AB9D194B0.PNG" alt=""/></div>
+          <div class="gallery-img"><img src="images/genoa must see/ryan--pkckNDGs94-unsplash.jpg" alt=""/></div>
+          <div class="gallery-img"><img src="images/genoa must see/IMG_8480.JPG" alt=""/></div>
+          <div class="gallery-img"><img src="images/genoa must see/IMG_8763.JPG" alt=""/></div>
+        </div>
+      </div>
+      <div id="g-reviews" style="margin-bottom:56px">
+        <div class="sec-label">What guests say</div><h2 class="sec-h2">Reviews</h2><div class="sec-rule"></div>
+        <div class="detail-rev-item"><div class="detail-rev-top"><div class="detail-rev-author"><div class="detail-rev-av">LA</div><div><div class="detail-rev-name">Laura</div><div class="detail-rev-from">USA</div></div></div><div class="detail-rev-stars">★★★★★</div></div><p class="detail-rev-body">"Felt like exploring Genoa with a friend, not a guide — relaxed and completely personal."</p></div>
+        <div class="detail-rev-item"><div class="detail-rev-top"><div class="detail-rev-author"><div class="detail-rev-av">MK</div><div><div class="detail-rev-name">Mark</div><div class="detail-rev-from">UK</div></div></div><div class="detail-rev-stars">★★★★★</div></div><p class="detail-rev-body">"She showed us hidden spots we would never find on our own."</p></div>
+        <div class="detail-rev-item"><div class="detail-rev-top"><div class="detail-rev-author"><div class="detail-rev-av">SO</div><div><div class="detail-rev-name">Sophie</div><div class="detail-rev-from">France</div></div></div><div class="detail-rev-stars">★★★★★</div></div><p class="detail-rev-body">"Perfect mix of culture, local food and beautiful views."</p></div>
+      </div>
+      <div id="g-faq" style="margin-bottom:80px">
+        <div class="sec-label">FAQ</div><h2 class="sec-h2">Good to know</h2><div class="sec-rule"></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Where do we meet?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Meeting point details shared after booking. I adapt to your location — hotel, port or anywhere central.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How many people can join?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">This is a private experience — just your group, no strangers. Groups of 1–8 people work great.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is food included?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Food and drinks are not included unless agreed in advance. I'll guide you to curated local spots and you choose what you'd like to try.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I customize the route?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Absolutely. If you have specific interests, just mention it when booking and I'll adapt the route.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What's the cancellation policy?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Free cancellation up to 48 hours before. After that, the deposit is non-refundable. Rescheduling is always possible.</div></div>
+      </div>
+    </div>
+    <div class="sidebar">
+      <div class="booking-card">
+        <div class="booking-price">€240 <span>/ group of 4</span></div>
+        <div class="booking-price-note">+€30 per person (up to 12 people)</div>
+        <div class="booking-details">
+          <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>3 hours</div>
+          <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Private experience</div>
+          <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>Flexible start time</div>
+          <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Meeting point in Genoa</div>
+        </div>
+        <button class="btn-book" onclick="openModal('genoa')">Check availability</button>
+        <a class="btn-wa-book" href="https://wa.me/393203723453" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Ask on WhatsApp</a>
+        <div class="booking-deposit">Reserve with a small deposit.<br>Final payment on the day.</div>
+        <div class="pay-row"><span class="pay-chip">VISA</span><span class="pay-chip">Mastercard</span><span class="pay-chip">Apple Pay</span><span class="pay-chip">G Pay</span></div>
+        <div class="booking-contact">Questions? <a href="mailto:nefset@proton.me">nefset@proton.me</a><br>WhatsApp: <a href="https://wa.me/393203723453">+39 320 372 3453</a><br>Instagram: <a href="https://www.instagram.com/nefset/" target="_blank">@nefset</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-cta">
+    <button class="btn-book" onclick="openModal('genoa')">Check availability</button>
+    <a class="m-wa-btn" href="https://wa.me/393203723453" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="#b8935a"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE: PORTOFINO TOUR
+═══════════════════════════════════════ -->
+<div id="page-portofino" class="page">
+  <div class="slider" id="slider-portofino">
+    <!-- ↓ ЗАМЕНИ src на свои фото тура Portofino -->
+    <div class="slide active"><img class="slide-photo" src="images/portofino/pexels-omar-helal-500649064-16089024.jpg" alt="Portofino"/><div class="slide-overlay"></div></div>
+    <div class="slide"><img class="slide-photo" src="images/portofino/pexels-vlasceanu-15570386.jpg" alt="San Fruttuoso"/><div class="slide-overlay"></div></div>
+    <div class="slide"><img class="slide-photo" src="images/portofino/pexels-vlasceanu-15570447.jpg" alt="Camogli"/><div class="slide-overlay"></div></div>
+    <div class="slide"><img class="slide-photo" src="images/portofino/pexels-archie-mcnicol-559645417-18602885.jpg" alt="Ferry"/><div class="slide-overlay"></div></div>
+    <div class="slide"><img class="slide-photo" src="images/portofino/chris-curry-CppSSFRjbRs-unsplash.jpg" alt="Coast"/><div class="slide-overlay"></div></div>
+    <div class="slide-content">
+      <div class="slide-eyebrow">Private experience · Ligurian Riviera</div>
+      <div class="slide-title">Portofino<br>&amp; Beyond</div>
+      <div class="slide-meta">
+        <div class="slide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>10:00 – 17:30 · Full day</div>
+        <div class="slide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Private · Custom route</div>
+        <div class="slide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>From €650 / group of 4</div>
+      </div>
+    </div>
+    <div class="slider-nav" id="dots-portofino"></div>
+    <div class="slider-arrow prev" onclick="slideNav('portofino',-1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg></div>
+    <div class="slider-arrow next" onclick="slideNav('portofino',1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+  </div>
+  <div class="tab-bar"><div class="tab-inner">
+    <div class="tab on" onclick="scrollToId('p-overview')">Overview</div>
+    <div class="tab" onclick="scrollToId('p-itinerary')">Itinerary</div>
+    <div class="tab" onclick="scrollToId('p-gallery')">Gallery</div>
+    <div class="tab" onclick="scrollToId('p-reviews')">Reviews</div>
+    <div class="tab" onclick="scrollToId('p-faq')">FAQ</div>
+  </div></div>
+  <div class="layout">
+    <div class="main">
+      <div id="p-overview" style="margin-bottom:56px">
+        <div class="sec-label">Overview</div>
+        <h2 class="sec-h2">The Riviera, the way it should be seen</h2>
+        <div class="sec-rule"></div>
+        <p class="body-text">We leave Genoa by ferry at 10:00 from Porto Antico and spend the day exploring Portofino, the hidden cove of San Fruttuoso, and the charming fishing village of Camogli — returning by the last ferry at 17:30. No tour bus, no fixed script. Just us, moving at our own pace.</p>
+        <p class="body-text">Portofino is popular and in high season you'll feel it. But there's a real difference between arriving with a group on a schedule and arriving with someone who knows where to go, when to go, and which corners most visitors never reach.</p>
+        <div class="exp-grid">
+          <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div><div class="exp-title">Ferry — included</div><p class="exp-desc">Golfo Paradiso ferry from Porto Antico. Scenic crossing along the Riviera.</p></div></div>
+          <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="exp-title">Portofino</div><p class="exp-desc">The iconic village seen with local eyes — the harbor, the viewpoints, the corners most tourists never reach.</p></div></div>
+          <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></div><div><div class="exp-title">San Fruttuoso di Camogli</div><p class="exp-desc">A medieval abbey in a hidden cove, reachable only by boat — extraordinary.</p></div></div>
+          <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div><div class="exp-title">Camogli</div><p class="exp-desc">A real Ligurian fishing village — colourful houses, pebble beach and focaccia worth travelling for.</p></div></div>
+        </div>
+      </div>
+      <div id="p-itinerary" style="margin-bottom:56px">
+        <div class="sec-label">Itinerary</div>
+        <h2 class="sec-h2">How the day unfolds</h2>
+        <div class="sec-rule"></div>
+        <div class="itin-track">
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="itin-time">09:30</div><div class="itin-title">Meeting at Porto Antico, Genoa</div><p class="itin-desc">We meet at the ferry terminal. I'll sort the tickets and brief you on the day before we board.</p></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div class="itin-time">10:00 – 11:00</div><div class="itin-title">Ferry crossing to Portofino</div><p class="itin-desc">A scenic hour on the Golfo Paradiso ferry — views of the Ligurian coast the whole way. A public tourist boat, but a beautiful way to travel.</p><span class="itin-tag">Ferry included in price</span></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><circle cx="12" cy="12" r="4"/></svg></div><div class="itin-time">11:00 – 13:00</div><div class="itin-title">Portofino</div><p class="itin-desc">The village can be busy in high season — that's the reality. But I know the timing and the quieter paths that make all the difference.</p></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></div><div class="itin-time">13:00 – 14:30</div><div class="itin-title">San Fruttuoso di Camogli</div><p class="itin-desc">A medieval abbey in a hidden cove — reachable only by boat. We hop the ferry between stops. Fewer crowds, extraordinary setting.</p><span class="itin-tag">Ferry between stops included</span></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div><div class="itin-time">14:30 – 16:30</div><div class="itin-title">Camogli — lunch &amp; free time</div><p class="itin-desc">Time to breathe. If you've added the lunch option, we head to a handpicked local restaurant. Otherwise I'll point you to the best spots.</p></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg></div><div class="itin-time">17:30</div><div class="itin-title">Last ferry back to Genoa</div><p class="itin-desc">Last Golfo Paradiso ferry from Camogli. We arrive back in Genoa around 18:30.</p><span class="itin-tag" style="background:#fee;color:#c00">Last ferry · don't miss it</span></div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div>
+          <div><div class="addon-title">Optional: Lunch at a local restaurant</div><p class="addon-desc">A curated lunch at a handpicked local spot in Camogli — fresh seafood, local wine. Agreed in advance. Just mention it when booking.</p></div>
+        </div>
+      </div>
+      <div id="p-gallery" style="margin-bottom:56px">
+        <div class="sec-label">Gallery</div><h2 class="sec-h2">From the experience</h2><div class="sec-rule"></div>
+        <div class="gallery-grid">
+          <div class="gallery-img big"><img src="images/portofino/pexels-omar-helal-500649064-16089024.jpg" alt="" style="height:100%"/></div>
+          <div class="gallery-img"><img src="images/portofino/pexels-vlasceanu-15570386.jpg" alt=""/></div>
+          <div class="gallery-img"><img src="images/portofino/pexels-vlasceanu-15570447.jpg" alt=""/></div>
+          <div class="gallery-img"><img src="images/portofino/pexels-archie-mcnicol-559645417-18602885.jpg" alt=""/></div>
+          <div class="gallery-img"><img src="images/portofino/chris-curry-CppSSFRjbRs-unsplash.jpg" alt=""/></div>
+        </div>
+      </div>
+      <div id="p-reviews" style="margin-bottom:56px">
+        <div class="sec-label">What guests say</div><h2 class="sec-h2">Reviews</h2><div class="sec-rule"></div>
+        <div class="detail-rev-item"><div class="detail-rev-top"><div class="detail-rev-author"><div class="detail-rev-av">JA</div><div><div class="detail-rev-name">James</div><div class="detail-rev-from">USA</div></div></div><div class="detail-rev-stars">★★★★★</div></div><p class="detail-rev-body">"The ferry crossing alone was worth it. Portofino with someone who actually knows it — completely different from arriving on your own."</p></div>
+        <div class="detail-rev-item"><div class="detail-rev-top"><div class="detail-rev-author"><div class="detail-rev-av">AN</div><div><div class="detail-rev-name">Anna</div><div class="detail-rev-from">Germany</div></div></div><div class="detail-rev-stars">★★★★★</div></div><p class="detail-rev-body">"San Fruttuoso was completely unexpected — one of the most beautiful places I've ever seen."</p></div>
+        <div class="detail-rev-item"><div class="detail-rev-top"><div class="detail-rev-author"><div class="detail-rev-av">SO</div><div><div class="detail-rev-name">Sophie</div><div class="detail-rev-from">France</div></div></div><div class="detail-rev-stars">★★★★★</div></div><p class="detail-rev-body">"A perfect day. Relaxed, personal, beautiful. The lunch in Camogli was the best meal of our whole trip."</p></div>
+      </div>
+      <div id="p-faq" style="margin-bottom:80px">
+        <div class="sec-label">FAQ</div><h2 class="sec-h2">Good to know</h2><div class="sec-rule"></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What time does it start and end?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">We meet at Porto Antico at 09:30. Ferry departs at 10:00. Last ferry back from Camogli is at 17:30, arriving in Genoa around 18:30.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Are ferry tickets included?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Yes — all ferry tickets for the day are included in your price. The ferry is a public tourist boat (Golfo Paradiso) shared with other passengers, but we move independently.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Will Portofino be crowded?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">In high season, yes. I offer timing, local knowledge and routes that most visitors never take — it makes a real difference.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is food included?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Food and drinks are not included unless agreed in advance. A full lunch at a local restaurant in Camogli can be added as an optional extra — just mention it when booking.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What if the weather is bad?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">In rough weather, Golfo Paradiso may cancel or modify the service. I monitor conditions and will let you know in advance. Rescheduling with no penalty.</div></div>
+      </div>
+    </div>
+    <div class="sidebar">
+      <div class="booking-card">
+        <div class="booking-price">€650 <span>/ group of 4</span></div>
+        <div class="booking-price-note">+€100 per person (up to 12 people) · All ferries included</div>
+        <div class="booking-details">
+          <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>10:00 – 17:30 · Full day</div>
+          <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Private · Custom route</div>
+          <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>All ferry tickets included</div>
+          <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg>Lunch available as add-on</div>
+        </div>
+        <button class="btn-book" onclick="openModal('portofino')">Plan my trip</button>
+        <a class="btn-wa-book" href="https://wa.me/393203723453" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Ask on WhatsApp</a>
+        <div class="booking-deposit">Reserve with a small deposit.<br>Final payment on the day.</div>
+        <div class="pay-row"><span class="pay-chip">VISA</span><span class="pay-chip">Mastercard</span><span class="pay-chip">Apple Pay</span><span class="pay-chip">G Pay</span></div>
+        <div class="booking-contact">Questions? <a href="mailto:nefset@proton.me">nefset@proton.me</a><br>WhatsApp: <a href="https://wa.me/393203723453">+39 320 372 3453</a><br>Instagram: <a href="https://www.instagram.com/nefset/" target="_blank">@nefset</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-cta">
+    <button class="btn-book" onclick="openModal('portofino')">Plan my trip</button>
+    <a class="m-wa-btn" href="https://wa.me/393203723453" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="#b8935a"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE: CINQUE TERRE TOUR
+═══════════════════════════════════════ -->
+<div id="page-cinqueterre" class="page">
+  <div class="slider" id="slider-ct">
+    <!-- ↓ ЗАМЕНИ src на свои фото тура Cinque Terre -->
+    <div class="slide active"><img class="slide-photo" src="images/5 terre/daniel-j-schwarz-9dnp5vwRUB8-unsplash.jpg" alt="Cinque Terre"/><div class="slide-overlay"></div></div>
+    <div class="slide"><img class="slide-photo" src="images/5 terre/daniel-j-schwarz-Yy-srRFVgPA-unsplash.jpg" alt="Vernazza"/><div class="slide-overlay"></div></div>
+    <div class="slide"><img class="slide-photo" src="images/5 terre/elias-kipfer-AE7TAzCqXPU-unsplash.jpg" alt="Manarola"/><div class="slide-overlay"></div></div>
+    <div class="slide"><img class="slide-photo" src="images/5 terre/josh-hild-K4WXehq5Alc-unsplash.jpg" alt="Riomaggiore"/><div class="slide-overlay"></div></div>
+    <div class="slide"><img class="slide-photo" src="images/5 terre/martino-grua-0_vfYpOsfl8-unsplash.jpg" alt="Coast"/><div class="slide-overlay"></div></div>
+    <div class="slide-content">
+      <div class="slide-eyebrow">Private experience · Cinque Terre</div>
+      <div class="slide-title">Cinque Terre<br>Day Experience</div>
+      <div class="slide-meta">
+        <div class="slide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Full day · flexible pace</div>
+        <div class="slide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Private · Vernazza, Manarola, Riomaggiore</div>
+        <div class="slide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>From €650 for a group of 4</div>
+      </div>
+    </div>
+    <div class="slider-nav" id="dots-ct"></div>
+    <div class="slider-arrow prev" onclick="slideNav('ct',-1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg></div>
+    <div class="slider-arrow next" onclick="slideNav('ct',1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+  </div>
+  <div class="tab-bar"><div class="tab-inner">
+    <div class="tab on" onclick="scrollToId('ct-overview')">Overview</div>
+    <div class="tab" onclick="scrollToId('ct-pricing')">Pricing</div>
+    <div class="tab" onclick="scrollToId('ct-itinerary')">Itinerary</div>
+    <div class="tab" onclick="scrollToId('ct-gallery')">Gallery</div>
+    <div class="tab" onclick="scrollToId('ct-reviews')">Reviews</div>
+    <div class="tab" onclick="scrollToId('ct-faq')">FAQ</div>
+  </div></div>
+  <div class="layout">
+    <div class="main">
+      <div id="ct-overview" style="margin-bottom:56px">
+        <div class="sec-label">Overview</div>
+        <h2 class="sec-h2">Three villages. One day. Your pace.</h2>
+        <div class="sec-rule"></div>
+        <p class="body-text">We take the train from Genoa and spend the day in Cinque Terre — exploring Vernazza, Manarola and Riomaggiore at a relaxed, unhurried pace. No tour group schedule, no headset, no rushing. Just the villages as they actually are.</p>
+        <p class="body-text">Cinque Terre is famous, and in high season the crowds are real. What I offer is timing, local knowledge and the ability to adapt the day to what you actually want.</p>
+        <div class="exp-grid">
+          <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div><div class="exp-title">Train from Genoa</div><p class="exp-desc">Direct regional train from Genova Brignole — about 1.5 hours, coastal views.</p></div></div>
+          <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="exp-title">Vernazza, Manarola, Riomaggiore</div><p class="exp-desc">Three villages, each with its own character. Explored properly, not rushed.</p></div></div>
+          <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="exp-title">Hiking option</div><p class="exp-desc">Walk coastal trail sections between villages — adapted to your fitness on the day.</p></div></div>
+          <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div><div><div class="exp-title">Local food stops</div><p class="exp-desc">Anchovies, pesto, local wine — I'll point you to the right spots throughout the day.</p></div></div>
+        </div>
+      </div>
+      <div id="ct-pricing" style="margin-bottom:56px">
+        <div class="sec-label">Pricing</div><h2 class="sec-h2">Two options</h2><div class="sec-rule"></div>
+        <p class="body-text" style="margin-bottom:28px">The price is per group — so the more of you there are, the better the value. You can also add full logistics where I prepare all train tickets in advance.</p>
+        <div class="pricing-cards">
+          <div class="p-card">
+            <div class="p-label">Experience only</div>
+            <div class="p-price">€650 <span>/ group of up to 4</span></div>
+            <div class="p-desc">My time and local knowledge. Train tickets purchased on the day by the client.</div>
+            <div class="p-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Full day private experience</div>
+            <div class="p-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Vernazza, Manarola, Riomaggiore</div>
+            <div class="p-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Hiking option included</div>
+            <div class="p-row no"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Train tickets not included</div>
+          </div>
+          <div class="p-card feat">
+            <div class="p-label" style="color:var(--gold)">Full logistics included</div>
+            <div class="p-price">€910–930 <span>/ group of up to 4</span></div>
+            <div class="p-desc">I prepare everything — tickets, schedules, connections. You just show up. (~+€60–70 p.p.)</div>
+            <div class="p-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Everything above included</div>
+            <div class="p-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>All train tickets included</div>
+            <div class="p-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Full schedule prepared</div>
+            <div class="p-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Zero logistics stress</div>
+          </div>
+        </div>
+      </div>
+      <div id="ct-itinerary" style="margin-bottom:56px">
+        <div class="sec-label">Itinerary</div><h2 class="sec-h2">How the day unfolds</h2><div class="sec-rule"></div>
+        <div class="itin-track">
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="itin-time">Morning</div><div class="itin-title">Meeting at Genova Brignole station</div><p class="itin-desc">We meet at the station. If you've booked full logistics, everything is ready. Otherwise I'll help you buy tickets on the spot.</p></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div class="itin-time">~1.5 hours</div><div class="itin-title">Train along the Ligurian coast</div><p class="itin-desc">A scenic regional train ride. I'll brief you on the villages and what to expect as we travel.</p></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><circle cx="12" cy="12" r="4"/></svg></div><div class="itin-time">~2–3 hours</div><div class="itin-title">Vernazza</div><p class="itin-desc">The most dramatic village — a natural harbour, a medieval tower and lanes winding up to panoramic views.</p></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></div><div class="itin-time">~1.5–2 hours</div><div class="itin-title">Manarola</div><p class="itin-desc">One of the most beautiful villages in Italy. We time our arrival to get the best light.</p></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div><div class="itin-time">~1 hour</div><div class="itin-title">Riomaggiore</div><p class="itin-desc">The southernmost and slightly quieter village. Good wine, good views, a natural end to the day.</p></div>
+          <div class="itin-step"><div class="itin-dot opt"><svg viewBox="0 0 24 24" fill="none" stroke="#9a8060" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="itin-time" style="color:#9a8060">Optional · extra cost</div><div class="itin-title" style="color:var(--ink-mid)">Monterosso — beach &amp; dinner</div><p class="itin-desc">In summer, we can end the day in Monterosso — the only village with a proper beach. A swim, aperitivo, dinner at a local restaurant.</p><span class="itin-tag opt">Summer only · extra cost · agree when booking</span></div>
+          <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg></div><div class="itin-time">Evening</div><div class="itin-title">Train back to Genoa</div><p class="itin-desc">We return together. I'll make sure you're on the right connection.</p></div>
+        </div>
+      </div>
+      <div id="ct-gallery" style="margin-bottom:56px">
+        <div class="sec-label">Gallery</div><h2 class="sec-h2">From the experience</h2><div class="sec-rule"></div>
+        <div class="gallery-grid">
+          <div class="gallery-img big"><img src="images/5 terre/daniel-j-schwarz-9dnp5vwRUB8-unsplash.jpg" alt="" style="height:100%"/></div>
+          <div class="gallery-img"><img src="images/5 terre/daniel-j-schwarz-Yy-srRFVgPA-unsplash.jpg" alt=""/></div>
+          <div class="gallery-img"><img src="images/5 terre/elias-kipfer-AE7TAzCqXPU-unsplash.jpg" alt=""/></div>
+          <div class="gallery-img"><img src="images/5 terre/josh-hild-K4WXehq5Alc-unsplash.jpg" alt=""/></div>
+          <div class="gallery-img"><img src="images/5 terre/martino-grua-0_vfYpOsfl8-unsplash.jpg" alt=""/></div>
+        </div>
+      </div>
+      <div id="ct-reviews" style="margin-bottom:56px">
+        <div class="sec-label">What guests say</div><h2 class="sec-h2">Reviews</h2><div class="sec-rule"></div>
+        <div class="detail-rev-item"><div class="detail-rev-top"><div class="detail-rev-author"><div class="detail-rev-av">LA</div><div><div class="detail-rev-name">Laura</div><div class="detail-rev-from">USA</div></div></div><div class="detail-rev-stars">★★★★★</div></div><p class="detail-rev-body">"We saw three villages without ever feeling rushed. Vernazza at that time of day was something else entirely."</p></div>
+        <div class="detail-rev-item"><div class="detail-rev-top"><div class="detail-rev-author"><div class="detail-rev-av">MK</div><div><div class="detail-rev-name">Mark</div><div class="detail-rev-from">UK</div></div></div><div class="detail-rev-stars">★★★★★</div></div><p class="detail-rev-body">"Having someone handle the trains meant we actually enjoyed the day instead of stressing about connections."</p></div>
+        <div class="detail-rev-item"><div class="detail-rev-top"><div class="detail-rev-author"><div class="detail-rev-av">AN</div><div><div class="detail-rev-name">Anna</div><div class="detail-rev-from">Germany</div></div></div><div class="detail-rev-stars">★★★★★</div></div><p class="detail-rev-body">"The Monterosso dinner at the end was the perfect finish. One of the best days of our whole Italy trip."</p></div>
+      </div>
+      <div id="ct-faq" style="margin-bottom:80px">
+        <div class="sec-label">FAQ</div><h2 class="sec-h2">Good to know</h2><div class="sec-rule"></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How is the price structured?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">The price is per group, not per person — from €600 for up to 4 people. Train tickets add approx. €60–70 per person on top if you choose the full logistics option.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Are train tickets included?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">It depends on the option. The base price does not include train tickets. The full logistics option includes all tickets, prepared in advance.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Will it be crowded?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">In high season, yes — crowds are part of the reality. I know the timing, the less-visited paths and the quieter corners that make a real difference.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is food included?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Food and drinks are not included unless agreed in advance. I'll guide you to curated local spots throughout the day.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can we add Monterosso and dinner?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Yes — in summer (June–September) we can end in Monterosso with a swim and dinner. Extra cost, arranged in advance. Mention it when booking.</div></div>
+      </div>
+    </div>
+    <div class="sidebar">
+      <div class="booking-card">
+        <div class="booking-price">€650 <span>/ group</span></div>
+        <div class="booking-price-note">Up to 4 people · +€100 per person (up to 12 people)</div>
+        <div class="booking-price-alt">+ ~€60–70 p.p. with full logistics</div>
+        <div class="booking-details">
+          <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Full day · flexible pace</div>
+          <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Private · your group only</div>
+          <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Hiking option included</div>
+          <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg>Monterosso add-on available</div>
+        </div>
+        <button class="btn-book" onclick="openModal('ct')">Plan my day</button>
+        <a class="btn-wa-book" href="https://wa.me/393203723453" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004 a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374 a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898 a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654 a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Ask on WhatsApp</a>
+        <div class="booking-deposit">Reserve with a small deposit.<br>Final payment on the day.</div>
+        <div class="pay-row"><span class="pay-chip">VISA</span><span class="pay-chip">Mastercard</span><span class="pay-chip">Apple Pay</span><span class="pay-chip">G Pay</span></div>
+        <div class="booking-contact">Questions? <a href="mailto:nefset@proton.me">nefset@proton.me</a><br>WhatsApp: <a href="https://wa.me/393203723453">+39 320 372 3453</a><br>Instagram: <a href="https://www.instagram.com/nefset/" target="_blank">@nefset</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-cta">
+    <button class="btn-book" onclick="openModal('ct')">Plan my day</button>
+    <a class="m-wa-btn" href="https://wa.me/393203723453" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="#b8935a"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     BOOKING MODAL (shared)
+═══════════════════════════════════════ -->
+<div class="modal-bg" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-x" onclick="closeModal()">×</button>
+    <h3 class="modal-h" id="modal-title">Book your tour</h3>
+    <p class="modal-sub" id="modal-sub">Reserve with a small deposit — final payment on the day.</p>
+    <div class="mf">
+      <select class="mi" id="modal-tour" style="display:none">
+        <option value="genoa">Genoa Must-Sees &amp; Tastings — from €240 / group of 4</option>
+        <option value="portofino">Portofino &amp; Beyond — from €650 / group of 4</option>
+        <option value="ct">Cinque Terre Day Experience — from €650 / group of 4</option>
+      </select>
+      <div class="mi modal-tour-label" id="modal-tour-label" style="display:none"></div>
+      <select class="mi" id="modal-group-size">
+  <option>1–4 people — €240 total</option>
+  <option>5 people — €270 total</option>
+  <option>6 people — €300 total</option>
+  <option>7 people — €330 total</option>
+  <option>8 people — €360 total</option>
+  <option>9 people — €390 total</option>
+  <option>10 people — €420 total</option>
+  <option>11 people — €450 total</option>
+  <option>12 people — €480 total</option>
+</select>
+      <div id="modal-extras"></div>
+      <button class="modal-submit" onclick="openCalendly()">Continue to date &amp; payment →</button>
+      <div class="modal-or">or</div>
+      <a href="https://wa.me/393203723453" target="_blank" class="modal-wa">Ask on WhatsApp instead →</a>
+      <div class="pay-row"><span class="pay-chip">VISA</span><span class="pay-chip">Mastercard</span><span class="pay-chip">Apple Pay</span><span class="pay-chip">G Pay</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════ -->
+<script>
+// ── PAGE NAVIGATION ──
+var sliderStates = {};
+
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('page-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+  document.getElementById('main-nav').classList.remove('open');
+
+  var isHome = (name === 'home');
+  document.getElementById('nav-back').style.display = isHome ? 'none' : 'block';
+  document.getElementById('nav-links').style.display = isHome ? 'flex' : 'none';
+
+  if (!isHome && !sliderStates[name]) {
+    initSlider(name);
+  }
+}
+
+function toggleNav() {
+  document.getElementById('main-nav').classList.toggle('open');
+}
+
+// ── SLIDERS ──
+function initSlider(name) {
+  var idMap = { genoa:'slider-genoa', portofino:'slider-portofino', cinqueterre:'slider-ct' };
+  var dotsIdMap = { genoa:'dots-genoa', portofino:'dots-portofino', cinqueterre:'dots-ct' };
+  var key = name === 'cinqueterre' ? 'ct' : name;
+
+  var container = document.getElementById(idMap[name]);
+  if (!container) return;
+  var slides = container.querySelectorAll('.slide');
+  var dotsEl = document.getElementById(dotsIdMap[name]);
+  var cur = 0;
+
+  dotsEl.innerHTML = '';
+  slides.forEach(function(_, i) {
+    var d = document.createElement('div');
+    d.className = 'slider-dot' + (i === 0 ? ' on' : '');
+    d.onclick = (function(idx){ return function(){ go(idx); }; })(i);
+    dotsEl.appendChild(d);
+  });
+
+  function go(n) {
+    slides[cur].classList.remove('active');
+    dotsEl.children[cur].classList.remove('on');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    dotsEl.children[cur].classList.add('on');
+    sliderStates[name].cur = cur;
+  }
+
+  sliderStates[name] = { cur: 0, go: go, total: slides.length };
+  var timer = setInterval(function(){ go(cur + 1); }, 5000);
+  sliderStates[name].timer = timer;
+}
+
+window.slideNav = function(key, dir) {
+  var name = key === 'ct' ? 'cinqueterre' : key;
+  if (sliderStates[name]) sliderStates[name].go(sliderStates[name].cur + dir);
+};
+
+// ── SCROLL & FAQ ──
+function scrollToId(id) {
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function toggleFaq(el) {
+  var a = el.nextElementSibling;
+  var ic = el.querySelector('.faq-icon');
+  var isOpen = a.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(function(x){ x.classList.remove('open'); });
+  document.querySelectorAll('.faq-icon').forEach(function(x){ x.classList.remove('open'); });
+  if (!isOpen) { a.classList.add('open'); ic.classList.add('open'); }
+}
+
+// ── MODAL ──
+function openModal(tour) {
+  var sel = document.getElementById('modal-tour');
+  var labelEl = document.getElementById('modal-tour-label');
+  var extrasEl = document.getElementById('modal-extras');
+  var groupSizeEl = document.getElementById('modal-group-size');
+  extrasEl.innerHTML = '';
+
+  var tourNames = {
+    genoa: 'Genoa Must-Sees & Tastings',
+    portofino: 'Portofino & Beyond',
+    ct: 'Cinque Terre Day Experience'
+  };
+
+  sel.value = tour;
+  sel.style.display = 'none';
+  labelEl.textContent = tourNames[tour] || tour;
+  labelEl.style.display = 'block';
+
+  if (tour === 'portofino') {
+    groupSizeEl.innerHTML = '<option>1–4 people — €650 total</option><option>5 people — €750 total</option><option>6 people — €850 total</option><option>7 people — €950 total</option><option>8 people — €1050 total</option><option>9 people — €1150 total</option><option>10 people — €1250 total</option><option>11 people — €1350 total</option><option>12 people — €1450 total</option>';
+    extrasEl.innerHTML = '<select class="mi"><option value="">Lunch add-on? (optional)</option><option value="yes">Yes — add lunch at a local restaurant</option><option value="no">No thanks</option></select>';
+  } else if (tour === 'ct') {
+    groupSizeEl.innerHTML = '<option>1–4 people — €650 total</option><option>5 people — €750 total</option><option>6 people — €850 total</option><option>7 people — €950 total</option><option>8 people — €1050 total</option><option>9 people — €1150 total</option><option>10 people — €1250 total</option><option>11 people — €1350 total</option><option>12 people — €1450 total</option>';
+    extrasEl.innerHTML = '<select class="mi"><option value="">Train tickets? (logistics option)</option><option value="yes">Yes — include all tickets (+~€60–70 p.p.)</option><option value="no">No — I\'ll handle tickets myself</option></select><select class="mi"><option value="">Monterosso add-on? (summer only)</option><option value="yes">Yes — beach & dinner</option><option value="no">No thanks</option></select>';
+  } else if (tour === 'genoa') {
+    groupSizeEl.innerHTML = '<option>1–4 people — €240 total</option><option>5 people — €270 total</option><option>6 people — €300 total</option><option>7 people — €330 total</option><option>8 people — €360 total</option><option>9 people — €390 total</option><option>10 people — €420 total</option><option>11 people — €450 total</option><option>12 people — €480 total</option>';
+  }
+
+  document.getElementById('modal').classList.add('on');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('on');
+}
+
+function openCalendly() {
+  closeModal();
+  var tour = document.getElementById('modal-tour').value;
+  var url = 'https://calendly.com/nefset';
+  if (tour === 'genoa') {
+    url = 'https://calendly.com/nefset/genoa-must-see';
+  } else if (tour === 'portofino') {
+    url = 'https://calendly.com/nefset/portofino';
+  } else if (tour === 'ct') {
+    url = 'https://calendly.com/nefset/5-terre';
+  }
+  window.open(url, '_blank');
+}
+</script>
+</body>
+</html>
