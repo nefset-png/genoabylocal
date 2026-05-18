@@ -105,9 +105,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 4
 .tour-btn{width:100%;padding:13px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:11px;letter-spacing:0.1em;font-weight:500;text-transform:uppercase;border-radius:6px;cursor:pointer;transition:all 0.15s}
 .tour-btn:hover,.tour-card:hover .tour-btn{background:var(--gold);color:#fff}
 
-.why-grid{display:grid;grid-template-columns:repeat(4,1fr)}
-.why-item{text-align:center;padding:52px 24px;border-right:0.5px solid var(--line)}
-.why-item:last-child{border-right:none}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+.why-item{text-align:center;padding:52px 24px;border-right:0.5px solid var(--line);border-bottom:0.5px solid var(--line)}
+.why-item:nth-child(3n){border-right:none}
+.why-item:nth-child(n+4){border-bottom:none}
 .why-icon{width:48px;height:48px;margin:0 auto 20px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;transition:background 0.25s}
 .why-item:hover .why-icon{background:#eddec8}
 .why-title{font-family:'Georgia',serif;font-size:18px;color:var(--ink);margin-bottom:10px}
@@ -124,11 +125,11 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 4
 .cta-band{background:linear-gradient(135deg,rgba(42,32,24,0.96),rgba(24,17,11,0.92));padding:100px 56px;position:relative;overflow:hidden}
 .cta-band::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 18% 30%,rgba(184,147,90,0.16),transparent 40%);pointer-events:none}
 .cta-band::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,147,90,0.45),transparent)}
-.cta-inner{max-width:520px;position:relative;z-index:1}
+.cta-inner{max-width:520px;position:relative;z-index:1;margin:0 auto;text-align:center}
 .cta-h2{font-family:'Georgia',serif;font-size:40px;font-weight:400;color:var(--soft-white);margin-bottom:16px;line-height:1.15}
-.cta-p{font-size:14px;color:rgba(255,255,255,0.44);max-width:360px;margin-bottom:44px;line-height:1.72}
-.cta-btns{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-bottom:32px}
-.cta-note{font-size:11px;color:rgba(255,255,255,0.22);letter-spacing:0.04em}
+.cta-p{font-size:14px;color:rgba(255,255,255,0.44);max-width:360px;margin:0 auto 44px;line-height:1.72}
+.cta-btns{display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:32px}
+.cta-note{font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:0.04em}.cta-note a{color:inherit;text-decoration:none}
 
 /* ═══════════════════════════════════════
    TOUR DETAIL PAGES
@@ -272,9 +273,11 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
 @media(max-width:900px){
   nav{padding:14px 20px;position:relative}
   .nav-toggle{display:block;border:none;background:transparent;color:var(--ink);font-size:24px;cursor:pointer;padding:10px 8px}
-  .nav-links{display:flex;flex-direction:column;gap:18px;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:18px 20px;border-bottom:0.5px solid var(--line);max-height:0;overflow:hidden;opacity:0;transition:max-height 0.28s ease,opacity 0.28s ease;box-shadow:0 12px 32px rgba(0,0,0,0.08)}
-  nav.open .nav-links{max-height:240px;opacity:1}
+  .nav-links{display:flex;flex-direction:column;gap:18px;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:18px 20px;border-bottom:0.5px solid var(--line);max-height:0;overflow:hidden;opacity:0;transition:max-height 0.35s ease,opacity 0.28s ease;box-shadow:0 12px 32px rgba(0,0,0,0.08)}
+  nav.open .nav-links{max-height:400px;opacity:1}
   .nav-links a{padding:10px 0}
+  #contact-drop{display:none;position:static !important;box-shadow:none !important;border:none !important;border-top:0.5px solid var(--line) !important;border-radius:0 !important;padding:4px 0 4px 12px !important;margin-top:4px;min-width:unset !important}
+  #contact-drop a{border-bottom:none !important;padding:8px 0 !important;color:var(--stone) !important;font-size:11px !important;letter-spacing:0.08em !important;text-transform:uppercase !important}
   .hero-warm{display:none}
   .sec{padding:64px 24px}
   .hero-inner{flex-direction:column;align-items:flex-start;padding:0 24px 32px;gap:20px}
@@ -286,10 +289,12 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
   .rct-div{width:60px;height:0.5px}
   .reviews-grid,.tours-grid{grid-template-columns:1fr}
   .why-grid{grid-template-columns:1fr 1fr}
-  .why-item{border-right:none;border-bottom:0.5px solid var(--line)}
+  .why-item{border-right:0.5px solid var(--line);border-bottom:0.5px solid var(--line)}
+  .why-item:nth-child(2n){border-right:none}
+  .why-item:nth-last-child(-n+2){border-bottom:none}
   .about-wrap{grid-template-columns:1fr}.about-photo{min-height:260px}
   .about-body{padding:48px 28px}
-  .cta-band{padding:64px 24px}.cta-btns{flex-direction:column;align-items:flex-start}
+  .cta-band{padding:64px 24px}.cta-btns{flex-direction:column;align-items:center}
   .foot-inner{grid-template-columns:1fr;text-align:center;padding:32px 24px}
   .foot-links{flex-wrap:wrap;justify-content:center}.foot-copy{text-align:center}
   .layout{grid-template-columns:1fr;padding:40px 24px}
@@ -315,10 +320,16 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
   </div>
   <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">☰</button>
   <div class="nav-links" id="nav-links">
-    <a onclick="scrollToId('reviews')">Reviews</a>
     <a onclick="scrollToId('tours')">Tours</a>
     <a onclick="scrollToId('about')">About</a>
-    <a onclick="openModal('general')">Contact</a>
+    <a href="/travel-tips/">Travel Tips</a>
+    <a onclick="toggleContact(event)" style="position:relative">Contact
+      <div id="contact-drop" style="display:none;position:absolute;top:calc(100% + 14px);right:0;background:#fff;border:0.5px solid var(--line);border-radius:10px;padding:20px 24px;min-width:220px;box-shadow:0 12px 32px rgba(0,0,0,0.10);text-align:left;z-index:300">
+        <a href="mailto:nefset@proton.me" style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink);text-decoration:none;letter-spacing:0;text-transform:none;padding:8px 0;border-bottom:0.5px solid var(--line)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>nefset@proton.me</a>
+        <a href="https://wa.me/393203723453" target="_blank" style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink);text-decoration:none;letter-spacing:0;text-transform:none;padding:8px 0;border-bottom:0.5px solid var(--line)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+        <a href="https://www.instagram.com/nefset/" target="_blank" style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink);text-decoration:none;letter-spacing:0;text-transform:none;padding:8px 0"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Follow on Instagram</a>
+      </div>
+    </a>
   </div>
   <div id="nav-back" style="display:none">
     <span class="nav-back" onclick="showPage('home')">← All tours</span>
@@ -356,32 +367,6 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
     </div>
   </div>
 
-  <section id="reviews" class="sec sec-alt">
-    <div style="text-align:center">
-      <div class="sec-label">What guests say</div>
-      <h2 class="sec-title">Trusted by travelers worldwide</h2>
-      <div class="sec-rule c"></div>
-    </div>
-    <div class="rating-card-top">
-      <div style="text-align:center"><div class="rct-num">5.0</div><div class="rct-stars">★★★★★</div></div>
-      <div class="rct-div"></div>
-      <div><div class="rct-travelers">50+ verified reviews</div><div class="rct-via">via Withlocals</div></div>
-    </div>
-    <div class="reviews-grid">
-      <div class="rev-card">
-        <div><div class="rev-stars">★★★★★</div><p class="rev-text">"Felt like exploring Genoa with a friend, not a guide — relaxed and completely personal."</p></div>
-        <div class="rev-author"><div class="rev-av">LA</div><div class="rev-name">Laura, USA</div></div>
-      </div>
-      <div class="rev-card">
-        <div><div class="rev-stars">★★★★★</div><p class="rev-text">"She showed us hidden spots we would never find on our own. An incredible day."</p></div>
-        <div class="rev-author"><div class="rev-av">MK</div><div class="rev-name">Mark, UK</div></div>
-      </div>
-      <div class="rev-card">
-        <div><div class="rev-stars">★★★★★</div><p class="rev-text">"Perfect mix of culture, local food and beautiful views. Highly recommended!"</p></div>
-        <div class="rev-author"><div class="rev-av">SO</div><div class="rev-name">Sophie, France</div></div>
-      </div>
-    </div>
-  </section>
 
   <section id="tours" class="sec">
     <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
@@ -459,6 +444,14 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
         <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
         <div class="why-title">Flexible</div><p class="why-text">Tours adapted to your pace and interests.</p>
       </div>
+      <div class="why-item">
+        <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <div class="why-title">Beautiful Memories</div><p class="why-text">Thoughtfully captured photos and videos to help you relive your favorite moments long after your trip.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16,11 18,13 22,9"/></svg></div>
+        <div class="why-title">Book Directly With Your Host</div><p class="why-text">No middlemen, no large agencies — just direct communication with the person who will personally host your experience.</p>
+      </div>
     </div>
   </section>
 
@@ -479,12 +472,13 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
       <h2 class="cta-h2">Ready to explore?</h2>
       <p class="cta-p">Reserve your spot with a small deposit. Final payment on the day of the tour.</p>
       <div class="cta-btns">
-        <button class="btn-gold lg" onclick="openModal('general')">Check availability →</button>
+        <a class="btn-gold lg" href="https://calendly.com/nefset" target="_blank">Check availability →</a>
         <a class="btn-ghost" href="https://wa.me/393203723453" target="_blank">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Ask on WhatsApp
         </a>
       </div>
+      <p class="cta-note">To check the price for your group, select a tour on the site or ask on WhatsApp.</p>
       <p class="cta-note">nefset@proton.me · +39 320 372 3453 · Instagram <a href="https://www.instagram.com/nefset/" target="_blank">@nefset</a></p>
     </div>
   </div>
@@ -581,7 +575,8 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How many people can join?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">This is a private experience — just your group, no strangers. Groups of 1–8 people work great.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is food included?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Food and drinks are not included unless agreed in advance. I'll guide you to curated local spots and you choose what you'd like to try.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I customize the route?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Absolutely. If you have specific interests, just mention it when booking and I'll adapt the route.</div></div>
-        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What's the cancellation policy?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Free cancellation up to 48 hours before. After that, the deposit is non-refundable. Rescheduling is always possible.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What's the cancellation policy?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">The €100 deposit is fully refundable if you cancel at least 7 days before the scheduled experience. If you cancel less than 7 days before, the deposit is non-refundable. Rescheduling is possible whenever availability allows.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How does booking and payment work?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">To confirm your date, a €100 deposit is required at the time of booking. The remaining balance is paid on the day of the experience in cash or by card. The deposit is fully refundable if you cancel at least 7 days before the scheduled experience. If you cancel less than 7 days before, the deposit is non-refundable. Rescheduling is possible whenever availability allows.</div></div>
       </div>
     </div>
     <div class="sidebar">
@@ -694,6 +689,7 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Will Portofino be crowded?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">In high season, yes. I offer timing, local knowledge and routes that most visitors never take — it makes a real difference.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is food included?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Food and drinks are not included unless agreed in advance. A full lunch at a local restaurant in Camogli can be added as an optional extra — just mention it when booking.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What if the weather is bad?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">In rough weather, Golfo Paradiso may cancel or modify the service. I monitor conditions and will let you know in advance. Rescheduling with no penalty.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How does booking and payment work?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">To confirm your date, a €100 deposit is required at the time of booking. The remaining balance is paid on the day of the experience in cash or by card. The deposit is fully refundable if you cancel at least 7 days before the scheduled experience. If you cancel less than 7 days before, the deposit is non-refundable. Rescheduling is possible whenever availability allows.</div></div>
       </div>
     </div>
     <div class="sidebar">
@@ -826,6 +822,7 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Will it be crowded?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">In high season, yes — crowds are part of the reality. I know the timing, the less-visited paths and the quieter corners that make a real difference.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is food included?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Food and drinks are not included unless agreed in advance. I'll guide you to curated local spots throughout the day.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can we add Monterosso and dinner?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Yes — in summer (June–September) we can end in Monterosso with a swim and dinner. Extra cost, arranged in advance. Mention it when booking.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How does booking and payment work?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">To confirm your date, a €100 deposit is required at the time of booking. The remaining balance is paid on the day of the experience in cash or by card. The deposit is fully refundable if you cancel at least 7 days before the scheduled experience. If you cancel less than 7 days before, the deposit is non-refundable. Rescheduling is possible whenever availability allows.</div></div>
       </div>
     </div>
     <div class="sidebar">
@@ -892,6 +889,16 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
      JAVASCRIPT
 ═══════════════════════════════════════ -->
 <script>
+function toggleContact(e) {
+  e.stopPropagation();
+  var d = document.getElementById('contact-drop');
+  d.style.display = d.style.display === 'none' ? 'block' : 'none';
+}
+document.addEventListener('click', function() {
+  var d = document.getElementById('contact-drop');
+  if (d) d.style.display = 'none';
+});
+
 // ── PAGE NAVIGATION ──
 var sliderStates = {};
 
@@ -912,6 +919,8 @@ function showPage(name) {
 
 function toggleNav() {
   document.getElementById('main-nav').classList.toggle('open');
+  var d = document.getElementById('contact-drop');
+  if (d) d.style.display = 'none';
 }
 
 // ── SLIDERS ──
