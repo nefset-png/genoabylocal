@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/nefset/Downloads/genoabylocal-main remote show origin)",
+      "Bash(git -C /Users/nefset/Downloads/genoabylocal-main fetch origin)",
+      "Bash(git -C /Users/nefset/Downloads/genoabylocal-main branch -r)"
+    ]
+  }
+}
