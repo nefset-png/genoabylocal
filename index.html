@@ -166,7 +166,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 4
 .slider-arrow:hover{background:rgba(28,20,13,0.82)}
 .slider-arrow.prev{left:20px}.slider-arrow.next{right:20px}
 
-.tab-bar{border-bottom:0.5px solid var(--line);background:var(--white);position:sticky;top:57px;z-index:100}
+.tab-bar{border-bottom:0.5px solid var(--line);background:var(--white);position:sticky;top:84px;z-index:100}
 .tab-inner{display:flex;padding:0 56px;overflow-x:auto}
 .tab{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone);padding:16px 0;margin-right:32px;cursor:pointer;border-bottom:1.5px solid transparent;transition:color 0.2s,border-color 0.2s;white-space:nowrap;flex-shrink:0}
 .tab.on{color:var(--ink);border-bottom-color:var(--gold)}
@@ -1186,6 +1186,36 @@ function openCalendly() {
   var url = 'https://wa.me/393203723453';
   window.open(url, '_blank');
 }
+
+// Update active tab on scroll
+function initTabObserver() {
+  var tabs = document.querySelectorAll('.tab');
+  if (tabs.length === 0) return;
+
+  var sections = ['g-overview', 'g-itinerary', 'g-gallery', 'g-reviews', 'g-faq'];
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        tabs.forEach(function(tab) { tab.classList.remove('on'); });
+        var index = sections.indexOf(entry.target.id);
+        if (index !== -1 && tabs[index]) {
+          tabs[index].classList.add('on');
+        }
+      }
+    });
+  }, { rootMargin: '0px 0px -50% 0px' });
+
+  sections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  initTabObserver();
+});
 </script>
 </body>
 </html>
