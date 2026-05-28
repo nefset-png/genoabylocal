@@ -1187,34 +1187,51 @@ function openCalendly() {
   window.open(url, '_blank');
 }
 
-// Update active tab on scroll
-function initTabObserver() {
-  var tabs = document.querySelectorAll('.tab');
+// Отслеживание активной секции при скролле
+document.addEventListener('DOMContentLoaded', function() {
+  var tabs = document.querySelectorAll('.tab-bar .tab');
   if (tabs.length === 0) return;
 
-  var sections = ['g-overview', 'g-itinerary', 'g-gallery', 'g-reviews', 'g-faq'];
+  // Определяем префикс (g-, p-, ct-) на основе ID первой секции
+  var sectionNames = ['overview', 'itinerary', 'gallery', 'reviews', 'faq'];
+  var prefix = '';
+
+  // Найдем префикс из первого ID секции
+  for (var i = 0; i < sectionNames.length; i++) {
+    var el = document.getElementById('g-' + sectionNames[i]);
+    if (el) { prefix = 'g'; break; }
+    el = document.getElementById('p-' + sectionNames[i]);
+    if (el) { prefix = 'p'; break; }
+    el = document.getElementById('ct-' + sectionNames[i]);
+    if (el) { prefix = 'ct'; break; }
+  }
 
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
+        // Убрать класс 'on' со всех табов
         tabs.forEach(function(tab) { tab.classList.remove('on'); });
-        var index = sections.indexOf(entry.target.id);
+
+        // Найти индекс секции в массиве sectionNames
+        var sectionName = entry.target.id.replace(prefix + '-', '');
+        var index = sectionNames.indexOf(sectionName);
+
+        // Добавить класс 'on' на соответствующий таб
         if (index !== -1 && tabs[index]) {
           tabs[index].classList.add('on');
         }
       }
     });
-  }, { rootMargin: '0px 0px -50% 0px' });
+  }, {
+    threshold: 0.2,
+    rootMargin: '-84px 0px 0px 0px'
+  });
 
-  sections.forEach(function(id) {
-    var el = document.getElementById(id);
+  // Наблюдать за всеми секциями
+  sectionNames.forEach(function(name) {
+    var el = document.getElementById(prefix + '-' + name);
     if (el) observer.observe(el);
   });
-}
-
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
-  initTabObserver();
 });
 </script>
 </body>
