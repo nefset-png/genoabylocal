@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+<title>Booking Cancelled | Genoa Local Experiences</title>
+<meta name="description" content="Your Genoa Local Experiences checkout was cancelled."/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--green:#1a3a2a;--gold:#d4a853;--cream:#f8f4ee;--line:#ece6dd;--ink:#17120c;--stone:#7a7268;--white:#fff}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;min-height:100vh}
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:0.5px solid var(--line);background:rgba(255,255,255,0.97)}
+.logo{text-decoration:none}.logo-name{font-family:Georgia,serif;font-size:16px;color:var(--ink)}.logo-loc{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);margin-top:2px}
+.nav-link{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);text-decoration:none}
+.wrap{min-height:calc(100vh - 76px);display:flex;align-items:center;justify-content:center;padding:56px 24px}
+.panel{width:100%;max-width:620px;background:var(--white);border:0.5px solid var(--line);border-radius:12px;padding:54px 46px;text-align:center;box-shadow:0 18px 54px rgba(35,22,10,.08)}
+.kicker{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+h1{font-family:Georgia,serif;font-size:38px;font-weight:400;color:var(--green);line-height:1.15;margin-bottom:18px}
+p{font-size:15px;color:var(--stone);line-height:1.8;margin:0 auto 18px;max-width:440px}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-block;border-radius:7px;padding:14px 26px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;text-decoration:none;font-weight:700}
+.btn.primary{background:var(--gold);color:#fff}.btn.secondary{border:1px solid var(--line);color:var(--green);background:#fff}
+.note{margin-top:28px;font-size:12px;color:#a09890}
+@media(max-width:640px){nav{padding:16px 22px}.nav-link{display:none}.panel{padding:42px 24px}h1{font-size:31px}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">
+    <div class="logo-name">Genoa Local Experiences</div>
+    <div class="logo-loc">Genoa &amp; Liguria</div>
+  </a>
+  <a class="nav-link" href="/#tours">Back to tours</a>
+</nav>
+<main class="wrap">
+  <section class="panel">
+    <div class="kicker">Checkout cancelled</div>
+    <h1>No payment was taken</h1>
+    <p>Your booking has not been confirmed yet. You can return to the tour page and try again when you are ready.</p>
+    <p>If Stripe did not work as expected, send me a message and I will help you reserve the date manually.</p>
+    <div class="actions">
+      <a class="btn primary" href="/#tours">Choose a tour</a>
+      <a class="btn secondary" href="https://wa.me/393203723453" target="_blank">Ask on WhatsApp</a>
+    </div>
+    <div class="note">Availability can change until the deposit is completed.</div>
+  </section>
+</main>
+</body>
+</html>
