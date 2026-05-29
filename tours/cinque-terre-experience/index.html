@@ -32,7 +32,7 @@
   --ink:#17120c;--ink-warm:#2a2018;--ink-mid:#3d3025;
   --stone:#7a7268;--stone-light:#a09890;
   --line:#ece6dd;--cream:#faf7f3;--white:#fff;
-  --soft-white:rgba(255,255,255,0.86);
+  --soft-white:rgba(255,255,255,0.86);--nav-height:84px;
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--white);color:var(--ink);line-height:1.6}
 nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:0.5px solid var(--line);background:rgba(255,255,255,0.97);position:sticky;top:0;z-index:200}
@@ -65,7 +65,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 4
 .slider-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;background:rgba(28,20,13,0.55);backdrop-filter:blur(4px);border:0.5px solid rgba(255,255,255,0.16);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s;z-index:10}
 .slider-arrow:hover{background:rgba(28,20,13,0.82)}
 .slider-arrow.prev{left:20px}.slider-arrow.next{right:20px}
-.tab-bar{border-bottom:0.5px solid var(--line);background:var(--white);position:sticky;top:57px;z-index:100}
+.tab-bar{border-bottom:0.5px solid var(--line);background:var(--white);position:sticky;top:var(--nav-height);z-index:190}
 .tab-inner{display:flex;padding:0 56px;overflow-x:auto}
 .tab{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone);padding:16px 0;margin-right:32px;cursor:pointer;border-bottom:1.5px solid transparent;transition:color 0.2s,border-color 0.2s;white-space:nowrap;flex-shrink:0}
 .tab.on{color:var(--ink);border-bottom-color:var(--gold)}
@@ -167,7 +167,7 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
 @media(min-width:768px){.nav-toggle{display:none}}
 @media(max-width:768px){.tab-bar{display:none}}
 @media(max-width:900px){
-  nav{padding:14px 20px;position:relative}
+  nav{padding:14px 20px;position:sticky;top:0;z-index:200}
   .nav-toggle{display:block;border:none;background:transparent;color:var(--ink);font-size:24px;cursor:pointer;padding:10px 8px}
   .nav-links{display:flex;flex-direction:column;gap:18px;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:18px 20px;border-bottom:0.5px solid var(--line);max-height:0;overflow:hidden;opacity:0;transition:max-height 0.35s ease,opacity 0.28s ease;box-shadow:0 12px 32px rgba(0,0,0,0.08)}
   nav.open .nav-links{max-height:400px;opacity:1}
@@ -430,6 +430,20 @@ document.addEventListener('click',function(){var d=document.getElementById('cont
 
 <script>
 
+function updateStickyOffset(){
+  var nav=document.getElementById('main-nav');
+  if(nav)document.documentElement.style.setProperty('--nav-height',nav.offsetHeight+'px');
+}
+function getStickyOffset(){
+  var nav=document.getElementById('main-nav');
+  var tabBar=document.querySelector('.tab-bar');
+  var tabVisible=tabBar&&window.getComputedStyle(tabBar).display!=='none';
+  return (nav?nav.offsetHeight:0)+(tabVisible?tabBar.offsetHeight:0);
+}
+window.addEventListener('resize',updateStickyOffset);
+document.addEventListener('DOMContentLoaded',updateStickyOffset);
+window.addEventListener('load',updateStickyOffset);
+
 function toggleReviews(id) {
   var el = document.getElementById(id + '-more-reviews');
   var btn = document.getElementById(id + '-reviews-btn');
@@ -442,7 +456,7 @@ function toggleReviews(id) {
     btn.textContent = 'Show all 20 reviews ↓';
   }
 }
-function scrollToId(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+function scrollToId(id){var el=document.getElementById(id);if(!el)return;var top=el.getBoundingClientRect().top+window.pageYOffset-getStickyOffset()-8;window.scrollTo({top:top,behavior:'smooth'});}
 function toggleFaq(el){
   var a=el.nextElementSibling;var ic=el.querySelector('.faq-icon');var isOpen=a.classList.contains('open');
   document.querySelectorAll('.faq-a').forEach(function(x){x.classList.remove('open');});
