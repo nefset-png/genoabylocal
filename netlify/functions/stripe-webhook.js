@@ -1,223 +1,255 @@
-const Stripe = require('stripe');
-const { google } = require('googleapis');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { Resend } = require('resend');
+const { confirmEvent, deleteEvent } = require('./lib/calendar');
 
-const EXPERIENCES = {
-  genoa: { name: 'Genoa Private Walk', slots: ['9:30', '14:30', '18:00'], fullDay: false },
-  portofino: { name: 'Portofino Full-Day Experience', slots: ['9:30'], fullDay: true },
-  'cinque-terre': { name: 'Cinque Terre Full-Day Experience', slots: ['7:30', '8:30'], fullDay: true },
+const resend = new Resend(process.env.RESEND_API_KEY);
+const HOST_EMAIL = process.env.HOST_EMAIL || 'nefset@proton.me';
+const FROM_EMAIL = process.env.FROM_EMAIL || 'bookings@genoabylocal.com';
+
+const MEETING_POINTS = {
+  genoa: 'Via della Mercanzia, 2, 16124 Genova GE',
+  portofino: 'Via della Mercanzia, 2, 16124 Genova GE',
+  cinque: 'Genova Brignole Railway Station'
 };
 
-const BLOCK_KEYWORDS = ['UNAVAILABLE', 'PERSONAL DAY', 'VACATION', 'OUT OF OFFICE', 'APPOINTMENT'];
+function euro(value) { return '€' + Math.round(Number(value) || 0); }
 
-function getGoogleAuth(scopes) {
-  const privateKey = process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
-  return new google.auth.JWT(
-    process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    null,
-    privateKey,
-    scopes
-  );
+function guestSummary(m) {
+  const adults = parseInt(m.adults) || 0;
+  const children = parseInt(m.children) || 0;
+  const infants = parseInt(m.infants) || 0;
+  const parts = [`${adults} adult${adults !== 1 ? 's' : ''}`];
+  if (children) parts.push(`${children} child${children !== 1 ? 'ren' : ''} 4-11`);
+  if (infants) parts.push(`${infants} infant${infants !== 1 ? 's' : ''} 0-3`);
+  return parts.join(', ');
 }
 
-function isManualBlock(title) {
-  if (!title) return false;
-  return BLOCK_KEYWORDS.some(keyword => title.toUpperCase().includes(keyword));
+function hostEmailHtml(m) {
+  const meeting = MEETING_POINTS[m.tourId] || '';
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"/></head>
+<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#faf7f3;color:#17120c;margin:0;padding:0">
+<div style="max-width:600px;margin:32px auto;background:#fff;border:1px solid #ece6dd;border-radius:12px;overflow:hidden">
+  <div style="background:#b8935a;padding:24px 32px">
+    <p style="color:#fff;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 6px">New booking</p>
+    <h1 style="color:#fff;font-size:28px;font-weight:400;margin:0;font-family:Georgia,serif">${m.tourName}</h1>
+  </div>
+  <div style="padding:32px">
+    <table style="width:100%;border-collapse:collapse">
+      <tr><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Date</td><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right">${m.date}</td></tr>
+      <tr><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Start time</td><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right">${m.time}</td></tr>
+      <tr><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Guests</td><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right">${guestSummary(m)}</td></tr>
+      <tr><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Transport add-on</td><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right">${m.logistics === 'yes' ? 'Yes' : 'No'}</td></tr>
+      <tr><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Meeting point</td><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right">${meeting}</td></tr>
+    </table>
+    <h2 style="font-family:Georgia,serif;font-size:18px;font-weight:400;margin:24px 0 12px">Client</h2>
+    <table style="width:100%;border-collapse:collapse">
+      <tr><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Name</td><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right">${m.customerName}</td></tr>
+      <tr><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Phone / WhatsApp</td><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right">${m.phone}</td></tr>
+      ${m.stay ? `<tr><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Hotel / cruise ship</td><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right">${m.stay}</td></tr>` : ''}
+      ${m.requests ? `<tr><td style="padding:9px 0;font-size:13px;color:#7a7268">Special requests</td><td style="padding:9px 0;font-size:13px;font-weight:600;text-align:right">${m.requests}</td></tr>` : ''}
+    </table>
+    <h2 style="font-family:Georgia,serif;font-size:18px;font-weight:400;margin:24px 0 12px">Payment</h2>
+    <table style="width:100%;border-collapse:collapse">
+      <tr><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Total</td><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right">${euro(m.total)}</td></tr>
+      <tr><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Paid online</td><td style="padding:9px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right">${euro(m.paid)}</td></tr>
+      <tr><td style="padding:9px 0;font-size:13px;color:#7a7268">Remaining</td><td style="padding:9px 0;font-size:13px;font-weight:600;text-align:right">${euro(m.remaining)}</td></tr>
+    </table>
+  </div>
+</div></body></html>`;
 }
 
-function isFullDayExperience(title) {
-  if (!title) return false;
-  return title.toLowerCase().includes('portofino') || title.toLowerCase().includes('cinque terre');
-}
+function customerEmailHtml(m) {
+  const meeting = MEETING_POINTS[m.tourId] || '';
+  const isDeposit = m.paymentMode !== 'full';
+  const firstName = m.customerName ? m.customerName.split(' ')[0] : '';
+  const paidLabel = isDeposit ? 'Deposit paid' : 'Fully paid';
 
-async function checkAvailability(experience, date, time) {
-  const auth = getGoogleAuth(['https://www.googleapis.com/auth/calendar.readonly']);
-  const calendar = google.calendar({ version: 'v3', auth });
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Booking Confirmed — Genoa Local Experiences</title>
+</head>
+<body style="margin:0;padding:0;background:#faf7f3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#17120c">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#faf7f3;padding:32px 16px">
+<tr><td align="center">
+<table width="100%" cellpadding="0" cellspacing="0" style="max-width:580px;background:#ffffff;border:1px solid #ece6dd;border-radius:14px;overflow:hidden">
 
-  const startOfDay = new Date(`${date}T00:00:00+02:00`).toISOString();
-  const endOfDay = new Date(`${date}T23:59:59+02:00`).toISOString();
+  <!-- HEADER -->
+  <tr>
+    <td style="background:linear-gradient(135deg,#ffffff,#faf6f0);padding:36px 40px 28px;border-bottom:1px solid #ece6dd">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="vertical-align:top;padding-right:20px">
+            <p style="margin:0 0 14px;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:#b8935a">Booking confirmed</p>
+            <h1 style="margin:0 0 10px;font-family:Georgia,serif;font-size:28px;font-weight:400;color:#17120c;line-height:1.15">You're all set${firstName ? ',&nbsp;' + firstName : ''}.</h1>
+            <p style="margin:0;font-size:14px;color:#7a7268;line-height:1.75">Your private experience is reserved.<br/>I look forward to meeting you in Genoa.</p>
+          </td>
+          <td style="vertical-align:top;text-align:center;min-width:90px">
+            <div style="width:70px;height:70px;border-radius:50%;background:#f5efe6;display:inline-flex;align-items:center;justify-content:center;border:1px solid #ece6dd;font-size:28px;line-height:70px;text-align:center">✓</div>
+            <p style="margin:8px 0 0;font-size:11px;color:#b8935a;font-weight:600">${paidLabel}</p>
+            <p style="margin:2px 0 0;font-size:11px;color:#7a7268">${euro(m.paid)} paid</p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 
-  const response = await calendar.events.list({
-    calendarId: process.env.GOOGLE_CALENDAR_ID,
-    timeMin: startOfDay,
-    timeMax: endOfDay,
-    singleEvents: true,
-  });
+  <!-- EXPERIENCE DETAILS -->
+  <tr>
+    <td style="padding:32px 40px 0">
+      <p style="margin:0 0 14px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#b8935a">Experience details</p>
+      <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">
+        <tr><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Experience</td><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right;color:#17120c">${m.tourName}</td></tr>
+        <tr><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Date</td><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right;color:#17120c">${m.date}</td></tr>
+        <tr><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Start time</td><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right;color:#17120c">${m.time}</td></tr>
+        <tr><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Guests</td><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right;color:#17120c">${guestSummary(m)}</td></tr>
+        <tr><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Total price</td><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right;color:#17120c">${euro(m.total)}</td></tr>
+        <tr><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">${paidLabel}</td><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right;color:#17120c">${euro(m.paid)}</td></tr>
+        <tr><td style="padding:10px 0;font-size:13px;color:#7a7268">Remaining balance</td><td style="padding:10px 0;font-size:13px;font-weight:600;text-align:right;color:#17120c">${euro(m.remaining)}</td></tr>
+      </table>
+    </td>
+  </tr>
 
-  const events = response.data.items || [];
+  ${isDeposit ? `
+  <!-- DEPOSIT NOTE -->
+  <tr>
+    <td style="padding:20px 40px 0">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="background:#faf6f0;border:1px solid #ece6dd;border-radius:10px;padding:16px;font-size:13px;color:#7a7268;line-height:1.7">
+            The remaining balance of <strong style="color:#17120c">${euro(m.remaining)}</strong> is due no later than 7 days before the experience. I will send you a secure payment link by email in advance.
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>` : ''}
 
-  for (const event of events) {
-    const title = event.summary || '';
-    if (isManualBlock(title) || isFullDayExperience(title)) return false;
-  }
+  <!-- MEETING POINT -->
+  <tr>
+    <td style="padding:24px 40px 0">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="background:#faf6f0;border:1px solid #ece6dd;border-radius:10px;padding:18px">
+            <p style="margin:0 0 6px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#b8935a">Meeting point</p>
+            <p style="margin:0 0 6px;font-size:14px;font-weight:600;color:#17120c">${meeting}</p>
+            <p style="margin:0;font-size:12px;color:#7a7268;line-height:1.6">The exact spot may be adjusted depending on your hotel or cruise terminal — I will confirm before we meet.</p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 
-  const bookedTimes = events.map(event => {
-    if (!event.start?.dateTime) return null;
-    const d = new Date(event.start.dateTime);
-    return `${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`;
-  }).filter(Boolean);
+  <!-- CANCELLATION -->
+  <tr>
+    <td style="padding:16px 40px 0">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="background:#faf6f0;border:1px solid #ece6dd;border-radius:10px;padding:18px">
+            <p style="margin:0 0 6px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#b8935a">Cancellation policy</p>
+            <p style="margin:0;font-size:13px;color:#7a7268;line-height:1.7">Full refund up to 7 days before the experience. No refund within 7 days. Rescheduling is possible whenever availability allows.</p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 
-  return !bookedTimes.includes(time);
-}
+  <!-- WHATSAPP CTA -->
+  <tr>
+    <td style="padding:28px 40px">
+      <table width="100%" cellpadding="0" cellspacing="0" style="background:#faf6f0;border:1px solid #ece6dd;border-radius:12px">
+        <tr>
+          <td style="padding:28px 32px;text-align:center">
+            <p style="margin:0 0 4px;font-family:Georgia,serif;font-size:20px;font-weight:400;color:#17120c">Stay in touch</p>
+            <p style="margin:0 0 20px;font-size:13px;color:#7a7268;line-height:1.7">Message me if you need help getting to the meeting point, want local tips, or have any questions before we meet.</p>
+            <a href="https://wa.me/393203723453" style="display:inline-block;background:#b8935a;color:#ffffff;text-decoration:none;border-radius:8px;padding:14px 32px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700">Message me on WhatsApp</a>
+            <p style="margin:16px 0 0;font-size:12px;color:#a09890">+39 320 372 3453 · nefset@proton.me</p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 
-async function createCalendarEvent(experience, date, time, customerName, guestCount, customerEmail, customerPhone) {
-  const auth = getGoogleAuth(['https://www.googleapis.com/auth/calendar']);
-  const calendar = google.calendar({ version: 'v3', auth });
-  const expData = EXPERIENCES[experience];
+  <!-- FOOTER -->
+  <tr>
+    <td style="padding:20px 40px;border-top:1px solid #ece6dd;text-align:center">
+      <p style="margin:0;font-size:11px;color:#a09890;line-height:1.6">Genoa Local Experiences · <a href="https://genoabylocal.com" style="color:#a09890">genoabylocal.com</a> · Your host: Nefset</p>
+    </td>
+  </tr>
 
-  const [hours, minutes] = time.split(':').map(Number);
-  const startDateTime = new Date(`${date}T${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:00`);
-
-  // Full-day experiences last ~10 hours, Genoa walk is 3 hours
-  const durationHours = expData.fullDay ? 10 : 3;
-  const endDateTime = new Date(startDateTime.getTime() + durationHours * 60 * 60 * 1000);
-
-  await calendar.events.insert({
-    calendarId: process.env.GOOGLE_CALENDAR_ID,
-    requestBody: {
-      summary: `${expData.name} - ${customerName} (${guestCount} guest${guestCount > 1 ? 's' : ''})`,
-      description: `Email: ${customerEmail}\nPhone: ${customerPhone || 'N/A'}\nDeposit: €100 paid`,
-      start: { dateTime: startDateTime.toISOString(), timeZone: 'Europe/Rome' },
-      end: { dateTime: endDateTime.toISOString(), timeZone: 'Europe/Rome' },
-    },
-  });
-}
-
-async function appendToSheets(data) {
-  const auth = getGoogleAuth(['https://www.googleapis.com/auth/spreadsheets']);
-  const sheets = google.sheets({ version: 'v4', auth });
-
-  const { experience, date, time, guestCount, customerName, customerEmail, customerPhone, totalPrice, deposit } = data;
-  const expData = EXPERIENCES[experience];
-  const bookingDate = new Date().toISOString().split('T')[0];
-
-  await sheets.spreadsheets.values.append({
-    spreadsheetId: process.env.GOOGLE_SHEET_ID,
-    range: 'Sheet1',
-    valueInputOption: 'USER_ENTERED',
-    requestBody: {
-      values: [[
-        date, time, expData.name, guestCount,
-        customerName, customerEmail, customerPhone || '',
-        `€${totalPrice}`, `€${deposit}`,
-        'Confirmed', bookingDate,
-      ]],
-    },
-  });
-}
-
-async function sendConfirmationEmail(data) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  const { experience, date, time, guestCount, customerName, customerEmail, totalPrice, deposit } = data;
-  const expData = EXPERIENCES[experience];
-
-  const [year, month, day] = date.split('-');
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const formattedDate = `${day} ${months[parseInt(month) - 1]} ${year}`;
-
-  await resend.emails.send({
-    from: 'Genoa by Local <bookings@genoabylocal.com>',
-    to: customerEmail,
-    subject: `Booking Confirmed — ${expData.name}`,
-    html: `
-      <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
-        <div style="background: #1a3a2a; padding: 32px; text-align: center;">
-          <h1 style="color: #d4a853; margin: 0; font-size: 28px;">Genoa by Local</h1>
-          <p style="color: #a8c4a0; margin: 8px 0 0;">Your booking is confirmed</p>
-        </div>
-
-        <div style="padding: 40px 32px;">
-          <p style="font-size: 18px;">Dear ${customerName},</p>
-          <p>Thank you for booking with Genoa by Local. We're excited to show you the best of the Italian Riviera!</p>
-
-          <div style="background: #f8f4ee; border-left: 4px solid #d4a853; padding: 24px; margin: 32px 0;">
-            <h2 style="color: #1a3a2a; margin: 0 0 16px; font-size: 20px;">Booking Details</h2>
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr><td style="padding: 6px 0; color: #666;">Experience</td><td style="padding: 6px 0; font-weight: bold;">${expData.name}</td></tr>
-              <tr><td style="padding: 6px 0; color: #666;">Date</td><td style="padding: 6px 0; font-weight: bold;">${formattedDate}</td></tr>
-              <tr><td style="padding: 6px 0; color: #666;">Time</td><td style="padding: 6px 0; font-weight: bold;">${time}</td></tr>
-              <tr><td style="padding: 6px 0; color: #666;">Guests</td><td style="padding: 6px 0; font-weight: bold;">${guestCount}</td></tr>
-              <tr><td style="padding: 6px 0; color: #666;">Total Price</td><td style="padding: 6px 0; font-weight: bold;">€${totalPrice}</td></tr>
-              <tr><td style="padding: 6px 0; color: #666;">Deposit Paid</td><td style="padding: 6px 0; font-weight: bold; color: #2a7a4a;">€${deposit} ✓</td></tr>
-              <tr><td style="padding: 6px 0; color: #666;">Remaining Balance</td><td style="padding: 6px 0; font-weight: bold;">€${totalPrice - deposit} (payable on the day)</td></tr>
-            </table>
-          </div>
-
-          <p>We'll meet you at the agreed meeting point 10 minutes before your tour begins. You'll receive detailed meeting point instructions 48 hours before your experience.</p>
-
-          <p>If you have any questions, please don't hesitate to contact us.</p>
-
-          <p style="margin-top: 40px;">With warmth,<br><strong>The Genoa by Local Team</strong></p>
-        </div>
-
-        <div style="background: #1a3a2a; padding: 24px; text-align: center;">
-          <p style="color: #a8c4a0; margin: 0; font-size: 14px;">© Genoa by Local · genoabylocal.com</p>
-        </div>
-      </div>
-    `,
-  });
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
 }
 
 exports.handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method not allowed' };
-  }
+  if (event.httpMethod !== 'POST') return { statusCode: 405, body: 'Method Not Allowed' };
 
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
   const sig = event.headers['stripe-signature'];
+  const rawBody = event.isBase64Encoded
+    ? Buffer.from(event.body, 'base64')
+    : Buffer.from(event.body);
 
   let stripeEvent;
   try {
-    stripeEvent = stripe.webhooks.constructEvent(
-      event.body,
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
+    stripeEvent = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
-    console.error('Webhook signature verification failed:', err.message);
+    console.error('Webhook signature failed:', err.message);
     return { statusCode: 400, body: `Webhook Error: ${err.message}` };
   }
 
-  if (stripeEvent.type !== 'checkout.session.completed') {
-    return { statusCode: 200, body: JSON.stringify({ status: 'ignored' }) };
-  }
-
   const session = stripeEvent.data.object;
+  const m = session.metadata || {};
 
-  if (session.payment_status !== 'paid') {
-    return { statusCode: 200, body: JSON.stringify({ status: 'not paid' }) };
-  }
-
-  const { experience, date, time, guestCount, customerName, customerEmail, customerPhone, totalPrice, deposit } = session.metadata;
-
-  try {
-    // Final availability check before confirming
-    const isAvailable = await checkAvailability(experience, date, time);
-    if (!isAvailable) {
-      console.error(`Slot no longer available: ${experience} on ${date} at ${time}`);
-      // Payment was taken — flag for manual review, don't fail silently
+  if (stripeEvent.type === 'checkout.session.completed') {
+    // Confirm calendar event
+    if (m.calendarEventId) {
+      try {
+        await confirmEvent(m.calendarEventId, {
+          tourName: m.tourName,
+          customerName: m.customerName,
+          guestSummary: guestSummary(m),
+          paymentMode: m.paymentMode
+        });
+      } catch (e) {
+        console.error('Calendar confirm failed:', e.message);
+      }
     }
 
-    // Create calendar event
-    await createCalendarEvent(experience, date, time, customerName, parseInt(guestCount), customerEmail, customerPhone);
-
-    // Record in Google Sheets
-    await appendToSheets({ experience, date, time, guestCount: parseInt(guestCount), customerName, customerEmail, customerPhone, totalPrice, deposit });
-
-    // Send confirmation email
-    await sendConfirmationEmail({ experience, date, time, guestCount, customerName, customerEmail, totalPrice, deposit });
-
-    console.log(`Booking confirmed: ${experience} for ${customerName} on ${date} at ${time}`);
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ status: 'success' }),
-    };
-  } catch (error) {
-    console.error('stripe-webhook processing error:', error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ status: 'error', message: error.message }),
-    };
+    // Send emails
+    const customerEmail = session.customer_email || session.customer_details?.email;
+    try {
+      await resend.emails.send({
+        from: FROM_EMAIL,
+        to: HOST_EMAIL,
+        subject: `New booking: ${m.tourName} — ${m.date} — ${m.customerName}`,
+        html: hostEmailHtml(m)
+      });
+      if (customerEmail) {
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: customerEmail,
+          subject: `Booking confirmed — ${m.tourName} on ${m.date}`,
+          html: customerEmailHtml(m)
+        });
+      }
+    } catch (e) {
+      console.error('Email send error:', e);
+    }
   }
+
+  if (stripeEvent.type === 'checkout.session.expired') {
+    if (m.calendarEventId) {
+      try {
+        await deleteEvent(m.calendarEventId);
+      } catch (e) {
+        console.error('Calendar delete failed:', e.message);
+      }
+    }
+  }
+
+  return { statusCode: 200, body: 'OK' };
 };

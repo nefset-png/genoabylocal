@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+<title>Reserve Your Experience | Genoa Local Experiences</title>
+<meta name="description" content="Choose your date, start time and group size. Reserve your private Genoa or Liguria experience with a small deposit."/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#b8935a;--gold-h:#c9a46e;--gold-pale:#f5efe6;--gold-faint:#faf6f0;
+  --ink:#17120c;--ink-warm:#2a2018;--ink-mid:#3d3025;
+  --stone:#7a7268;--stone-light:#a09890;
+  --line:#ece6dd;--cream:#faf7f3;--white:#fff;--success:#6f8f70;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+a{color:inherit}
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:0.5px solid var(--line);background:rgba(255,255,255,0.97);position:sticky;top:0;z-index:20}
+.logo{text-decoration:none}
+.logo-name{font-family:Georgia,serif;font-size:16px;font-weight:400;color:var(--ink)}
+.logo-loc{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--stone);margin-top:2px}
+.nav-back{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone);text-decoration:none}
+.nav-back:hover{color:var(--ink)}
+.page{max-width:1180px;margin:0 auto;padding:54px 40px 96px}
+.hero{display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:end;margin-bottom:36px}
+.eyebrow{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+h1{font-family:Georgia,serif;font-size:44px;font-weight:400;line-height:1.08;color:var(--ink);margin-bottom:16px}
+.lead{max-width:690px;font-size:15px;color:var(--stone);line-height:1.85}
+.direct-card{background:var(--white);border:0.5px solid var(--line);border-radius:12px;padding:22px;box-shadow:0 12px 32px rgba(35,22,10,0.06)}
+.direct-card-title{font-family:Georgia,serif;font-size:18px;color:var(--ink);margin-bottom:8px}
+.direct-card p{font-size:13px;color:var(--stone);line-height:1.7}
+.booking-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:36px;align-items:start}
+.panel,.summary{background:var(--white);border:0.5px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgba(35,22,10,0.06)}
+.panel{overflow:hidden}
+.tour-chooser{display:none;padding:24px;border-bottom:0.5px solid var(--line);background:#fff}
+.tour-chooser.on{display:block}
+.chooser-title{font-family:Georgia,serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:6px}
+.chooser-note{font-size:13px;color:var(--stone);margin-bottom:16px}
+.chooser-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.chooser-card{border:0.5px solid var(--line);border-radius:10px;background:var(--white);padding:16px;text-align:left;cursor:pointer;transition:border-color 0.2s,background 0.2s,transform 0.15s}
+.chooser-card:hover,.chooser-card.selected{border-color:var(--gold);background:var(--gold-faint);transform:translateY(-1px)}
+.chooser-card-name{font-family:Georgia,serif;font-size:17px;color:var(--ink);line-height:1.25;margin-bottom:8px}
+.chooser-card-meta{font-size:12px;color:var(--stone);line-height:1.5}
+.tour-strip{display:grid;grid-template-columns:120px 1fr;gap:22px;padding:24px;border-bottom:0.5px solid var(--line);background:linear-gradient(135deg,#fff,var(--gold-faint))}
+.tour-img{width:120px;height:120px;border-radius:10px;object-fit:cover;filter:sepia(10%) brightness(0.96)}
+.tour-name{font-family:Georgia,serif;font-size:26px;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:8px}
+.tour-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.pill{border:0.5px solid var(--line);background:rgba(255,255,255,0.72);border-radius:999px;padding:5px 9px;font-size:11px;color:var(--stone)}
+.tour-copy{font-size:13px;color:var(--stone);line-height:1.7;max-width:620px}
+.steps{padding:28px}
+.step{padding:0 0 32px;margin-bottom:32px;border-bottom:0.5px solid var(--line)}
+.step:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.step-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}
+.step-num{width:28px;height:28px;border-radius:50%;background:var(--gold-pale);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.step-title{font-family:Georgia,serif;font-size:22px;font-weight:400;color:var(--ink);line-height:1.25}
+.step-note{font-size:12px;color:var(--stone);margin-top:4px}
+.calendar-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.month-title{font-family:Georgia,serif;font-size:20px;color:var(--ink)}
+.month-controls{display:flex;gap:8px}
+.icon-btn{width:36px;height:36px;border:0.5px solid var(--line);background:var(--white);border-radius:50%;cursor:pointer;color:var(--ink);font-size:18px;transition:background 0.2s,border-color 0.2s}
+.icon-btn:hover{background:var(--gold-faint);border-color:var(--gold)}
+.calendar{border:0.5px solid var(--line);border-radius:10px;padding:18px;background:#fff}
+.dow,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.dow div{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone-light);text-align:center;padding-bottom:8px;border-bottom:0.5px solid var(--line)}
+.days{padding-top:12px}
+.day{aspect-ratio:1;border:0;border-radius:8px;background:transparent;font-size:14px;color:var(--ink-mid);cursor:pointer;transition:background 0.2s,color 0.2s}
+.day:hover{background:var(--gold-faint)}
+.day.selected{background:var(--gold);color:#fff}
+.day.today{box-shadow:inset 0 0 0 1px var(--gold)}
+.day.blank{pointer-events:none}
+.day.disabled{color:#d2cbc3;cursor:not-allowed;background:transparent;text-decoration:line-through}
+.slot-groups{display:grid;gap:18px}
+.slot-label{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+.slot-list{display:flex;flex-wrap:wrap;gap:10px}
+.slot{min-width:96px;padding:13px 16px;border:0.5px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font-size:15px;font-weight:600;cursor:pointer;transition:all 0.18s}
+.slot:hover{border-color:var(--gold);background:var(--gold-faint)}
+.slot.selected{background:var(--ink-warm);border-color:var(--ink-warm);color:#fff}
+.slot.disabled{color:#d2cbc3;cursor:not-allowed;background:transparent;border-color:var(--line);font-size:13px}
+.guest-control{display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--gold-faint);border:0.5px solid var(--line);border-radius:10px;padding:18px}
+.guest-title{font-family:Georgia,serif;font-size:18px;color:var(--ink)}
+.guest-sub{font-size:12px;color:var(--stone);line-height:1.65;margin-top:4px}
+.guest-stack{display:grid;gap:12px}
+.guest-row{display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--gold-faint);border:0.5px solid var(--line);border-radius:10px;padding:18px}
+.guest-row-main{min-width:0}
+.addon-box{display:none;background:#fff;border:0.5px solid var(--line);border-radius:10px;padding:18px;margin-top:16px}
+.addon-box.on{display:block}
+.addon-option{display:grid;grid-template-columns:auto 1fr;align-items:flex-start;gap:14px;cursor:pointer;text-transform:none;letter-spacing:0;color:inherit}
+.addon-option input{width:18px;height:18px;margin-top:6px;accent-color:var(--gold);flex-shrink:0}
+.addon-content{min-width:0}
+.addon-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.addon-kicker{display:block;font-size:12px;color:var(--gold);letter-spacing:0;text-transform:none;margin-bottom:3px}
+.addon-title{display:block;font-family:Georgia,serif;font-size:18px;font-weight:400;color:var(--ink);line-height:1.28;letter-spacing:0;text-transform:none}
+.addon-copy{display:block;font-size:13px;color:var(--stone);line-height:1.65;margin-top:7px;letter-spacing:0;text-transform:none;max-width:680px}
+.addon-price{background:var(--gold-faint);border:0.5px solid var(--line);border-radius:999px;padding:7px 10px;font-size:12px;color:var(--ink);white-space:nowrap;margin-top:1px;letter-spacing:0;text-transform:none}
+.counter{display:flex;align-items:center;gap:16px}
+.counter-btn{width:44px;height:44px;border:0.5px solid var(--line);border-radius:50%;background:#fff;color:var(--ink);font-size:20px;font-weight:700;cursor:pointer}
+.counter-btn:disabled{color:#d4ccc4;cursor:not-allowed}
+.guest-count{min-width:36px;text-align:center;font-size:24px;font-weight:650;color:var(--ink)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+.field.error input{border-color:#b14d3a;box-shadow:0 0 0 3px rgba(177,77,58,0.08)}
+.field-error{display:none;font-size:11px;color:#b14d3a;line-height:1.35}
+.field.error .field-error{display:block}
+.step-error{display:none;font-size:11px;color:#b14d3a;line-height:1.45;margin-top:10px}
+.step-error.on{display:block}
+label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone)}
+input,textarea{width:100%;border:0.5px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:14px;padding:13px 14px;outline:none;transition:border-color 0.2s,box-shadow 0.2s}
+textarea{min-height:92px;resize:vertical}
+input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,147,90,0.11)}
+.summary{position:sticky;top:104px;padding:26px}
+.summary-host{display:flex;align-items:center;gap:14px;padding-bottom:18px;margin-bottom:18px;border-bottom:0.5px solid var(--line)}
+.host-img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-pale)}
+.host-kicker{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)}
+.host-name{font-family:Georgia,serif;font-size:18px;color:var(--ink);line-height:1.2}
+.summary-title{font-family:Georgia,serif;font-size:24px;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:16px}
+.summary-lines{display:flex;flex-direction:column;gap:9px;border-bottom:0.5px solid var(--line);padding-bottom:18px;margin-bottom:18px}
+.summary-line{display:flex;justify-content:space-between;gap:18px;font-size:13px;color:var(--stone)}
+.summary-line strong{color:var(--ink);font-weight:600;text-align:right}
+.price-block{border-bottom:0.5px solid var(--line);padding-bottom:18px;margin-bottom:18px}
+.price-row{display:flex;justify-content:space-between;gap:18px;font-size:13px;color:var(--stone);margin-bottom:9px}
+.price-row strong{color:var(--ink);font-weight:600;text-align:right}
+.total-row{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-top:14px;padding-top:14px;border-top:0.5px solid var(--line)}
+.total-row span{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone)}
+.total-row strong{font-family:Georgia,serif;font-size:30px;font-weight:400;color:var(--ink)}
+.deposit-box{background:var(--gold-faint);border:0.5px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
+.deposit-row{display:flex;justify-content:space-between;gap:14px;font-size:13px;color:var(--stone);margin-bottom:7px}
+.deposit-row:last-child{margin-bottom:0}
+.deposit-row strong{color:var(--ink)}
+.payment-choice{display:grid;gap:9px;margin-bottom:13px}
+.payment-option{display:grid;grid-template-columns:18px 1fr auto;gap:10px;align-items:center;background:#fff;border:0.5px solid var(--line);border-radius:8px;padding:11px 12px;cursor:pointer;color:var(--stone);font-size:12px;letter-spacing:0;text-transform:none}
+.payment-option input{width:16px;height:16px;accent-color:var(--gold);padding:0}
+.payment-option strong{font-family:Georgia,serif;font-size:15px;font-weight:400;color:var(--ink)}
+.payment-option span{color:var(--stone)}
+.payment-option:has(input:checked){border-color:rgba(184,147,90,0.65);background:#fffaf4}
+.included-box{border-bottom:0.5px solid var(--line);padding-bottom:18px;margin-bottom:18px}
+.included-title{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.included-group{margin-bottom:14px}
+.included-subtitle{font-family:Georgia,serif;font-size:15px;color:var(--ink);margin-bottom:8px}
+.included-list{display:grid;gap:7px}
+.included-item{display:grid;grid-template-columns:18px 1fr;gap:8px;font-size:12px;color:var(--stone);line-height:1.55}
+.included-mark{width:18px;height:18px;border-radius:50%;background:var(--gold-pale);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1;margin-top:1px}
+.included-mark.no{background:#f8f1ec;color:#9d6c55}
+.included-note{font-size:12px;color:var(--stone);line-height:1.6;background:var(--gold-faint);border:0.5px solid var(--line);border-radius:8px;padding:10px 12px}
+.btn-pay{width:100%;border:0;background:var(--gold);color:#fff;border-radius:8px;padding:16px 18px;font-size:12px;letter-spacing:0.09em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:background 0.2s,transform 0.15s;text-align:center;text-decoration:none;display:block}
+.btn-pay:hover{background:var(--gold-h);transform:translateY(-1px)}
+.trust{font-size:11px;color:var(--stone-light);text-align:center;line-height:1.55;margin-top:12px}
+.whatsapp-link{display:block;text-align:center;font-size:12px;color:var(--gold);text-decoration:none;margin-top:12px}
+.whatsapp-link:hover{text-decoration:underline}
+.mobile-bar{display:none}
+@media(max-width:900px){
+  nav{padding:14px 20px}
+  .nav-back{font-size:10px}
+  .page{padding:34px 20px 120px}
+  .hero,.booking-layout{grid-template-columns:1fr;gap:24px}
+  .hero{margin-bottom:24px}
+  h1{font-size:34px}
+  .direct-card{display:none}
+  .tour-strip{grid-template-columns:92px 1fr;gap:16px;padding:18px}
+  .chooser-grid{grid-template-columns:1fr}
+  .tour-img{width:92px;height:92px}
+  .tour-name{font-size:22px}
+  .steps{padding:22px}
+  .form-grid{grid-template-columns:1fr}
+  .summary{position:static}
+  .guest-control,.guest-row{align-items:flex-start;flex-direction:column}
+  .addon-top{align-items:flex-start;flex-direction:column}
+  .addon-price{width:max-content}
+  .counter{width:100%;justify-content:flex-end}
+  .slot{flex:1;min-width:92px}
+  .mobile-bar{display:flex;position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,0.98);border-top:0.5px solid var(--line);box-shadow:0 -10px 28px rgba(35,22,10,0.08);padding:12px 16px;gap:12px;align-items:center;z-index:30}
+  .mobile-bar-price{flex:1;line-height:1.25}
+  .mobile-bar-price strong{display:block;font-family:Georgia,serif;font-size:19px;color:var(--ink);font-weight:400}
+  .mobile-bar-price span{font-size:11px;color:var(--stone)}
+  .mobile-bar .btn-pay{width:auto;padding:14px 18px;white-space:nowrap}
+}
+@media(max-width:520px){
+  .page{padding-left:14px;padding-right:14px}
+  .tour-strip{grid-template-columns:1fr}
+  .tour-img{width:100%;height:190px}
+  .calendar{padding:12px}
+  .day{font-size:13px}
+  .steps{padding:18px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">
+    <div class="logo-name">Genoa Local Experiences</div>
+    <div class="logo-loc">Genoa &amp; Liguria</div>
+  </a>
+  <a class="nav-back" id="back-link" href="/">Back to experience</a>
+</nav>
+
+<main class="page">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Private booking</div>
+      <h1>Reserve your private experience</h1>
+      <p class="lead">Choose your date, start time and group size. You can secure your booking with a €100 deposit or pay the full amount now. If you choose the deposit, the remaining balance is paid online before the experience.</p>
+    </div>
+    <aside class="direct-card">
+      <div class="direct-card-title">Direct booking with Nefset</div>
+      <p>No platform service fees, no public group. You are booking a private experience directly with your local host.</p>
+    </aside>
+  </section>
+
+  <section class="booking-layout">
+    <div class="panel">
+      <div class="tour-chooser" id="tour-chooser">
+        <h2 class="chooser-title">Choose your experience</h2>
+        <p class="chooser-note">Select the tour you would like to reserve.</p>
+        <div class="chooser-grid" id="chooser-grid"></div>
+      </div>
+      <div class="tour-strip">
+        <img class="tour-img" id="tour-image" src="/images/genoa must see/img_8480.jpg" alt="Selected experience"/>
+        <div>
+          <h2 class="tour-name" id="tour-name">Genoa Must-Sees &amp; Tastings</h2>
+          <div class="tour-meta" id="tour-meta"></div>
+          <p class="tour-copy" id="tour-copy"></p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-head">
+            <div class="step-num">1</div>
+            <div>
+              <h3 class="step-title">Choose a date</h3>
+              <p class="step-note">Unavailable days will be disabled once Google Calendar is connected.</p>
+            </div>
+          </div>
+          <div class="calendar">
+            <div class="calendar-top">
+              <button class="icon-btn" type="button" onclick="changeMonth(-1)" aria-label="Previous month">&#8249;</button>
+              <div class="month-title" id="month-title"></div>
+              <button class="icon-btn" type="button" onclick="changeMonth(1)" aria-label="Next month">&#8250;</button>
+            </div>
+            <div class="dow"><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div></div>
+            <div class="days" id="days"></div>
+          </div>
+          <div class="step-error" id="date-error">Please choose a date.</div>
+        </div>
+
+        <div class="step">
+          <div class="step-head">
+            <div class="step-num">2</div>
+            <div>
+              <h3 class="step-title">Choose a start time</h3>
+              <p class="step-note" id="slot-note">Select a date first, then pick one of the available start times.</p>
+            </div>
+          </div>
+          <div class="slot-groups" id="slots"></div>
+          <div class="step-error" id="time-error">Please choose a start time.</div>
+        </div>
+
+        <div class="step">
+          <div class="step-head">
+            <div class="step-num">3</div>
+            <div>
+              <h3 class="step-title">Guests</h3>
+              <p class="step-note">Private groups can include up to 12 guests total.</p>
+            </div>
+          </div>
+          <div class="guest-stack">
+            <div class="guest-row">
+              <div class="guest-row-main">
+                <div class="guest-title">Adults</div>
+                <div class="guest-sub" id="guest-sub"></div>
+              </div>
+              <div class="counter">
+                <button class="counter-btn" id="adult-minus" type="button" onclick="changeAdults(-1)">-</button>
+                <div class="guest-count" id="adult-count">4</div>
+                <button class="counter-btn" id="adult-plus" type="button" onclick="changeAdults(1)">+</button>
+              </div>
+            </div>
+            <div class="guest-row">
+              <div class="guest-row-main">
+                <div class="guest-title">Children 4-11</div>
+                <div class="guest-sub">Children 4-11 join the experience free. Transport tickets, meals and extras are paid separately when needed.</div>
+              </div>
+              <div class="counter">
+                <button class="counter-btn" id="child-minus" type="button" onclick="changeChildren(-1)">-</button>
+                <div class="guest-count" id="child-count">0</div>
+                <button class="counter-btn" id="child-plus" type="button" onclick="changeChildren(1)">+</button>
+              </div>
+            </div>
+            <div class="guest-row">
+              <div class="guest-row-main">
+                <div class="guest-title">Infants 0-3</div>
+                <div class="guest-sub">Infants 0-3 join free, including transport tickets when they are free for this age group.</div>
+              </div>
+              <div class="counter">
+                <button class="counter-btn" id="infant-minus" type="button" onclick="changeInfants(-1)">-</button>
+                <div class="guest-count" id="infant-count">0</div>
+                <button class="counter-btn" id="infant-plus" type="button" onclick="changeInfants(1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="addon-box" id="cinque-logistics-box">
+            <label class="addon-option" for="cinque-logistics">
+              <input id="cinque-logistics" type="checkbox" onchange="toggleCinqueLogistics(this.checked)"/>
+              <span class="addon-content">
+                <span class="addon-top">
+                  <span>
+                    <span class="addon-kicker">Cinque Terre add-on</span>
+                    <span class="addon-title">Let me handle the transport</span>
+                  </span>
+                  <span class="addon-price">+€100 per adult / child 4+</span>
+                </span>
+                <span class="addon-copy">Round-trip train tickets from Genoa, plus the best local option for your date: Cinque Terre Card between villages, or a scenic boat segment when weather and schedules allow.</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-head">
+            <div class="step-num">4</div>
+            <div>
+              <h3 class="step-title">Your details</h3>
+              <p class="step-note">These details will be sent with your confirmation email.</p>
+            </div>
+          </div>
+          <form class="form-grid" onsubmit="event.preventDefault();goToConfirmation();">
+            <div class="field" id="field-name"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" placeholder="Sarah Johnson" oninput="clearFieldError('name')"/><div class="field-error">Please enter your full name.</div></div>
+            <div class="field" id="field-email"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" placeholder="sarah@email.com" oninput="clearFieldError('email')"/><div class="field-error">Please enter a valid email address.</div></div>
+            <div class="field" id="field-phone"><label for="phone">Phone / WhatsApp</label><input id="phone" name="phone" autocomplete="tel" placeholder="+1 555 123 4567" oninput="clearFieldError('phone')"/><div class="field-error">Please enter your phone or WhatsApp number.</div></div>
+            <div class="field"><label for="stay">Hotel / cruise ship</label><input id="stay" name="stay" placeholder="Optional"/></div>
+            <div class="field full"><label for="requests">Special requests</label><textarea id="requests" name="requests" placeholder="Mobility needs, kids in the group, food preferences, timing notes..."></textarea></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <aside class="summary" aria-live="polite">
+      <div class="summary-host">
+        <img class="host-img" src="/images/nefset host.jpg" alt="Nefset"/>
+        <div>
+          <div class="host-kicker">Your host</div>
+          <div class="host-name">Nefset</div>
+        </div>
+      </div>
+      <h2 class="summary-title" id="summary-title">Your booking</h2>
+      <div class="summary-lines">
+        <div class="summary-line"><span>Date</span><strong id="summary-date">Choose a date</strong></div>
+        <div class="summary-line"><span>Start time</span><strong id="summary-time">Choose a time</strong></div>
+        <div class="summary-line"><span>Guests</span><strong id="summary-guests">4 adults</strong></div>
+      </div>
+      <div class="price-block">
+        <div class="price-row"><span id="base-label">Base price, up to 4 adults</span><strong id="base-price">€240</strong></div>
+        <div class="price-row"><span id="extra-label">Additional adults</span><strong id="extra-price">€0</strong></div>
+        <div class="price-row"><span>Children 4-11</span><strong>Free</strong></div>
+        <div class="price-row"><span>Infants 0-3</span><strong>Free</strong></div>
+        <div class="price-row" id="logistics-row" style="display:none"><span id="logistics-label">Train-ticket logistics</span><strong id="logistics-price">€0</strong></div>
+        <div class="price-row"><span>Approx. per paying adult</span><strong id="per-person">€60</strong></div>
+        <div class="total-row"><span>Total</span><strong id="total-price">€240</strong></div>
+      </div>
+      <div class="deposit-box">
+        <div class="payment-choice" aria-label="Payment today">
+          <label class="payment-option">
+            <input type="radio" name="payment-choice" value="deposit" checked onchange="setPaymentMode(this.value)"/>
+            <span>Pay deposit today</span>
+            <strong>€100</strong>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment-choice" value="full" onchange="setPaymentMode(this.value)"/>
+            <span>Pay full amount now</span>
+            <strong id="full-payment-option">€240</strong>
+          </label>
+        </div>
+        <div class="deposit-row"><span id="due-today-label">Due today</span><strong id="due-today">€100</strong></div>
+        <div class="deposit-row"><span>Remaining balance</span><strong id="remaining">€140</strong></div>
+      </div>
+      <div class="included-box" id="included-box"></div>
+      <button class="btn-pay" id="pay-button" type="button" onclick="goToConfirmation()">Pay €100 deposit</button>
+      <div class="trust" id="payment-note">The remaining balance is paid online via a secure payment link sent by email, no later than 7 days before the experience. A reminder will be sent.</div>
+      <a class="whatsapp-link" href="https://wa.me/393203723453" target="_blank">Ask a question on WhatsApp</a>
+    </aside>
+  </section>
+</main>
+
+<div class="mobile-bar">
+  <div class="mobile-bar-price"><strong id="mobile-total">€240 total</strong><span id="mobile-payment">€100 deposit today</span></div>
+  <button class="btn-pay" type="button" onclick="document.querySelector('.summary').scrollIntoView({behavior:'smooth'})">Review</button>
+</div>
+
+<script>
+const tours={
+  genoa:{
+    id:'genoa',name:'Genoa Must-Sees & Tastings',duration:'3 hours',base:240,extra:30,deposit:100,includedAdults:4,max:12,
+    image:'/images/genoa must see/img_8480.jpg',back:'/tours/genoa-must-see/',
+    copy:'A private walk through Genoa with hidden streets, local tastings, viewpoints and flexible pacing.',
+    includedItems:['Fresh pesto tasting','Gelato or a secret Genoese dessert with coffee','Panoramic elevator tickets'],
+    notIncludedItems:['Transport to the meeting point','Full meal','Extra food or drinks beyond the included tastings'],
+    reassurance:'No required extra costs during the walk.',
+    meta:['3 hours','Private experience','Flexible meeting point'],
+    meeting:'Via della Mercanzia, 2, 16124 Genova GE',
+    slots:{Morning:['09:30'],Afternoon:['14:30'],Evening:['18:00']}
+  },
+  portofino:{
+    id:'portofino',name:'Portofino & Beyond',duration:'Full day',base:650,extra:100,deposit:100,includedAdults:4,max:12,
+    image:'/images/portofino/portofino-panoramic.jpg',back:'/tours/portofino-beyond/',
+    copy:'A full day along the Ligurian Riviera with Portofino, San Fruttuoso and Camogli at your own pace.',
+    includedItems:['Ferry tickets for the planned route','Private experience with Nefset','Flexible route pacing'],
+    notIncludedItems:['Transport to the meeting point in Genoa','Food and drinks','Optional extras'],
+    reassurance:'Your ferry logistics are already part of the experience price.',
+    meta:['Full day','Private experience','Ferry day'],
+    meeting:'Via della Mercanzia, 2, 16124 Genova GE',
+    slots:{Morning:['09:30']}
+  },
+  cinque:{
+    id:'cinque',name:'Cinque Terre Day Experience',duration:'Full day',base:650,extra:130,deposit:100,includedAdults:4,max:12,logisticsPerGuest:100,
+    image:'/images/5 terre/sami-hobbs-ihw2jww6xt4-unsplash.jpg',back:'/tours/cinque-terre-experience/',
+    copy:'A relaxed full day by train through Vernazza, Manarola and Riomaggiore, with optional hiking.',
+    includedItems:['Private experience with Nefset','Route planning and flexible pacing'],
+    notIncludedItems:['Train tickets','Meals and drinks','Optional extras'],
+    reassurance:'I will help you choose the best train ticket option after booking.',
+    meta:['Full day','Private experience','Train day'],
+    meeting:'Genova Brignole Railway Station',
+    slots:{'Early morning':['07:30','08:30']}
+  }
+};
+let params=new URLSearchParams(window.location.search);
+let requestedTour=params.get('tour');
+let tour=tours[requestedTour]||tours.genoa;
+let showChooser=!requestedTour||!tours[requestedTour];
+let now=new Date();
+let viewDate=new Date(now.getFullYear(),now.getMonth(),1);
+let selectedDate=null;
+let selectedTime=null;
+let adults=4;
+let children=0;
+let infants=0;
+let cinqueLogistics=false;
+let paymentMode='deposit';
+let dateAvailability=null;
+let checkingAvailability=false;
+const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function euro(value){
+  const amount=Number(value);
+  return '€'+Math.round(Number.isFinite(amount)?amount:0);
+}
+function isoDate(date){return date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0')}
+function prettyDate(date){
+  if(!date)return 'Choose a date';
+  return date.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+}
+function initTour(){
+  renderTourChooser();
+  document.getElementById('tour-name').textContent=tour.name;
+  document.getElementById('tour-copy').textContent=tour.copy;
+  document.getElementById('tour-image').src=tour.image;
+  document.getElementById('back-link').href=tour.back;
+  document.getElementById('tour-meta').innerHTML=tour.meta.map(item=>'<span class="pill">'+item+'</span>').join('');
+  document.getElementById('guest-sub').textContent='Up to '+tour.includedAdults+' adults are included. Additional adults are '+euro(tour.extra)+' each.';
+  document.getElementById('summary-title').textContent=tour.name;
+  document.getElementById('base-label').textContent='Base price, up to '+tour.includedAdults+' adults';
+  if(tour.id!=='cinque')cinqueLogistics=false;
+  renderAddOns();
+  renderSlots();
+}
+function renderAddOns(){
+  const box=document.getElementById('cinque-logistics-box');
+  const input=document.getElementById('cinque-logistics');
+  const show=tour.id==='cinque';
+  box.classList.toggle('on',show);
+  input.checked=show&&cinqueLogistics;
+}
+function toggleCinqueLogistics(checked){
+  cinqueLogistics=tour.id==='cinque'&&checked;
+  updateSummary();
+}
+function renderTourChooser(){
+  const chooser=document.getElementById('tour-chooser');
+  const grid=document.getElementById('chooser-grid');
+  chooser.classList.toggle('on',showChooser);
+  grid.innerHTML='';
+  Object.values(tours).forEach(item=>{
+    const card=document.createElement('button');
+    card.type='button';
+    card.className='chooser-card'+(item.id===tour.id?' selected':'');
+    card.innerHTML='<div class="chooser-card-name">'+item.name+'</div><div class="chooser-card-meta">'+item.duration+' · from '+euro(item.base)+' per private group</div>';
+    card.onclick=()=>{
+      tour=item;
+      showChooser=true;
+      selectedTime=null;
+      adults=4;
+      children=0;
+      infants=0;
+      cinqueLogistics=false;
+      try{history.replaceState(null,'','/booking/?tour='+tour.id);}catch(e){}
+      initTour();
+      renderCalendar();
+      updateSummary();
+    };
+    grid.appendChild(card);
+  });
+}
+function renderCalendar(){
+  document.getElementById('month-title').textContent=monthNames[viewDate.getMonth()]+' '+viewDate.getFullYear();
+  const daysEl=document.getElementById('days');
+  daysEl.innerHTML='';
+  const first=new Date(viewDate.getFullYear(),viewDate.getMonth(),1);
+  const startOffset=(first.getDay()+6)%7;
+  const lastDay=new Date(viewDate.getFullYear(),viewDate.getMonth()+1,0).getDate();
+  for(let i=0;i<startOffset;i++){
+    const blank=document.createElement('button');
+    blank.className='day blank';
+    blank.type='button';
+    daysEl.appendChild(blank);
+  }
+  for(let day=1;day<=lastDay;day++){
+    const date=new Date(viewDate.getFullYear(),viewDate.getMonth(),day);
+    const btn=document.createElement('button');
+    btn.type='button';
+    btn.textContent=day;
+    btn.className='day';
+    const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    if(date<today)btn.classList.add('disabled');
+    if(isoDate(date)===isoDate(today))btn.classList.add('today');
+    if(selectedDate&&isoDate(date)===isoDate(selectedDate))btn.classList.add('selected');
+    btn.onclick=async()=>{
+      if(btn.classList.contains('disabled'))return;
+      selectedDate=date;
+      selectedTime=null;
+      dateAvailability=null;
+      renderCalendar();
+      renderSlots();
+      updateSummary();
+      checkingAvailability=true;
+      try{
+        const res=await fetch('/.netlify/functions/check-availability?date='+isoDate(date)+'&tour='+tour.id);
+        dateAvailability=await res.json();
+      }catch(e){
+        dateAvailability={available:true};
+      }
+      checkingAvailability=false;
+      renderSlots();
+    };
+    daysEl.appendChild(btn);
+  }
+}
+function changeMonth(amount){
+  viewDate=new Date(viewDate.getFullYear(),viewDate.getMonth()+amount,1);
+  renderCalendar();
+}
+function renderSlots(){
+  const wrap=document.getElementById('slots');
+  const note=document.getElementById('slot-note');
+  wrap.innerHTML='';
+  if(!selectedDate){
+    note.textContent='Select a date first, then pick one of the available start times.';
+    return;
+  }
+  if(checkingAvailability){
+    note.textContent='Checking availability…';
+    return;
+  }
+  if(dateAvailability&&!dateAvailability.available){
+    note.textContent='This date is not available for '+tour.name+'. Please choose another date.';
+    return;
+  }
+  note.textContent='Available start times for '+prettyDate(selectedDate)+'.';
+  Object.entries(tour.slots).forEach(([label,times])=>{
+    const group=document.createElement('div');
+    group.innerHTML='<div class="slot-label">'+label+'</div>';
+    const list=document.createElement('div');
+    list.className='slot-list';
+    times.forEach(time=>{
+      const slotFree=!dateAvailability||!dateAvailability.slots||dateAvailability.slots[time]!==false;
+      const btn=document.createElement('button');
+      btn.type='button';
+      btn.disabled=!slotFree;
+      btn.className='slot'+(selectedTime===time?' selected':'')+(!slotFree?' disabled':'');
+      btn.textContent=slotFree?time:time+' — taken';
+      if(slotFree)btn.onclick=()=>{selectedTime=time;renderSlots();updateSummary();};
+      list.appendChild(btn);
+    });
+    group.appendChild(list);
+    wrap.appendChild(group);
+  });
+}
+function totalGuests(){return adults+children+infants}
+function ticketedGuests(){return adults+children}
+function changeAdults(delta){setAdults(adults+delta)}
+function changeChildren(delta){setChildren(children+delta)}
+function changeInfants(delta){setInfants(infants+delta)}
+function setAdults(value){
+  const next=Number(value);
+  const maxAdults=Math.max(1,tour.max-children-infants);
+  adults=Math.max(1,Math.min(maxAdults,Number.isFinite(next)?next:adults));
+  updateSummary();
+}
+function setChildren(value){
+  const next=Number(value);
+  const maxChildren=Math.max(0,tour.max-adults-infants);
+  children=Math.max(0,Math.min(maxChildren,Number.isFinite(next)?next:children));
+  updateSummary();
+}
+function setInfants(value){
+  const next=Number(value);
+  const maxInfants=Math.max(0,tour.max-adults-children);
+  infants=Math.max(0,Math.min(maxInfants,Number.isFinite(next)?next:infants));
+  updateSummary();
+}
+function setPaymentMode(mode){
+  paymentMode=mode==='full'?'full':'deposit';
+  updateSummary();
+}
+function totals(){
+  const extras=Math.max(0,adults-tour.includedAdults);
+  const extraTotal=extras*tour.extra;
+  const logisticsTotal=tour.id==='cinque'&&cinqueLogistics?ticketedGuests()*(tour.logisticsPerGuest||0):0;
+  const total=tour.base+extraTotal+logisticsTotal;
+  const dueToday=paymentMode==='full'?total:tour.deposit;
+  const remaining=paymentMode==='full'?0:Math.max(0,total-tour.deposit);
+  return {extras,extraTotal,logisticsTotal,total,dueToday,remaining,perPerson:total/adults};
+}
+function guestSummary(){
+  const adultText=adults+' '+(adults===1?'adult':'adults');
+  const parts=[adultText];
+  if(children)parts.push(children+' '+(children===1?'child':'children')+' 4-11');
+  if(infants)parts.push(infants+' '+(infants===1?'infant':'infants')+' 0-3');
+  return parts.join(', ');
+}
+function updateSummary(){
+  const t=totals();
+  document.getElementById('adult-count').textContent=adults;
+  document.getElementById('child-count').textContent=children;
+  document.getElementById('infant-count').textContent=infants;
+  document.getElementById('summary-date').textContent=prettyDate(selectedDate);
+  document.getElementById('summary-time').textContent=selectedTime||'Choose a time';
+  document.getElementById('summary-guests').textContent=guestSummary();
+  document.getElementById('base-price').textContent=euro(tour.base);
+  document.getElementById('extra-label').textContent=t.extras? t.extras+' additional '+(t.extras===1?'adult':'adults'):'Additional adults';
+  document.getElementById('extra-price').textContent=euro(t.extraTotal);
+  document.getElementById('logistics-row').style.display=t.logisticsTotal?'flex':'none';
+  document.getElementById('logistics-label').textContent='Transport logistics ('+ticketedGuests()+' '+(ticketedGuests()===1?'ticketed guest':'ticketed guests')+')';
+  document.getElementById('logistics-price').textContent=euro(t.logisticsTotal);
+  document.getElementById('per-person').textContent=euro(t.perPerson);
+  document.getElementById('total-price').textContent=euro(t.total);
+  document.getElementById('full-payment-option').textContent=euro(t.total);
+  document.getElementById('due-today').textContent=euro(t.dueToday);
+  document.getElementById('remaining').textContent=euro(t.remaining);
+  document.getElementById('mobile-total').textContent=euro(t.total)+' total';
+  document.getElementById('mobile-payment').textContent=paymentMode==='full'?'Full payment today':euro(tour.deposit)+' deposit today';
+  document.getElementById('pay-button').textContent=paymentMode==='full'?'Pay '+euro(t.total)+' now':'Pay '+euro(tour.deposit)+' deposit';
+  document.getElementById('payment-note').textContent=paymentMode==='full'
+    ? 'Your experience is fully paid. No remaining balance is due before the tour.'
+    : 'The remaining balance is paid online via a secure payment link sent by email, no later than 7 days before the experience. A reminder will be sent. A reminder will be sent by email.';
+  const included=tour.id==='cinque'&&cinqueLogistics?[...tour.includedItems,'Round-trip train tickets from Genoa','Best local transport setup for your date: Cinque Terre Card or scenic boat segment']:tour.includedItems;
+  const notIncluded=tour.id==='cinque'&&cinqueLogistics?['Meals and drinks','Optional extras']:tour.notIncludedItems;
+  const reassurance=tour.id==='cinque'&&cinqueLogistics?'Transport logistics add-on: '+euro(tour.logisticsPerGuest)+' per adult / child 4+. Infants 0-3 are not charged when transport tickets are free for this age group. Boat segments depend on sea conditions and seasonal schedules.':tour.reassurance;
+  document.getElementById('included-box').innerHTML=
+    '<div class="included-title">Included / not included</div>'+
+    '<div class="included-group"><div class="included-subtitle">Included</div><div class="included-list">'+included.map(item=>'<div class="included-item"><span class="included-mark">✓</span><span>'+item+'</span></div>').join('')+'</div></div>'+
+    '<div class="included-group"><div class="included-subtitle">Not included</div><div class="included-list">'+notIncluded.map(item=>'<div class="included-item"><span class="included-mark no">–</span><span>'+item+'</span></div>').join('')+'</div></div>'+
+    '<div class="included-note">'+reassurance+'</div>';
+  document.getElementById('adult-minus').disabled=adults<=1;
+  document.getElementById('adult-plus').disabled=totalGuests()>=tour.max;
+  document.getElementById('child-minus').disabled=children<=0;
+  document.getElementById('child-plus').disabled=totalGuests()>=tour.max;
+  document.getElementById('infant-minus').disabled=infants<=0;
+  document.getElementById('infant-plus').disabled=totalGuests()>=tour.max;
+}
+function setStepError(id,on){
+  document.getElementById(id).classList.toggle('on',on);
+}
+function setFieldError(id,on){
+  document.getElementById('field-'+id).classList.toggle('error',on);
+}
+function clearFieldError(id){
+  setFieldError(id,false);
+}
+function validateBooking(){
+  const name=document.getElementById('name').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  setStepError('date-error',!selectedDate);
+  setStepError('time-error',!selectedTime);
+  setFieldError('name',!name);
+  setFieldError('email',!emailOk);
+  setFieldError('phone',!phone);
+  const firstError=document.querySelector('.step-error.on,.field.error');
+  if(firstError)firstError.scrollIntoView({behavior:'smooth',block:'center'});
+  return selectedDate&&selectedTime&&name&&emailOk&&phone;
+}
+async function goToConfirmation(){
+  if(!validateBooking())return;
+  const t=totals();
+  const btn=document.getElementById('pay-button');
+  const mobileBtn=document.querySelector('.mobile-bar .btn-pay');
+  const originalText=btn.textContent;
+  btn.textContent='Processing…';
+  btn.disabled=true;
+  if(mobileBtn){mobileBtn.textContent='Processing…';mobileBtn.disabled=true;}
+  try{
+    const res=await fetch('/.netlify/functions/create-checkout',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        tourId:tour.id,
+        date:selectedDate?isoDate(selectedDate):'',
+        time:selectedTime||'',
+        adults:String(adults),
+        children:String(children),
+        infants:String(infants),
+        logistics:cinqueLogistics?'yes':'no',
+        paymentMode,
+        name:document.getElementById('name').value.trim(),
+        email:document.getElementById('email').value.trim(),
+        phone:document.getElementById('phone').value.trim(),
+        stay:document.getElementById('stay').value.trim(),
+        requests:document.getElementById('requests').value.trim()
+      })
+    });
+    const json=await res.json();
+    if(json.url){
+      window.location.href=json.url;
+    }else{
+      throw new Error(json.error||'Unknown error');
+    }
+  }catch(err){
+    btn.textContent=originalText;
+    btn.disabled=false;
+    if(mobileBtn){mobileBtn.textContent='Review';mobileBtn.disabled=false;}
+    alert('Something went wrong. Please try again or contact us on WhatsApp.');
+    console.error(err);
+  }
+}
+initTour();
+renderCalendar();
+updateSummary();
+</script>
+</body>
+</html>

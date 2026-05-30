@@ -2,4 +2,7 @@
 **/.DS_Store
 .vscode/
 .env
+.env.local
 node_modules/
+.netlify/
+*.log

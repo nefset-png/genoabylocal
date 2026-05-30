@@ -1,120 +1,47 @@
-const { google } = require('googleapis');
+const { getEventsForDate, parseBookingEvent } = require('./lib/calendar');
 
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Content-Type': 'application/json',
-};
-
-const EXPERIENCES = {
-  genoa: { slots: ['9:30', '14:30', '18:00'], fullDay: false },
-  portofino: { slots: ['9:30'], fullDay: true },
-  'cinque-terre': { slots: ['7:30', '8:30'], fullDay: true },
-};
-
-const BLOCK_KEYWORDS = ['UNAVAILABLE', 'PERSONAL DAY', 'VACATION', 'OUT OF OFFICE', 'APPOINTMENT'];
-
-function getGoogleAuth() {
-  const privateKey = process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
-  return new google.auth.JWT(
-    process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    null,
-    privateKey,
-    ['https://www.googleapis.com/auth/calendar.readonly']
-  );
-}
-
-function isManualBlock(title) {
-  if (!title) return false;
-  return BLOCK_KEYWORDS.some(keyword => title.toUpperCase().includes(keyword));
-}
-
-function isFullDayExperience(title) {
-  if (!title) return false;
-  return title.toLowerCase().includes('portofino') || title.toLowerCase().includes('cinque terre');
-}
+const ALL_GENOA_SLOTS = { '09:30': true, '14:30': true, '18:00': true };
 
 exports.handler = async (event) => {
-  if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers: CORS_HEADERS, body: '' };
-  }
+  const date = event.queryStringParameters?.date;
+  const tourId = event.queryStringParameters?.tour;
 
-  const { date, experience } = event.queryStringParameters || {};
-
-  if (!date || !experience) {
-    return {
-      statusCode: 400,
-      headers: CORS_HEADERS,
-      body: JSON.stringify({ available: false, error: 'Missing date or experience parameter' }),
-    };
-  }
-
-  if (!EXPERIENCES[experience]) {
-    return {
-      statusCode: 400,
-      headers: CORS_HEADERS,
-      body: JSON.stringify({ available: false, error: 'Invalid experience' }),
-    };
-  }
+  if (!date) return { statusCode: 400, body: JSON.stringify({ error: 'Missing date' }) };
 
   try {
-    const auth = getGoogleAuth();
-    const calendar = google.calendar({ version: 'v3', auth });
+    const events = await getEventsForDate(date);
+    const bookings = events.map(parseBookingEvent).filter(Boolean);
 
-    // Query all events for the selected date
-    const startOfDay = new Date(`${date}T00:00:00+02:00`).toISOString();
-    const endOfDay = new Date(`${date}T23:59:59+02:00`).toISOString();
+    const hasPortofinoCT = bookings.some(b => b.tourId === 'portofino' || b.tourId === 'cinque');
+    const genoaBookings = bookings.filter(b => b.tourId === 'genoa');
 
-    const response = await calendar.events.list({
-      calendarId: process.env.GOOGLE_CALENDAR_ID,
-      timeMin: startOfDay,
-      timeMax: endOfDay,
-      singleEvents: true,
-    });
-
-    const events = response.data.items || [];
-
-    // Check for manual blocks or full-day blockers
-    for (const event of events) {
-      const title = event.summary || '';
-      if (isManualBlock(title) || isFullDayExperience(title)) {
-        return {
-          statusCode: 200,
-          headers: CORS_HEADERS,
-          body: JSON.stringify({ available: false, slots: [], experience, date }),
-        };
-      }
+    // Portofino or CT booked → whole day blocked
+    if (hasPortofinoCT) {
+      return { statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ available: false }) };
     }
 
-    // Get booked time slots for this experience
-    const bookedTimes = events.map(event => {
-      if (!event.start || !event.start.dateTime) return null;
-      const startTime = new Date(event.start.dateTime);
-      const hours = startTime.getHours();
-      const minutes = startTime.getMinutes().toString().padStart(2, '0');
-      return `${hours}:${minutes}`;
-    }).filter(Boolean);
+    // Checking Portofino or CT: blocked if any Genoa booking exists
+    if (tourId === 'portofino' || tourId === 'cinque') {
+      const available = genoaBookings.length === 0;
+      return { statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ available }) };
+    }
 
-    // Filter out already booked slots
-    const allSlots = EXPERIENCES[experience].slots;
-    const availableSlots = allSlots.filter(slot => !bookedTimes.includes(slot));
+    // Checking Genoa: return slot-level availability
+    const takenSlots = new Set(genoaBookings.map(b => b.slot).filter(Boolean));
+    const slots = {};
+    for (const slot of Object.keys(ALL_GENOA_SLOTS)) {
+      slots[slot] = !takenSlots.has(slot);
+    }
+    const anyAvailable = Object.values(slots).some(Boolean);
 
     return {
       statusCode: 200,
-      headers: CORS_HEADERS,
-      body: JSON.stringify({
-        available: availableSlots.length > 0,
-        slots: availableSlots,
-        experience,
-        date,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ available: anyAvailable, slots })
     };
-  } catch (error) {
-    console.error('check-availability error:', error);
-    return {
-      statusCode: 500,
-      headers: CORS_HEADERS,
-      body: JSON.stringify({ available: false, error: 'Failed to check availability' }),
-    };
+  } catch (err) {
+    console.error('check-availability error:', err);
+    // On error, don't block bookings — let Stripe handle worst case
+    return { statusCode: 200, body: JSON.stringify({ available: true }) };
   }
 };

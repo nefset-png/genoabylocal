@@ -7,24 +7,74 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
 <title>Booking Confirmed | Genoa Local Experiences</title>
-<meta name="description" content="Your Genoa Local Experiences booking deposit has been received."/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--green:#1a3a2a;--gold:#d4a853;--gold-dark:#b8935a;--cream:#f8f4ee;--line:#ece6dd;--ink:#17120c;--stone:#7a7268;--white:#fff}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;min-height:100vh}
+:root{
+  --gold:#b8935a;--gold-h:#c9a46e;--gold-pale:#f5efe6;--gold-faint:#faf6f0;
+  --ink:#17120c;--ink-warm:#2a2018;--stone:#7a7268;--stone-light:#a09890;
+  --line:#ece6dd;--cream:#faf7f3;--white:#fff;--green:#6f8f70;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
 nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:0.5px solid var(--line);background:rgba(255,255,255,0.97)}
-.logo{text-decoration:none}.logo-name{font-family:Georgia,serif;font-size:16px;color:var(--ink)}.logo-loc{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);margin-top:2px}
-.nav-link{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);text-decoration:none}
-.wrap{min-height:calc(100vh - 76px);display:flex;align-items:center;justify-content:center;padding:56px 24px}
-.panel{width:100%;max-width:620px;background:var(--white);border:0.5px solid var(--line);border-radius:12px;padding:54px 46px;text-align:center;box-shadow:0 18px 54px rgba(35,22,10,.08)}
-.kicker{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-h1{font-family:Georgia,serif;font-size:38px;font-weight:400;color:var(--green);line-height:1.15;margin-bottom:18px}
-p{font-size:15px;color:var(--stone);line-height:1.8;margin:0 auto 18px;max-width:440px}
-.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
-.btn{display:inline-block;border-radius:7px;padding:14px 26px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;text-decoration:none;font-weight:700}
-.btn.primary{background:var(--gold);color:#fff}.btn.secondary{border:1px solid var(--line);color:var(--green);background:#fff}
-.note{margin-top:28px;font-size:12px;color:#a09890}
-@media(max-width:640px){nav{padding:16px 22px}.nav-link{display:none}.panel{padding:42px 24px}h1{font-size:31px}}
+.logo{text-decoration:none}
+.logo-name{font-family:Georgia,serif;font-size:16px;font-weight:400;color:var(--ink)}
+.logo-loc{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--stone);margin-top:2px}
+.nav-link{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone);text-decoration:none}
+.nav-link:hover{color:var(--ink)}
+.page{max-width:980px;margin:0 auto;padding:60px 40px 90px}
+.card{background:var(--white);border:0.5px solid var(--line);border-radius:14px;box-shadow:0 14px 38px rgba(35,22,10,0.07);overflow:hidden}
+.top{display:grid;grid-template-columns:1fr 260px;gap:34px;padding:42px;background:linear-gradient(135deg,#fff,var(--gold-faint));border-bottom:0.5px solid var(--line)}
+.eyebrow{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+h1{font-family:Georgia,serif;font-size:42px;font-weight:400;line-height:1.08;color:var(--ink);margin-bottom:16px}
+.lead{font-size:15px;color:var(--stone);line-height:1.85;max-width:620px}
+.stamp{align-self:start;border:0.5px solid var(--line);background:#fff;border-radius:12px;padding:20px;text-align:center}
+.stamp-mark{width:54px;height:54px;border-radius:50%;background:var(--gold-pale);color:var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:28px}
+.stamp-title{font-family:Georgia,serif;font-size:18px;color:var(--ink)}
+.stamp-sub{font-size:12px;color:var(--stone);margin-top:4px}
+.content{display:grid;grid-template-columns:1fr 300px;gap:36px;padding:34px 42px 42px}
+.section{padding-bottom:28px;margin-bottom:28px;border-bottom:0.5px solid var(--line)}
+.section:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.section h2{font-family:Georgia,serif;font-size:24px;font-weight:400;color:var(--ink);margin-bottom:16px}
+.detail-row{display:flex;justify-content:space-between;gap:24px;font-size:14px;color:var(--stone);padding:9px 0}
+.detail-row strong{color:var(--ink);font-weight:600;text-align:right}
+.note{font-size:13px;color:var(--stone);line-height:1.75;background:var(--gold-faint);border:0.5px solid var(--line);border-radius:10px;padding:16px;margin-top:16px}
+.map-card{margin-top:16px;border:0.5px solid var(--line);border-radius:12px;overflow:hidden;background:var(--gold-faint)}
+.map-frame{display:block;width:100%;height:230px;border:0}
+.map-actions{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px 15px}
+.map-note{font-size:12px;color:var(--stone);line-height:1.5}
+.map-link{flex:0 0 auto;font-size:10px;letter-spacing:0.09em;text-transform:uppercase;text-decoration:none;color:#fff;background:var(--gold);border-radius:8px;padding:10px 13px;font-weight:700}
+.map-link:hover{background:var(--gold-h)}
+.included-box{display:grid;gap:18px}
+.included-group{display:grid;gap:9px}
+.included-subtitle{font-family:Georgia,serif;font-size:16px;color:var(--ink)}
+.included-list{display:grid;gap:8px}
+.included-item{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;font-size:13px;color:var(--stone);line-height:1.6}
+.included-mark{width:20px;height:20px;border-radius:50%;background:var(--gold-pale);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;line-height:1;margin-top:1px}
+.included-mark.no{background:#f8f1ec;color:#9d6c55}
+.included-note{font-size:13px;color:var(--stone);line-height:1.65;background:var(--gold-faint);border:0.5px solid var(--line);border-radius:10px;padding:14px 16px}
+.side{background:var(--cream);border:0.5px solid var(--line);border-radius:12px;padding:24px;align-self:start}
+.host{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.host img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-pale)}
+.host-kicker{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)}
+.host-name{font-family:Georgia,serif;font-size:18px;color:var(--ink)}
+.touch-title{font-family:Georgia,serif;font-size:24px;font-weight:400;color:var(--ink);margin:4px 0 10px}
+.touch-copy{font-size:13px;color:var(--stone);line-height:1.75;margin-bottom:16px}
+.touch-list{display:grid;gap:10px;margin:16px 0 18px}
+.touch-item{display:grid;grid-template-columns:18px 1fr;gap:9px;font-size:12.5px;color:var(--stone);line-height:1.55}
+.touch-dot{width:18px;height:18px;border-radius:50%;background:#fff;color:var(--gold);border:0.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;margin-top:1px}
+.btn{display:block;width:100%;text-align:center;text-decoration:none;border-radius:8px;padding:15px 18px;font-size:12px;letter-spacing:0.09em;text-transform:uppercase;font-weight:700;margin-top:12px}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold-h)}
+.tiny{font-size:11px;color:var(--stone-light);line-height:1.6;margin-top:16px;text-align:center}
+@media(max-width:800px){
+  nav{padding:14px 20px}
+  .page{padding:30px 14px 70px}
+  .top,.content{grid-template-columns:1fr;padding:28px 22px}
+  h1{font-size:34px}
+  .stamp{text-align:left}
+  .stamp-mark{margin:0 0 12px}
+  .detail-row{align-items:flex-start}
+}
 </style>
 </head>
 <body>
@@ -33,20 +83,211 @@ p{font-size:15px;color:var(--stone);line-height:1.8;margin:0 auto 18px;max-width
     <div class="logo-name">Genoa Local Experiences</div>
     <div class="logo-loc">Genoa &amp; Liguria</div>
   </a>
-  <a class="nav-link" href="/#tours">Back to tours</a>
+  <a class="nav-link" href="/">Home</a>
 </nav>
-<main class="wrap">
-  <section class="panel">
-    <div class="kicker">Deposit received</div>
-    <h1>Your booking is confirmed</h1>
-    <p>Thank you. Your €100 deposit has been paid and your date is reserved.</p>
-    <p>You will receive a confirmation email with the booking details. I will also follow up personally if anything needs to be clarified.</p>
-    <div class="actions">
-      <a class="btn primary" href="/">Return home</a>
-      <a class="btn secondary" href="https://wa.me/393203723453" target="_blank">Message on WhatsApp</a>
+
+<main class="page">
+  <article class="card">
+    <div class="top">
+      <div>
+        <div class="eyebrow">Booking preview</div>
+        <h1>Your booking is confirmed</h1>
+        <p class="lead" id="thanks">Thank you. Your payment has been received and your private experience is reserved.</p>
+      </div>
+      <div class="stamp">
+        <div class="stamp-mark">&#10003;</div>
+        <div class="stamp-title" id="stamp-title">Payment received</div>
+        <div class="stamp-sub" id="stamp-sub">€100 paid online</div>
+      </div>
     </div>
-    <div class="note">Final payment is made on the day of the experience.</div>
-  </section>
+
+    <div class="content">
+      <div>
+        <section class="section">
+          <h2>Experience details</h2>
+          <div class="detail-row"><span>Experience</span><strong id="tour-name">Genoa Must-Sees &amp; Tastings</strong></div>
+          <div class="detail-row"><span>Date</span><strong id="date">Selected date</strong></div>
+          <div class="detail-row"><span>Start time</span><strong id="time">Selected time</strong></div>
+          <div class="detail-row"><span>Guests</span><strong id="guests">4 adults</strong></div>
+        </section>
+
+        <section class="section">
+          <h2>Payment summary</h2>
+          <div class="detail-row" id="logistics-row" style="display:none"><span>Transport logistics</span><strong id="logistics">Included</strong></div>
+          <div class="detail-row"><span>Total price</span><strong id="total">€240</strong></div>
+          <div class="detail-row"><span id="paid-label">Paid online</span><strong id="paid">€100</strong></div>
+          <div class="detail-row"><span>Remaining balance</span><strong id="remaining">€140</strong></div>
+          <div class="detail-row"><span id="per-guest-label">Approx. per guest</span><strong id="per-guest">€60</strong></div>
+          <div class="detail-row"><span id="remaining-per-guest-label">Remaining per guest</span><strong id="remaining-per-guest">€35</strong></div>
+          <p class="note" id="payment-summary-note">If you chose the deposit option, the remaining balance is paid online before the experience. A secure payment link will be sent by email and should be completed no later than 7 days before the tour.</p>
+        </section>
+
+        <section class="section">
+          <h2>Meeting point</h2>
+          <div class="detail-row"><span>Location</span><strong id="meeting">Via della Mercanzia, 2, 16124 Genova GE</strong></div>
+          <div class="map-card">
+            <iframe class="map-frame" id="meeting-map" title="Meeting point map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="map-actions">
+              <div class="map-note">Use the map as a first reference. I will confirm the easiest exact spot before we meet.</div>
+              <a class="map-link" id="map-link" href="#" target="_blank" rel="noopener">Open map</a>
+            </div>
+          </div>
+          <p class="note">The meeting point may be adjusted depending on your hotel, cruise terminal, mobility needs or special requests.</p>
+        </section>
+
+        <section class="section">
+          <h2>Included / not included</h2>
+          <div class="included-box" id="included-box"></div>
+        </section>
+
+        <section class="section">
+          <h2>Cancellation policy</h2>
+          <p class="note">Full refund up to 7 days before the experience. No refund within 7 days before the experience. Rescheduling is possible whenever availability allows.</p>
+        </section>
+      </div>
+
+      <aside class="side">
+        <div class="host">
+          <img src="/images/nefset host.jpg" alt="Nefset"/>
+          <div>
+            <div class="host-kicker">Your host</div>
+            <div class="host-name">Nefset</div>
+          </div>
+        </div>
+        <h2 class="touch-title">Stay in touch</h2>
+        <p class="touch-copy">You can message me before the experience if you need help getting to the meeting point or want a few local tips.</p>
+        <div class="touch-list">
+          <div class="touch-item"><span class="touch-dot">&#10003;</span><span>Ask how to reach the meeting point from your hotel, cruise terminal or train station.</span></div>
+          <div class="touch-item"><span class="touch-dot">&#10003;</span><span>Tell me if you are arriving earlier or staying longer in Liguria.</span></div>
+          <div class="touch-item"><span class="touch-dot">&#10003;</span><span>I can share my personal selection of restaurants, beaches, clubs and favorite local spots.</span></div>
+        </div>
+        <a class="btn btn-gold" href="https://wa.me/393203723453" target="_blank">Message me on WhatsApp</a>
+        <div class="tiny">Questions? Message me on WhatsApp or visit <a href="/" style="color:inherit">genoabylocal.com</a></div>
+      </aside>
+    </div>
+  </article>
 </main>
+
+<script>
+const TOURS={
+  genoa:{
+    meeting:'Via della Mercanzia, 2, 16124 Genova GE',
+    mapQuery:'Via della Mercanzia 2, 16124 Genova GE',
+    includedItems:['Fresh pesto tasting','Gelato or a secret Genoese dessert with coffee','Panoramic elevator tickets'],
+    notIncludedItems:['Transport to the meeting point','Full meal','Extra food or drinks beyond the included tastings'],
+    reassurance:'No required extra costs during the walk.'
+  },
+  portofino:{
+    meeting:'Via della Mercanzia, 2, 16124 Genova GE',
+    mapQuery:'Via della Mercanzia 2, 16124 Genova GE',
+    includedItems:['Ferry tickets for the planned route','Private experience with Nefset','Flexible route pacing throughout the day'],
+    notIncludedItems:['Transport to the meeting point in Genoa','Food and drinks','Optional extras'],
+    reassurance:'Your ferry logistics are already part of the experience price.'
+  },
+  cinque:{
+    meeting:'Genova Brignole Railway Station',
+    mapQuery:'Genova Brignole Railway Station',
+    includedItems:['Private experience with Nefset','Route planning and flexible pacing'],
+    notIncludedItems:['Train tickets','Meals and drinks','Optional extras'],
+    reassurance:'I will help you choose the best train ticket option after booking.'
+  }
+};
+function euro(value){
+  const amount=Math.round(Number(value)||0);
+  return '€'+amount;
+}
+function prettyDate(value){
+  if(!value)return 'Selected date';
+  const date=new Date(value+'T12:00:00');
+  return date.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+}
+function guestSummary(m){
+  const adults=parseInt(m.adults)||0;
+  const children=parseInt(m.children)||0;
+  const infants=parseInt(m.infants)||0;
+  const parts=[adults+' '+(adults===1?'adult':'adults')];
+  if(children)parts.push(children+' '+(children===1?'child':'children')+' 4-11');
+  if(infants)parts.push(infants+' '+(infants===1?'infant':'infants')+' 0-3');
+  return parts.join(', ');
+}
+function renderIncludedBox(m){
+  const tourData=TOURS[m.tourId]||TOURS.genoa;
+  const hasLogistics=m.tourId==='cinque'&&m.logistics==='yes';
+  const included=hasLogistics?[...tourData.includedItems,'Round-trip train tickets from Genoa','Best local transport setup for your date: Cinque Terre Card or scenic boat segment']:tourData.includedItems;
+  const notIncluded=hasLogistics?['Meals and drinks','Optional extras']:tourData.notIncludedItems;
+  const reassurance=hasLogistics?'Transport logistics add-on: €100 per adult / child 4+. Infants 0-3 are not charged when transport tickets are free for this age group. Boat segments depend on sea conditions and seasonal schedules.':tourData.reassurance;
+  const renderItems=(items,type)=>items.map(item=>'<div class="included-item"><span class="included-mark '+(type==='no'?'no':'')+'">'+(type==='no'?'–':'✓')+'</span><span>'+item+'</span></div>').join('');
+  document.getElementById('included-box').innerHTML=
+    '<div class="included-group"><div class="included-subtitle">Included</div><div class="included-list">'+renderItems(included,'yes')+'</div></div>'+
+    '<div class="included-group"><div class="included-subtitle">Not included</div><div class="included-list">'+renderItems(notIncluded,'no')+'</div></div>'+
+    '<div class="included-note">'+reassurance+'</div>';
+}
+function populatePage(m){
+  const tourData=TOURS[m.tourId]||TOURS.genoa;
+  const hasLogistics=m.tourId==='cinque'&&m.logistics==='yes';
+  const paymentMode=m.paymentMode==='full'?'full':'deposit';
+  const total=Number(m.total||0);
+  const paid=Number(m.paid||0);
+  const remaining=Number(m.remaining||0);
+  const adults=parseInt(m.adults)||1;
+  const children=parseInt(m.children)||0;
+  const payingGuests=Math.max(1,adults+children);
+  const perGuestNote=(parseInt(m.infants)||0)?' (excluding infants 0-3)':'';
+  const firstName=m.customerName?m.customerName.split(' ')[0]:'';
+
+  document.getElementById('thanks').textContent=firstName?'Thank you, '+firstName+'. Your payment has been received and your private experience is reserved.':'Thank you. Your payment has been received and your private experience is reserved.';
+  document.getElementById('tour-name').textContent=m.tourName||'';
+  document.getElementById('date').textContent=prettyDate(m.date);
+  document.getElementById('time').textContent=m.time||'';
+  document.getElementById('guests').textContent=guestSummary(m);
+  document.getElementById('meeting').textContent=tourData.meeting;
+  document.getElementById('meeting-map').src='https://www.google.com/maps?q='+encodeURIComponent(tourData.mapQuery)+'&output=embed';
+  document.getElementById('map-link').href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(tourData.mapQuery);
+  document.getElementById('logistics-row').style.display=hasLogistics?'flex':'none';
+  document.getElementById('logistics').textContent=hasLogistics?'€100 per adult / child 4+':'Not selected';
+  document.getElementById('stamp-title').textContent=paymentMode==='full'?'Fully paid':'Deposit received';
+  document.getElementById('stamp-sub').textContent=euro(paid)+' paid online';
+  document.getElementById('total').textContent=euro(total);
+  document.getElementById('paid-label').textContent=paymentMode==='full'?'Paid online':'Deposit received';
+  document.getElementById('paid').textContent=euro(paid);
+  document.getElementById('remaining').textContent=euro(remaining);
+  document.getElementById('per-guest-label').textContent='Approx. per guest'+perGuestNote;
+  document.getElementById('remaining-per-guest-label').textContent='Remaining per guest'+perGuestNote;
+  document.getElementById('per-guest').textContent=euro(total/payingGuests);
+  document.getElementById('remaining-per-guest').textContent=euro(remaining/payingGuests);
+  document.getElementById('payment-summary-note').textContent=paymentMode==='full'
+    ?'Your experience is fully paid. No remaining balance is due before the tour.'
+    :'The remaining balance is paid online before the experience. A secure payment link will be sent by email and should be completed no later than 7 days before the tour. A reminder will also be sent by email.';
+  renderIncludedBox(m);
+}
+async function init(){
+  const params=new URLSearchParams(window.location.search);
+  const sessionId=params.get('session_id');
+  if(sessionId){
+    try{
+      const res=await fetch('/.netlify/functions/get-session?id='+encodeURIComponent(sessionId));
+      const json=await res.json();
+      if(json.metadata){
+        populatePage(json.metadata);
+        return;
+      }
+    }catch(e){
+      console.error('Could not load session',e);
+    }
+  }
+  const fallback={
+    tourId:params.get('tour')||'genoa',
+    tourName:params.get('tour')==='portofino'?'Portofino & Beyond':params.get('tour')==='cinque'?'Cinque Terre Day Experience':'Genoa Must-Sees & Tastings',
+    date:params.get('date')||'',time:params.get('time')||'',
+    adults:params.get('adults')||params.get('guests')||'4',
+    children:params.get('children')||'0',infants:params.get('infants')||'0',
+    logistics:params.get('logistics')||'no',paymentMode:params.get('payment')||'deposit',
+    total:params.get('total')||'240',paid:params.get('paid')||'100',remaining:params.get('remaining')||'140',
+    customerName:params.get('name')||''
+  };
+  populatePage(fallback);
+}
+init();
+</script>
 </body>
 </html>

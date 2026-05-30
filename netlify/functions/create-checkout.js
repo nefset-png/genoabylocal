@@ -1,120 +1,94 @@
-const Stripe = require('stripe');
-
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Content-Type': 'application/json',
-};
-
-const EXPERIENCES = {
-  genoa: { name: 'Genoa Private Walk', base: 240, extra: 30, duration: '3 hours' },
-  portofino: { name: 'Portofino Full-Day Experience', base: 650, extra: 100, duration: 'Full day' },
-  'cinque-terre': { name: 'Cinque Terre Full-Day Experience', base: 650, extra: 130, duration: 'Full day' },
-};
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { createTentativeEvent } = require('./lib/calendar');
 
 const DEPOSIT = 100;
 
-function calculatePrice(experience, guestCount) {
-  const data = EXPERIENCES[experience];
-  if (guestCount <= 4) return data.base;
-  return data.base + (guestCount - 4) * data.extra;
-}
-
-function formatDate(dateStr) {
-  const [year, month, day] = dateStr.split('-');
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  return `${day} ${months[parseInt(month) - 1]} ${year}`;
-}
+const TOURS = {
+  genoa: { name: 'Genoa Must-Sees & Tastings', base: 240, extra: 30, includedAdults: 4, max: 12 },
+  portofino: { name: 'Portofino & Beyond', base: 650, extra: 100, includedAdults: 4, max: 12 },
+  cinque: { name: 'Cinque Terre Day Experience', base: 650, extra: 130, includedAdults: 4, max: 12, logisticsPerGuest: 100 }
+};
 
 exports.handler = async (event) => {
-  if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers: CORS_HEADERS, body: '' };
-  }
-
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, headers: CORS_HEADERS, body: JSON.stringify({ success: false, error: 'Method not allowed' }) };
-  }
-
-  let body;
-  try {
-    body = JSON.parse(event.body);
-  } catch {
-    return { statusCode: 400, headers: CORS_HEADERS, body: JSON.stringify({ success: false, error: 'Invalid JSON' }) };
-  }
-
-  const { experience, date, time, guestCount, customerName, customerEmail, customerPhone } = body;
-
-  if (!experience || !date || !time || !guestCount || !customerName || !customerEmail) {
-    return {
-      statusCode: 400,
-      headers: CORS_HEADERS,
-      body: JSON.stringify({ success: false, error: 'Missing required fields' }),
-    };
-  }
-
-  if (!EXPERIENCES[experience]) {
-    return {
-      statusCode: 400,
-      headers: CORS_HEADERS,
-      body: JSON.stringify({ success: false, error: 'Invalid experience' }),
-    };
-  }
+  if (event.httpMethod !== 'POST') return { statusCode: 405, body: 'Method Not Allowed' };
 
   try {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-    const expData = EXPERIENCES[experience];
-    const totalPrice = calculatePrice(experience, guestCount);
-    const formattedDate = formatDate(date);
+    const data = JSON.parse(event.body);
+    const { tourId, date, time, adults, children, infants, logistics, paymentMode, name, email, phone, stay, requests } = data;
+
+    const tour = TOURS[tourId];
+    if (!tour) return { statusCode: 400, body: JSON.stringify({ error: 'Invalid tour' }) };
+
+    const adultsNum = Math.max(1, parseInt(adults) || 1);
+    const childrenNum = Math.max(0, parseInt(children) || 0);
+    const infantsNum = Math.max(0, parseInt(infants) || 0);
+
+    const extras = Math.max(0, adultsNum - tour.includedAdults);
+    const logisticsTotal = tourId === 'cinque' && logistics === 'yes'
+      ? (adultsNum + childrenNum) * tour.logisticsPerGuest
+      : 0;
+    const total = tour.base + extras * tour.extra + logisticsTotal;
+    const amountToPay = paymentMode === 'full' ? total : DEPOSIT;
+    const remaining = paymentMode === 'full' ? 0 : total - DEPOSIT;
+
+    const siteUrl = process.env.URL || 'https://genoabylocal.com';
+
+    const guestParts = [`${adultsNum} adult${adultsNum !== 1 ? 's' : ''}`];
+    if (childrenNum) guestParts.push(`${childrenNum} child${childrenNum !== 1 ? 'ren' : ''} 4-11`);
+    if (infantsNum) guestParts.push(`${infantsNum} infant${infantsNum !== 1 ? 's' : ''} 0-3`);
+    const guestDesc = guestParts.join(', ');
+
+    // Create tentative calendar hold first so we get the event ID
+    let calendarEventId = null;
+    try {
+      // Stripe session ID not available yet — use a temp placeholder, will use session ID after
+      // We create with a temp ID and store the event ID in Stripe metadata
+      calendarEventId = await createTentativeEvent({
+        date, time, tourId,
+        tourName: tour.name,
+        customerName: name,
+        sessionId: 'pending'
+      });
+    } catch (calErr) {
+      console.error('Calendar hold failed (non-fatal):', calErr.message);
+    }
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
-      line_items: [
-        {
-          price_data: {
-            currency: 'eur',
-            product_data: {
-              name: `${expData.name} — Deposit`,
-              description: `${formattedDate} at ${time} · ${guestCount} guest${guestCount > 1 ? 's' : ''} · Total: €${totalPrice}`,
-            },
-            unit_amount: DEPOSIT * 100, // Stripe uses cents
+      customer_email: email,
+      line_items: [{
+        price_data: {
+          currency: 'eur',
+          product_data: {
+            name: paymentMode === 'full' ? `${tour.name} — Full payment` : `${tour.name} — Deposit`,
+            description: `${date} at ${time} · ${guestDesc}`
           },
-          quantity: 1,
+          unit_amount: amountToPay * 100
         },
-      ],
-      customer_email: customerEmail,
-      success_url: `https://genoabylocal.com/booking-confirmed?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `https://genoabylocal.com/booking-cancelled`,
+        quantity: 1
+      }],
       metadata: {
-        experience,
-        date,
-        time,
-        guestCount: String(guestCount),
-        customerName,
-        customerEmail,
-        customerPhone: customerPhone || '',
-        totalPrice: String(totalPrice),
-        deposit: String(DEPOSIT),
+        tourId, tourName: tour.name, date, time,
+        adults: String(adultsNum), children: String(childrenNum), infants: String(infantsNum),
+        logistics: logistics === 'yes' ? 'yes' : 'no',
+        paymentMode,
+        total: String(total), paid: String(amountToPay), remaining: String(remaining),
+        customerName: name, phone,
+        stay: stay || '', requests: requests || '',
+        calendarEventId: calendarEventId || ''
       },
+      success_url: `${siteUrl}/booking-confirmed/?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteUrl}/booking/?tour=${tourId}`
     });
 
     return {
       statusCode: 200,
-      headers: CORS_HEADERS,
-      body: JSON.stringify({
-        success: true,
-        checkoutUrl: session.url,
-        totalPrice,
-        deposit: DEPOSIT,
-        sessionId: session.id,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: session.url })
     };
-  } catch (error) {
-    console.error('create-checkout error:', error);
-    return {
-      statusCode: 500,
-      headers: CORS_HEADERS,
-      body: JSON.stringify({ success: false, error: 'Failed to create checkout session' }),
-    };
+  } catch (err) {
+    console.error('create-checkout error:', err);
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
   }
 };

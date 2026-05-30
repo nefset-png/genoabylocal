@@ -85,6 +85,15 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 4
 .exp-icon{width:36px;height:36px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .exp-title{font-family:'Georgia',serif;font-size:15px;color:var(--ink);margin-bottom:4px}
 .exp-desc{font-size:12px;color:var(--stone);line-height:1.55}
+.included-panel{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+.included-card{background:var(--cream);border:0.5px solid var(--line);border-radius:8px;padding:22px}
+.included-card.soft{background:var(--gold-faint)}
+.included-heading{font-family:'Georgia',serif;font-size:18px;color:var(--ink);margin-bottom:12px}
+.included-list{display:grid;gap:10px}
+.included-item{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;font-size:13px;color:var(--stone);line-height:1.6}
+.included-mark{width:20px;height:20px;border-radius:50%;background:var(--gold-pale);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;line-height:1;margin-top:1px}
+.included-mark.no{background:#f8f1ec;color:#9d6c55}
+.included-note{font-size:13px;color:var(--stone);line-height:1.7;background:var(--gold-faint);border:0.5px solid var(--line);border-radius:8px;padding:14px 16px}
 
 .itin-track{position:relative;padding-left:32px;margin-bottom:56px}
 .itin-track::before{content:'';position:absolute;left:11px;top:12px;bottom:12px;width:0.5px;background:var(--line)}
@@ -185,7 +194,7 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
   .slider-nav{left:24px}
   .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:160px 160px 160px}
   .gallery-img.big{grid-row:auto}
-  .exp-grid{grid-template-columns:1fr}
+  .exp-grid,.included-panel{grid-template-columns:1fr}
   .tab-inner{padding:0 24px}
   .foot-inner{grid-template-columns:1fr;text-align:center;padding:32px 24px}
   .foot-links{flex-wrap:wrap;justify-content:center}.foot-copy{text-align:center}
@@ -223,7 +232,7 @@ document.addEventListener('click',function(){var d=document.getElementById('cont
   <div class="slide"><img class="slide-photo" src="../../images/genoa must see/IMG_8763.JPG" alt="Genoa alley"/><div class="slide-overlay"></div></div>
   <div class="slide"><img class="slide-photo" src="../../images/genoa must see/aleksandr-popov-p5eiH_T0MnE-unsplash.jpg" alt="Local food"/><div class="slide-overlay"></div></div>
   <div class="slide"><img class="slide-photo" src="../../images/genoa must see/julia-karnavusha-w5LDNk4EGSU-unsplash.jpg" alt="Cathedral"/><div class="slide-overlay"></div></div>
-  <div class="slide"><img class="slide-photo" src="../../images/genoa must see/ryan--pkckNDGs94-unsplash.jpg" alt="View"/><div class="slide-overlay"></div></div>
+  <div class="slide"><img class="slide-photo" src="../../images/genoa must see/img_8762.avif" alt="Genoa view"/><div class="slide-overlay"></div></div>
   <div class="slide-content">
     <div class="slide-eyebrow">Private walking tour · Genoa · Shore excursion</div>
     <h1 class="slide-title">Genoa Must-Sees<br>&amp; Tastings</h1>
@@ -241,6 +250,7 @@ document.addEventListener('click',function(){var d=document.getElementById('cont
 <div class="tab-bar">
   <div class="tab-inner">
     <div class="tab on" onclick="scrollToId('g-overview')">Overview</div>
+    <div class="tab" onclick="scrollToId('g-included')">Included</div>
     <div class="tab" onclick="scrollToId('g-itinerary')">Itinerary</div>
     <div class="tab" onclick="scrollToId('g-gallery')">Gallery</div>
     <div class="tab" onclick="scrollToId('g-reviews')">Reviews</div>
@@ -257,13 +267,35 @@ document.addEventListener('click',function(){var d=document.getElementById('cont
       <p class="body-text">Walk through the heart of the city with a local host, discover hidden streets, hear fascinating stories and enjoy authentic local tastings. A perfect introduction to Genoa — at your own pace, with no group and no rush. Ideal as a private experience in Genoa's old town, a shore excursion for cruise passengers with a few hours in port, or a family-friendly introduction to the city for first-time visitors.</p>
       <div class="exp-grid">
         <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></div><div><div class="exp-title">Iconic landmarks &amp; hidden gems</div><p class="exp-desc">UNESCO-listed Via Garibaldi, the Rolli Palaces, the Caruggi medieval alleyways and the Christopher Columbus birthplace — seen with local eyes.</p></div></div>
-        <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div><div><div class="exp-title">Taste authentic local food</div><p class="exp-desc">Focaccia, fresh pesto, farinata — I'll point you to the right spots and you choose what to try.</p></div></div>
+        <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div><div><div class="exp-title">A little taste of Genoa included</div><p class="exp-desc">Fresh pesto, plus gelato or a secret Genoese dessert with coffee — small tastings are part of the experience.</p></div></div>
         <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div><div class="exp-title">Local stories, not boring history</div><p class="exp-desc">Learn the city's stories in a relaxed and engaging way.</p></div></div>
         <div class="exp-item"><div class="exp-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><div class="exp-title">Local tips &amp; recommendations</div><p class="exp-desc">Restaurant picks, viewpoints, what to do next — especially useful if you're in Genoa for just one day or arriving by cruise ship.</p></div></div>
       </div>
-      <div class="booking-widget-mobile">
-        <div data-booking-widget data-experience="genoa"></div>
+    </div>
+
+    <div id="g-included" style="margin-bottom:56px">
+      
+      <h2 class="sec-h2">What's included</h2>
+      <div class="sec-rule"></div>
+      <div class="included-panel">
+        <div class="included-card soft">
+          <div class="included-heading">Included</div>
+          <div class="included-list">
+            <div class="included-item"><span class="included-mark">✓</span><span>Fresh pesto tasting</span></div>
+            <div class="included-item"><span class="included-mark">✓</span><span>Gelato or a secret Genoese dessert with coffee</span></div>
+            <div class="included-item"><span class="included-mark">✓</span><span>Panoramic elevator tickets</span></div>
+          </div>
+        </div>
+        <div class="included-card">
+          <div class="included-heading">Not included</div>
+          <div class="included-list">
+            <div class="included-item"><span class="included-mark no">–</span><span>Transport to the meeting point</span></div>
+            <div class="included-item"><span class="included-mark no">–</span><span>Full meal</span></div>
+            <div class="included-item"><span class="included-mark no">–</span><span>Extra food or drinks beyond the included tastings</span></div>
+          </div>
+        </div>
       </div>
+      <p class="included-note">No required extra costs during the walk. Tastings may vary slightly depending on opening hours, season and the rhythm of the route.</p>
     </div>
 
     <div id="g-itinerary" style="margin-bottom:56px">
@@ -280,7 +312,7 @@ document.addEventListener('click',function(){var d=document.getElementById('cont
         <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div class="itin-time">~20 min</div><div class="itin-title">Chiesa del Gesù</div><p class="itin-desc">A baroque jewel just off the main square, home to two original Rubens masterpieces that most visitors never realize are there.</p></div>
         <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></div><div class="itin-time">~20 min</div><div class="itin-title">Porta Soprana &amp; Casa di Colombo</div><p class="itin-desc">The towering medieval city gate and, right beside it, the boyhood house of Christopher Columbus.</p></div>
         <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div class="itin-time">~30 min</div><div class="itin-title">San Lorenzo Cathedral</div><p class="itin-desc">Genoa's striking striped-marble cathedral — one of the oldest in Italy, full of stories most tourists never hear, including an unexploded WWII shell still kept inside.</p></div>
-        <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div><div class="itin-time">~30 min</div><div class="itin-title">Caruggi &amp; local food stop</div><p class="itin-desc">We wander the vicoli — the narrow medieval alleyways full of real local life — and stop at carefully chosen spots for authentic Genoese flavors. You choose what to try, no pressure.</p></div>
+        <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div><div class="itin-time">~30 min</div><div class="itin-title">Caruggi &amp; local food stop</div><p class="itin-desc">We wander the vicoli — the narrow medieval alleyways full of real local life — and stop at carefully chosen spots for fresh pesto, plus gelato or a secret Genoese dessert with coffee.</p></div>
         <div class="itin-step"><div class="itin-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="itin-time">End</div><div class="itin-title">Porto Antico</div><p class="itin-desc">We finish by the sea at the revitalized old harbor — the perfect moment for your last questions and personal tips for the rest of your stay.</p></div>
       </div>
       <p style="font-size:13px;color:var(--stone);font-style:italic;line-height:1.7">This is a typical route, not a fixed script. The exact path, stops and timing can shift depending on the weather, your mood and energy on the day — so not every detail is listed here. What never changes: together we see the essential heart of Genoa, the places everyone should experience at least once, plus the hidden gems and local tastings we discover along the way.</p>
@@ -291,7 +323,7 @@ document.addEventListener('click',function(){var d=document.getElementById('cont
       <div class="gallery-grid">
         <div class="gallery-img big"><img src="../../images/genoa must see/aleksandr-popov-p5eiH_T0MnE-unsplash.jpg" alt="Local food in Genoa" style="height:100%"/></div>
         <div class="gallery-img"><img src="../../images/genoa must see/07DFC1A1-F08C-4DB6-B1F4-436AB9D194B0.PNG" alt="Genoa hidden streets"/></div>
-        <div class="gallery-img"><img src="../../images/genoa must see/ryan--pkckNDGs94-unsplash.jpg" alt="View over Genoa"/></div>
+        <div class="gallery-img"><img src="../../images/genoa must see/65db7878-573c-4af4-bad3-442518fd46b0.png" alt="View over Genoa"/></div>
         <div class="gallery-img"><img src="../../images/genoa must see/IMG_8480.JPG" alt="Genoa caruggi"/></div>
         <div class="gallery-img"><img src="../../images/genoa must see/IMG_8763.JPG" alt="Genoa historic center"/></div>
       </div>
@@ -329,10 +361,10 @@ document.addEventListener('click',function(){var d=document.getElementById('cont
       <div class="sec-label">FAQ</div><h2 class="sec-h2">Good to know</h2><div class="sec-rule"></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Where do we meet?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Meeting point details shared after booking. I adapt to your location — hotel, cruise terminal or anywhere central. If you're arriving at the Genoa cruise port (Terminal Crociere), I'll meet you directly there.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How many people can join?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">This is a private experience — just your group, no strangers. Groups of 1–8 people work great.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is food included?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Food and drinks are not included unless agreed in advance. I'll point you to curated local spots and you choose what you'd like to try.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is food included?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Yes — a fresh pesto tasting and gelato or a secret Genoese dessert with coffee are included. A full meal and any extra food or drinks beyond the included tastings are not included.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I customize the route?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Absolutely. If you have specific interests, just mention it when booking and I'll adapt the route.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What's the cancellation policy?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">The €100 deposit is fully refundable if you cancel at least 7 days before the scheduled experience. If you cancel less than 7 days before, the deposit is non-refundable. Rescheduling is possible whenever availability allows.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How does booking and payment work?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">To confirm your date, a €100 deposit is required at the time of booking. The remaining balance is paid on the day of the experience in cash or by card. The deposit is fully refundable if you cancel at least 7 days before the scheduled experience. If you cancel less than 7 days before, the deposit is non-refundable. Rescheduling is possible whenever availability allows.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How does booking and payment work?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">To confirm your date, a €100 deposit is required at the time of booking. The remaining balance is paid online via a secure payment link sent by email, no later than 7 days before the experience. The deposit is fully refundable if you cancel at least 7 days before the scheduled experience. If you cancel less than 7 days before, the deposit is non-refundable. Rescheduling is possible whenever availability allows.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is this a traditional historical tour?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Not exactly. These experiences are designed as relaxed local walks — the kind of day I'd naturally share with friends visiting Genoa. The focus is on atmosphere, hidden corners, food, views and authentic local culture rather than formal historical guiding. For guests curious about Genoa's history and cultural context, I also share a curated digital booklet with stories, facts and recommendations before the experience.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is this good for cruise ship passengers stopping in Genoa?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Yes — this is one of the most popular choices for cruise ship passengers docking at the Genoa cruise terminal. The tour runs 3 hours, I meet you at the port or city center, and you'll be back comfortably before your ship departs. Just let me know your ship's schedule when you book and I'll plan around it.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is this suitable for families with children or older travelers?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Absolutely. The route is an easy walk with no strenuous sections and plenty of stops. I adapt the pace and storytelling to who's in the group — whether that's kids who need short bursts of engagement or older travelers who prefer a slower, more relaxed pace. Many of our guests are families and retirees.</div></div>
@@ -340,12 +372,25 @@ document.addEventListener('click',function(){var d=document.getElementById('cont
   </div>
 
   <div class="sidebar">
-    <div class="booking-card" data-booking-widget data-experience="genoa"></div>
+    <div class="booking-card">
+      <div class="booking-price">From €40 <span>p.p.</span></div>
+      <div class="booking-details">
+        <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>3 hours · in English</div>
+        <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Private experience</div>
+        <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>Flexible start time</div>
+        <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Meeting point in Genoa</div>
+      </div>
+      <button class="btn-book" onclick="window.location.href='/booking/?tour=genoa'">Check availability</button>
+      <a class="btn-wa-book" href="https://wa.me/393203723453" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Ask on WhatsApp</a>
+      <div class="booking-deposit">Reserve with a small deposit.<br>Remaining balance paid online before the experience.</div>
+      <div class="pay-row"><span class="pay-chip">VISA</span><span class="pay-chip">Mastercard</span><span class="pay-chip">Apple Pay</span><span class="pay-chip">G Pay</span></div>
+      <div class="booking-contact">Questions? <a href="mailto:nefset@proton.me">nefset@proton.me</a><br>WhatsApp: <a href="https://wa.me/393203723453">+39 320 372 3453</a><br>Instagram: <a href="https://www.instagram.com/nefset/" target="_blank">@nefset</a></div>
+    </div>
   </div>
 </div>
 
 <div class="mobile-cta">
-  <button class="btn-book" onclick="scrollToBooking()">Book now</button>
+  <button class="btn-book" onclick="window.location.href='/booking/?tour=genoa'">Check availability</button>
   <a class="m-wa-btn" href="https://wa.me/393203723453" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="#b8935a"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 </div>
 
@@ -353,8 +398,8 @@ document.addEventListener('click',function(){var d=document.getElementById('cont
 <div style="background:linear-gradient(135deg,rgba(42,32,24,0.97),rgba(24,17,11,0.94));padding:56px 40px;text-align:center;position:relative">
   <p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(184,147,90,0.8);margin-bottom:14px">Ready to book?</p>
   <h2 style="font-family:Georgia,serif;font-size:28px;font-weight:400;color:rgba(255,255,255,0.9);margin-bottom:12px;line-height:1.3">Reserve your spot</h2>
-  <p style="font-size:14px;color:rgba(255,255,255,0.45);margin-bottom:32px">Small deposit to confirm. Final payment on the day.</p>
-  <button onclick="scrollToBooking()" style="display:inline-block;background:#b8935a;color:#fff;text-decoration:none;padding:16px 40px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;border-radius:7px;font-weight:600;border:none;cursor:pointer">Check Availability</button>
+  <p style="font-size:14px;color:rgba(255,255,255,0.45);margin-bottom:32px">Small deposit to confirm. Remaining balance paid online before the experience.</p>
+  <a href="https://wa.me/393203723453" target="_blank" style="display:inline-block;background:#b8935a;color:#fff;text-decoration:none;padding:16px 40px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;border-radius:7px;font-weight:600">Check Availability</a>
 </div>
 <footer><div class="foot-inner">
   <div><div class="foot-logo-name">Genoa Local Experiences</div><div class="foot-logo-loc">Private tours in Genoa &amp; Liguria</div></div>
@@ -365,7 +410,6 @@ document.addEventListener('click',function(){var d=document.getElementById('cont
   </div>
   <div class="foot-copy">© Genoa Local Experiences</div>
 </div></footer>
-  <div style="background:#faf7f3;border-top:0.5px solid #ece6dd;padding:12px 40px;text-align:center;font-size:11px;color:#a09890;line-height:1.6">This site is currently being developed. If you notice any errors or have any concerns — please reach out via <a href="mailto:nefset@proton.me" style="color:#7a7268;text-decoration:none">email</a> or <a href="https://wa.me/393203723453" target="_blank" style="color:#7a7268;text-decoration:none">WhatsApp</a>. Thank you.</div>
 
 <div class="modal-bg" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
@@ -457,6 +501,5 @@ function closeModal(){document.getElementById('modal').classList.remove('on');}
   setInterval(function(){go(cur+1);},5000);
 })();
 </script>
-<script src="/js/booking.js"></script>
 </body>
 </html>

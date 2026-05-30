@@ -1,14 +1,9 @@
 {
   "name": "genoabylocal",
   "version": "1.0.0",
-  "description": "Booking system for Genoa by Local guided experiences",
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "dependencies": {
-    "googleapis": "^144.0.0",
-    "stripe": "^17.0.0",
+    "stripe": "^16.0.0",
     "resend": "^4.0.0",
-    "dotenv": "^16.0.0"
+    "googleapis": "^144.0.0"
   }
 }
