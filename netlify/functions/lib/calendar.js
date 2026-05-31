@@ -6,7 +6,11 @@ const HOLD_MINUTES = 35;
 const TOUR_DURATION_HOURS = { genoa: 3, portofino: 11, cinque: 12 };
 
 function getCalendar() {
-  const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
+  const raw = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
+  const credentials = JSON.parse(raw);
+  if (credentials.private_key) {
+    credentials.private_key = credentials.private_key.replace(/\\n/g, '\n');
+  }
   const auth = new google.auth.GoogleAuth({
     credentials,
     scopes: ['https://www.googleapis.com/auth/calendar']
