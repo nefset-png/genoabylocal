@@ -123,9 +123,15 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
 .price-block{border-bottom:0.5px solid var(--line);padding-bottom:18px;margin-bottom:18px}
 .price-row{display:flex;justify-content:space-between;gap:18px;font-size:13px;color:var(--stone);margin-bottom:9px}
 .price-row strong{color:var(--ink);font-weight:600;text-align:right}
+.discount-row{color:#2f7d46}
+.discount-row strong{color:#2f7d46}
 .total-row{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-top:14px;padding-top:14px;border-top:0.5px solid var(--line)}
 .total-row span{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone)}
 .total-row strong{font-family:Georgia,serif;font-size:30px;font-weight:400;color:var(--ink)}
+.promo-box{border-bottom:0.5px solid var(--line);padding-bottom:18px;margin-bottom:18px}
+.promo-input{margin-top:8px;text-transform:uppercase;letter-spacing:0.04em}
+.promo-message{display:none;margin-top:8px;font-size:12px;color:#2f7d46;font-weight:600}
+.promo-message.on{display:block}
 .deposit-box{background:var(--gold-faint);border:0.5px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
 .deposit-row{display:flex;justify-content:space-between;gap:14px;font-size:13px;color:var(--stone);margin-bottom:7px}
 .deposit-row:last-child{margin-bottom:0}
@@ -358,7 +364,13 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
         <div class="price-row"><span>Infants 0-3</span><strong>Free</strong></div>
         <div class="price-row" id="logistics-row" style="display:none"><span id="logistics-label">Train-ticket logistics</span><strong id="logistics-price">€0</strong></div>
         <div class="price-row"><span>Approx. per paying adult</span><strong id="per-person">€60</strong></div>
+        <div class="price-row discount-row" id="discount-row" style="display:none"><span>FRIEND26 discount</span><strong id="discount-price">-€0</strong></div>
         <div class="total-row"><span>Total</span><strong id="total-price">€240</strong></div>
+      </div>
+      <div class="promo-box">
+        <label for="promo-code">Promo Code</label>
+        <input class="promo-input" id="promo-code" type="text" autocomplete="off" spellcheck="false" placeholder="Enter code" oninput="setPromoCode(this.value)"/>
+        <div class="promo-message" id="promo-message">10% discount applied ✓</div>
       </div>
       <div class="deposit-box">
         <div class="payment-choice" aria-label="Payment today">
@@ -439,6 +451,7 @@ let children=0;
 let infants=0;
 let cinqueLogistics=false;
 let paymentMode='deposit';
+let promoCode='';
 let dateAvailability=null;
 let checkingAvailability=false;
 let monthBlockedDates=new Set();
@@ -635,14 +648,24 @@ function setPaymentMode(mode){
   paymentMode=mode==='full'?'full':'deposit';
   updateSummary();
 }
+function normalizedPromoCode(){
+  return promoCode.trim().toUpperCase();
+}
+function setPromoCode(value){
+  promoCode=value;
+  updateSummary();
+}
 function totals(){
   const extras=Math.max(0,adults-tour.includedAdults);
   const extraTotal=extras*tour.extra;
   const logisticsTotal=tour.id==='cinque'&&cinqueLogistics?ticketedGuests()*(tour.logisticsPerGuest||0):0;
-  const total=tour.base+extraTotal+logisticsTotal;
+  const subtotal=tour.base+extraTotal+logisticsTotal;
+  const discountActive=normalizedPromoCode()==='FRIEND26';
+  const discount=discountActive?Math.round(subtotal*0.1):0;
+  const total=Math.max(0,subtotal-discount);
   const dueToday=paymentMode==='full'?total:tour.deposit;
   const remaining=paymentMode==='full'?0:Math.max(0,total-tour.deposit);
-  return {extras,extraTotal,logisticsTotal,total,dueToday,remaining,perPerson:total/adults};
+  return {extras,extraTotal,logisticsTotal,subtotal,discount,discountActive,total,dueToday,remaining,perPerson:total/adults};
 }
 function guestSummary(){
   const adultText=adults+' '+(adults===1?'adult':'adults');
@@ -666,6 +689,9 @@ function updateSummary(){
   document.getElementById('logistics-label').textContent='Transport logistics ('+ticketedGuests()+' '+(ticketedGuests()===1?'ticketed guest':'ticketed guests')+')';
   document.getElementById('logistics-price').textContent=euro(t.logisticsTotal);
   document.getElementById('per-person').textContent=euro(t.perPerson);
+  document.getElementById('discount-row').style.display=t.discountActive?'flex':'none';
+  document.getElementById('discount-price').textContent='-'+euro(t.discount);
+  document.getElementById('promo-message').classList.toggle('on',t.discountActive);
   document.getElementById('total-price').textContent=euro(t.total);
   document.getElementById('full-payment-option').textContent=euro(t.total);
   document.getElementById('due-today').textContent=euro(t.dueToday);
@@ -740,7 +766,8 @@ async function goToConfirmation(){
         email:document.getElementById('email').value.trim(),
         phone:document.getElementById('phone').value.trim(),
         stay:document.getElementById('stay').value.trim(),
-        requests:document.getElementById('requests').value.trim()
+        requests:document.getElementById('requests').value.trim(),
+        promoCode:normalizedPromoCode()
       })
     });
     const json=await res.json();

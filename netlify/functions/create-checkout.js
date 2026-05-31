@@ -2,6 +2,8 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { createTentativeEvent } = require('./lib/calendar');
 
 const DEPOSIT = 100;
+const PROMO_CODE = 'FRIEND26';
+const PROMO_DISCOUNT_RATE = 0.1;
 
 const TOURS = {
   genoa: { name: 'Genoa Must-Sees & Tastings', base: 240, extra: 30, includedAdults: 4, max: 12 },
@@ -14,7 +16,7 @@ exports.handler = async (event) => {
 
   try {
     const data = JSON.parse(event.body);
-    const { tourId, date, time, adults, children, infants, logistics, paymentMode, name, email, phone, stay, requests } = data;
+    const { tourId, date, time, adults, children, infants, logistics, paymentMode, name, email, phone, stay, requests, promoCode } = data;
 
     const tour = TOURS[tourId];
     if (!tour) return { statusCode: 400, body: JSON.stringify({ error: 'Invalid tour' }) };
@@ -27,7 +29,11 @@ exports.handler = async (event) => {
     const logisticsTotal = tourId === 'cinque' && logistics === 'yes'
       ? (adultsNum + childrenNum) * tour.logisticsPerGuest
       : 0;
-    const total = tour.base + extras * tour.extra + logisticsTotal;
+    const subtotal = tour.base + extras * tour.extra + logisticsTotal;
+    const normalizedPromoCode = String(promoCode || '').trim().toUpperCase();
+    const discountApplied = normalizedPromoCode === PROMO_CODE;
+    const discount = discountApplied ? Math.round(subtotal * PROMO_DISCOUNT_RATE) : 0;
+    const total = Math.max(0, subtotal - discount);
     const amountToPay = paymentMode === 'full' ? total : DEPOSIT;
     const remaining = paymentMode === 'full' ? 0 : total - DEPOSIT;
 
@@ -62,7 +68,7 @@ exports.handler = async (event) => {
           currency: 'eur',
           product_data: {
             name: paymentMode === 'full' ? `${tour.name} — Full payment` : `${tour.name} — Deposit`,
-            description: `${date} at ${time} · ${guestDesc}`
+            description: `${date} at ${time} · ${guestDesc}${discountApplied ? ' · FRIEND26 discount applied' : ''}`
           },
           unit_amount: amountToPay * 100
         },
@@ -73,6 +79,8 @@ exports.handler = async (event) => {
         adults: String(adultsNum), children: String(childrenNum), infants: String(infantsNum),
         logistics: logistics === 'yes' ? 'yes' : 'no',
         paymentMode,
+        subtotal: String(subtotal), discount: String(discount),
+        promoCode: discountApplied ? PROMO_CODE : '',
         total: String(total), paid: String(amountToPay), remaining: String(remaining),
         customerName: name, phone,
         stay: stay || '', requests: requests || '',
