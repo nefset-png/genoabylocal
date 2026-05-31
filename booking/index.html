@@ -440,6 +440,8 @@ let cinqueLogistics=false;
 let paymentMode='deposit';
 let dateAvailability=null;
 let checkingAvailability=false;
+let monthBlockedDates=new Set();
+let loadingMonth=false;
 const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
 function euro(value){
   const amount=Number(value);
@@ -495,11 +497,28 @@ function renderTourChooser(){
       cinqueLogistics=false;
       try{history.replaceState(null,'','/booking/?tour='+tour.id);}catch(e){}
       initTour();
+      monthBlockedDates=new Set();
       renderCalendar();
+      loadMonthAvailability();
       updateSummary();
     };
     grid.appendChild(card);
   });
+}
+async function loadMonthAvailability(){
+  if(loadingMonth)return;
+  loadingMonth=true;
+  const y=viewDate.getFullYear();
+  const m=viewDate.getMonth()+1;
+  try{
+    const res=await fetch('/.netlify/functions/get-month-availability?year='+y+'&month='+m+'&tour='+tour.id);
+    const json=await res.json();
+    monthBlockedDates=new Set(json.blockedDates||[]);
+  }catch(e){
+    monthBlockedDates=new Set();
+  }
+  loadingMonth=false;
+  renderCalendar();
 }
 function renderCalendar(){
   document.getElementById('month-title').textContent=monthNames[viewDate.getMonth()]+' '+viewDate.getFullYear();
@@ -522,6 +541,7 @@ function renderCalendar(){
     btn.className='day';
     const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
     if(date<today)btn.classList.add('disabled');
+    if(monthBlockedDates.has(isoDate(date)))btn.classList.add('disabled');
     if(isoDate(date)===isoDate(today))btn.classList.add('today');
     if(selectedDate&&isoDate(date)===isoDate(selectedDate))btn.classList.add('selected');
     btn.onclick=async()=>{
@@ -547,7 +567,9 @@ function renderCalendar(){
 }
 function changeMonth(amount){
   viewDate=new Date(viewDate.getFullYear(),viewDate.getMonth()+amount,1);
+  monthBlockedDates=new Set();
   renderCalendar();
+  loadMonthAvailability();
 }
 function renderSlots(){
   const wrap=document.getElementById('slots');
@@ -737,6 +759,7 @@ async function goToConfirmation(){
 initTour();
 renderCalendar();
 updateSummary();
+loadMonthAvailability();
 </script>
 </body>
 </html>

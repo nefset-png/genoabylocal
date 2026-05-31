@@ -61,8 +61,18 @@ function hostEmailHtml(m) {
 function customerEmailHtml(m) {
   const meeting = MEETING_POINTS[m.tourId] || '';
   const isDeposit = m.paymentMode !== 'full';
+  const hasRemaining = Number(m.remaining) > 0;
   const firstName = m.customerName ? m.customerName.split(' ')[0] : '';
   const paidLabel = isDeposit ? 'Deposit paid' : 'Fully paid';
+  const adults = parseInt(m.adults) || 1;
+  const perPerson = Number(m.total) > 0 ? Math.round(Number(m.total) / adults) : 0;
+  const siteUrl = 'https://genoabylocal.com';
+  const icalUrl = siteUrl + '/.netlify/functions/get-ical?tour=' + m.tourId + '&date=' + m.date + '&time=' + encodeURIComponent(m.time) + '&guests=' + encodeURIComponent(guestSummary(m));
+  const gcalDate = m.date.replace(/-/g,'') + 'T' + m.time.replace(':','') + '00';
+  const gcalDur = {genoa:'0300', portofino:'1100', cinque:'1100'}[m.tourId] || '0300';
+  const gcalEndH = String(parseInt(m.time.split(':')[0]) + parseInt(gcalDur.slice(0,2))).padStart(2,'0');
+  const gcalEnd = m.date.replace(/-/g,'') + 'T' + gcalEndH + m.time.split(':')[1] + '00';
+  const gcalUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(m.tourName) + '&dates=' + gcalDate + '/' + gcalEnd + '&location=' + encodeURIComponent(meeting) + '&details=' + encodeURIComponent('Private experience with Nefset · genoabylocal.com');
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -107,12 +117,13 @@ function customerEmailHtml(m) {
         <tr><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Guests</td><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right;color:#17120c">${guestSummary(m)}</td></tr>
         <tr><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">Total price</td><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right;color:#17120c">${euro(m.total)}</td></tr>
         <tr><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">${paidLabel}</td><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right;color:#17120c">${euro(m.paid)}</td></tr>
-        <tr><td style="padding:10px 0;font-size:13px;color:#7a7268">Remaining balance</td><td style="padding:10px 0;font-size:13px;font-weight:600;text-align:right;color:#17120c">${euro(m.remaining)}</td></tr>
+        ${hasRemaining ? `<tr><td style="padding:10px 0;font-size:13px;color:#7a7268">Remaining balance</td><td style="padding:10px 0;font-size:13px;font-weight:600;text-align:right;color:#17120c">${euro(m.remaining)}</td></tr>` : ''}
+        <tr><td style="padding:10px 0;font-size:13px;color:#7a7268">Approx. per adult</td><td style="padding:10px 0;font-size:13px;font-weight:600;text-align:right;color:#17120c">€${perPerson}</td></tr>
       </table>
     </td>
   </tr>
 
-  ${isDeposit ? `
+  ${isDeposit && hasRemaining ? `
   <!-- DEPOSIT NOTE -->
   <tr>
     <td style="padding:20px 40px 0">
@@ -150,6 +161,19 @@ function customerEmailHtml(m) {
             <p style="margin:0 0 6px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#b8935a">Cancellation policy</p>
             <p style="margin:0;font-size:13px;color:#7a7268;line-height:1.7">Full refund up to 7 days before the experience. No refund within 7 days. Rescheduling is possible whenever availability allows.</p>
           </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ADD TO CALENDAR -->
+  <tr>
+    <td style="padding:24px 40px 0">
+      <p style="margin:0 0 12px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#b8935a">Add to calendar</p>
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="padding-right:10px"><a href="${gcalUrl}" style="display:inline-block;background:#fff;border:1px solid #ece6dd;color:#17120c;text-decoration:none;border-radius:8px;padding:11px 18px;font-size:12px;font-weight:600">Google Calendar</a></td>
+          <td><a href="${icalUrl}" style="display:inline-block;background:#fff;border:1px solid #ece6dd;color:#17120c;text-decoration:none;border-radius:8px;padding:11px 18px;font-size:12px;font-weight:600">Apple / Outlook (.ics)</a></td>
         </tr>
       </table>
     </td>
