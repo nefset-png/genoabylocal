@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /test-payment/
 Sitemap: https://genoabylocal.com/sitemap.xml
  

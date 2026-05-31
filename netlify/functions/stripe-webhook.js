@@ -1,4 +1,5 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { google } = require('googleapis');
 const { Resend } = require('resend');
 const { confirmEvent, deleteEvent } = require('./lib/calendar');
 
@@ -209,6 +210,55 @@ function customerEmailHtml(m) {
 </html>`;
 }
 
+
+const SHEET_HEADERS = [
+  'Timestamp','Tour','Date','Time','Adults','Children','Infants',
+  'Name','Email','Phone','Hotel / Cruise','Special requests',
+  'Total (€)','Paid (€)','Remaining (€)','Payment type','CT Logistics'
+];
+
+async function appendToSheet(m, customerEmail) {
+  const sheetId = process.env.GOOGLE_SHEET_ID;
+  if (!sheetId) return;
+  try {
+    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
+    if (credentials.private_key) credentials.private_key = credentials.private_key.replace(/\\n/g, '\n');
+    const auth = new google.auth.GoogleAuth({ credentials, scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
+    const sheets = google.sheets({ version: 'v4', auth });
+
+    // Add headers if sheet is empty
+    const meta = await sheets.spreadsheets.values.get({ spreadsheetId: sheetId, range: 'Sheet1!A1' });
+    if (!meta.data.values || meta.data.values.length === 0) {
+      await sheets.spreadsheets.values.update({
+        spreadsheetId: sheetId, range: 'Sheet1!A1',
+        valueInputOption: 'RAW',
+        resource: { values: [SHEET_HEADERS] }
+      });
+    }
+
+    const now = new Date().toLocaleString('it-IT', { timeZone: 'Europe/Rome' });
+    const row = [
+      now, m.tourName, m.date, m.time,
+      m.adults || '0', m.children || '0', m.infants || '0',
+      m.customerName || '', customerEmail || '', m.phone || '',
+      m.stay || '', m.requests || '',
+      m.total || '0', m.paid || '0', m.remaining || '0',
+      m.paymentMode === 'full' ? 'Full payment' : 'Deposit',
+      m.logistics === 'yes' ? 'Yes' : 'No'
+    ];
+
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: sheetId,
+      range: 'Sheet1!A1',
+      valueInputOption: 'RAW',
+      insertDataOption: 'INSERT_ROWS',
+      resource: { values: [row] }
+    });
+  } catch (e) {
+    console.error('Sheets append error:', e.message);
+  }
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') return { statusCode: 405, body: 'Method Not Allowed' };
 
@@ -263,6 +313,9 @@ exports.handler = async (event) => {
     } catch (e) {
       console.error('Email send error:', e);
     }
+
+    // Log to Google Sheets
+    await appendToSheet(m, customerEmail);
   }
 
   if (stripeEvent.type === 'checkout.session.expired') {
