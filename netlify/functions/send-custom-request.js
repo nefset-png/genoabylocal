@@ -69,6 +69,22 @@ function customerEmailHtml(data) {
   </div>
   <div style="padding:28px 38px">
     <p style="margin:0 0 18px;font-size:14px;color:#7a7268;line-height:1.75">I'll look at your date, group size and interests, then suggest the best private route or experience for you.</p>
+
+    <h2 style="font-family:Georgia,serif;font-size:18px;font-weight:400;margin:22px 0 12px;color:#17120c">Your request summary</h2>
+    <table style="width:100%;border-collapse:collapse;margin-bottom:20px">
+      ${row('Preferred date', data.date)}
+      ${row('Group size', data.groupSize)}
+      ${row('Interests', data.interests)}
+      ${row('Preferred contact', data.contactMethod)}
+      ${row('Phone / WhatsApp', data.phone)}
+      ${row('Hotel / cruise ship', data.stay)}
+    </table>
+
+    ${data.message ? `<div style="margin:0 0 22px;background:#faf6f0;border:1px solid #ece6dd;border-radius:10px;padding:16px">
+      <p style="margin:0 0 8px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#b8935a">Your message</p>
+      <p style="margin:0;font-size:13px;line-height:1.7;color:#3d3025">${escapeHtml(data.message)}</p>
+    </div>` : ''}
+
     <a href="https://wa.me/393203723453" style="display:inline-block;background:#b8935a;color:#fff;text-decoration:none;border-radius:8px;padding:14px 28px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700">Message on WhatsApp</a>
     <p style="margin:18px 0 0;font-size:12px;color:#a09890">Genoa Local Experiences · nefset@proton.me · +39 320 372 3453</p>
   </div>
