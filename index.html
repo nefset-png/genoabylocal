@@ -118,6 +118,11 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 4
 .tour-price{font-family:'Georgia',serif;font-size:17px;color:var(--gold);margin-bottom:22px}
 .tour-btn{width:100%;padding:13px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:11px;letter-spacing:0.1em;font-weight:500;text-transform:uppercase;border-radius:6px;cursor:pointer;transition:all 0.15s}
 .tour-btn:hover,.tour-card:hover .tour-btn{background:var(--gold);color:#fff}
+.custom-request-card{margin-top:28px;background:linear-gradient(135deg,#fff,var(--gold-faint));border:0.5px solid var(--line);border-radius:10px;padding:30px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center}
+.custom-request-kicker{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.custom-request-title{font-family:Georgia,serif;font-size:26px;font-weight:400;color:var(--ink);line-height:1.22;margin-bottom:8px}
+.custom-request-copy{font-size:13px;color:var(--stone);line-height:1.7;max-width:640px}
+.custom-request-card .btn-gold{white-space:nowrap;text-align:center}
 
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr)}
 .why-item{text-align:center;padding:52px 24px;border-right:0.5px solid var(--line);border-bottom:0.5px solid var(--line)}
@@ -321,6 +326,7 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
   .rating-card-top{flex-direction:column;gap:20px;padding:28px 24px}
   .rct-div{width:60px;height:0.5px}
   .reviews-grid,.tours-grid{grid-template-columns:1fr}
+  .custom-request-card{grid-template-columns:1fr;padding:24px}
   .why-grid{grid-template-columns:1fr 1fr}
   .why-item{border-right:0.5px solid var(--line);border-bottom:0.5px solid var(--line)}
   .why-item:nth-child(2n){border-right:none}
@@ -357,12 +363,6 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
       "@type": "PostalAddress",
       "addressLocality": "Genoa",
       "addressCountry": "IT"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "50",
-      "bestRating": "5"
     }
   },
   "offers": {
@@ -407,15 +407,10 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
   },
   "sameAs": [
     "https://www.instagram.com/nefset/"
-  ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": "50",
-    "bestRating": "5"
-  }
+  ]
 }
 </script>
+<script src="/analytics-consent.js" defer></script>
 </head>
 <body>
 
@@ -458,7 +453,7 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
       <div class="hero-left">
         <div class="hero-eyebrow">Private tours · Genoa &amp; Liguria · Shore Excursions</div>
         <h1 class="hero-h1">Genoa &amp; Liguria —<br>seen like a local</h1>
-        <p class="hero-sub">Private experiences in Genoa for families, groups and cruise passengers — hidden places, authentic food and a personal touch.</p>
+        <p class="hero-sub">Private experiences in Genoa for couples, friends, families, small groups and cruise passengers — hidden places, authentic food and a personal touch.</p>
         <div class="hero-btns">
           <button class="btn-gold" onclick="scrollToId('tours')">Explore tours →</button>
           <a class="btn-ghost" href="https://wa.me/393203723453" target="_blank">
@@ -507,7 +502,7 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
         </div>
         <div class="tour-body">
           <div class="tour-name">Portofino &amp; Beyond</div>
-          <p class="tour-desc">Portofino, San Fruttuoso and Camogli — a full day by ferry along the Riviera.</p>
+          <p class="tour-desc">Portofino, San Fruttuoso and Camogli — a scenic private day trip by ferry along the Riviera, perfect for friends, couples and small groups.</p>
           <div class="tour-meta">Full day · Private · Ferry included</div>
           <div class="tour-price">From €120 p.p.</div>
           <div class="tour-btn">View Experience →</div>
@@ -521,12 +516,20 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
         </div>
         <div class="tour-body">
           <div class="tour-name">Cinque Terre Day Experience</div>
-          <p class="tour-desc">Vernazza, Manarola, Riomaggiore — explored properly, at your pace.</p>
+          <p class="tour-desc">Vernazza, Manarola, Riomaggiore — a private Cinque Terre day trip from Genoa by train, explored properly at your pace.</p>
           <div class="tour-meta">Full day · Private · Flexible pace</div>
-          <div class="tour-price">From €120 p.p.</div>
+          <div class="tour-price">From €140 p.p.</div>
           <div class="tour-btn">View Experience →</div>
         </div>
       </a>
+    </div>
+    <div class="custom-request-card">
+      <div>
+        <div class="custom-request-kicker">Custom private experience</div>
+        <h3 class="custom-request-title">Didn't find exactly what you were looking for?</h3>
+        <p class="custom-request-copy">Tell me your date, group, timing and the kind of day you want. I can design something private around Genoa and across Liguria — food, viewpoints, hidden places, coastal villages or a slower family-friendly pace.</p>
+      </div>
+      <a class="btn-gold" href="/custom-request/">Request a custom experience</a>
     </div>
     <p style="margin-top:28px;font-size:12px;color:#bbb">Prices vary based on group size and customization.</p>
   </section>
@@ -552,7 +555,7 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
       </div>
       <div class="why-item">
         <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
-        <div class="why-title">Great for families, groups &amp; seniors</div><p class="why-text">Easy pace, no strenuous sections, plenty of stops. I adapt to who's in the group — curious kids or travelers who prefer a relaxed rhythm.</p>
+        <div class="why-title">Great for couples, friends &amp; families</div><p class="why-text">Easy pace, beautiful stops, local food and plenty of flexibility. I adapt to who's in the group — friends, curious kids, couples, parents or travelers who prefer a relaxed rhythm.</p>
       </div>
       <div class="why-item">
         <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><line x1="4" y1="6" x2="4" y2="12"/><line x1="4" y1="16" x2="4" y2="22"/><line x1="20" y1="4" x2="20" y2="10"/><line x1="20" y1="14" x2="20" y2="20"/><line x1="12" y1="7" x2="12" y2="19"/></svg></div>
@@ -574,7 +577,6 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
       <p class="about-p">I've been living in Genoa since 2015 — long enough to know the city the way a local does, short enough to still remember what it feels like to discover it for the first time. I share both.</p>
       <p class="about-p">Each experience is private, flexible, and shaped around you — hidden streets, real food, stories you won't find in any guidebook. No script, no group, no rush.</p>
       <p class="about-p" style="margin-bottom:32px">Whether you have a few hours from a cruise ship or a full day to spend — I'll make sure you leave knowing a side of Liguria most visitors never see.</p>
-      <a class="btn-outline" href="https://wa.me/393203723453" target="_blank">PLAN YOUR PERFECT DAY</a>
     </div>
   </div>
 
@@ -872,7 +874,7 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
       <div class="slide-meta">
         <div class="slide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Full day · flexible pace</div>
         <div class="slide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Private · Vernazza, Manarola, Riomaggiore</div>
-        <div class="slide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>From €120 p.p.</div>
+        <div class="slide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>From €140 p.p.</div>
       </div>
     </div>
     <div class="slider-nav" id="dots-ct"></div>
@@ -966,7 +968,7 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
     </div>
     <div class="sidebar">
       <div class="booking-card">
-        <div class="booking-price">From €120 <span>p.p.</span></div>
+        <div class="booking-price">From €140 <span>p.p.</span></div>
         <div class="booking-price-alt">+ ~€60–70 p.p. with full logistics</div>
         <div class="booking-details">
           <div class="booking-row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#b8935a" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Full day · flexible pace</div>

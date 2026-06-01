@@ -76,6 +76,7 @@ h1{font-family:Georgia,serif;font-size:42px;font-weight:400;line-height:1.08;col
   .detail-row{align-items:flex-start}
 }
 </style>
+<script src="/analytics-consent.js" defer></script>
 </head>
 <body>
 <nav>
@@ -222,6 +223,48 @@ function renderIncludedBox(m){
     '<div class="included-group"><div class="included-subtitle">Not included</div><div class="included-list">'+renderItems(notIncluded,'no')+'</div></div>'+
     '<div class="included-note">'+reassurance+'</div>';
 }
+function purchaseItem(m,total){
+  return {
+    item_id:m.tourId||'',
+    item_name:m.tourName||'',
+    item_category:'tours',
+    price:total,
+    quantity:1
+  };
+}
+function trackBookingConfirmed(m,sessionId){
+  const total=Number(m.total||0);
+  const paid=Number(m.paid||0);
+  const remaining=Number(m.remaining||0);
+  const transactionId=sessionId||m.sessionId||('booking-'+(m.date||'')+'-'+(m.time||''));
+  try{
+    const key='genoabylocal_purchase_'+transactionId;
+    if(sessionStorage.getItem(key))return;
+    sessionStorage.setItem(key,'1');
+  }catch(e){}
+  const params={
+    transaction_id:transactionId,
+    currency:'EUR',
+    value:total,
+    payment_amount:paid,
+    remaining_balance:remaining,
+    payment_type:m.paymentMode==='full'?'full':'deposit',
+    tour_id:m.tourId||'',
+    tour_name:m.tourName||'',
+    discount:Number(m.discount||0),
+    coupon:m.promoCode||'',
+    adults:parseInt(m.adults)||0,
+    children:parseInt(m.children)||0,
+    infants:parseInt(m.infants)||0,
+    items:[purchaseItem(m,total)]
+  };
+  if(window.trackGenoaEvent){
+    window.trackGenoaEvent('purchase',params);
+  }else{
+    window.genoaPendingAnalyticsEvents=window.genoaPendingAnalyticsEvents||[];
+    window.genoaPendingAnalyticsEvents.push({name:'purchase',params:params});
+  }
+}
 function populatePage(m){
   const tourData=TOURS[m.tourId]||TOURS.genoa;
   const hasLogistics=m.tourId==='cinque'&&m.logistics==='yes';
@@ -269,6 +312,7 @@ async function init(){
       const json=await res.json();
       if(json.metadata){
         populatePage(json.metadata);
+        trackBookingConfirmed(json.metadata,sessionId);
         return;
       }
     }catch(e){

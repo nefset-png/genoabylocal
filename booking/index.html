@@ -44,6 +44,12 @@ h1{font-family:Georgia,serif;font-size:44px;font-weight:400;line-height:1.08;col
 .chooser-card:hover,.chooser-card.selected{border-color:var(--gold);background:var(--gold-faint);transform:translateY(-1px)}
 .chooser-card-name{font-family:Georgia,serif;font-size:17px;color:var(--ink);line-height:1.25;margin-bottom:8px}
 .chooser-card-meta{font-size:12px;color:var(--stone);line-height:1.5}
+.custom-request-card{margin-top:14px;background:linear-gradient(135deg,#fff,var(--gold-faint));border:0.5px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:12px;align-items:start}
+.custom-request-kicker{font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.custom-request-title{font-family:Georgia,serif;font-size:16px;font-weight:400;color:var(--ink);line-height:1.25;margin-bottom:3px}
+.custom-request-copy{font-size:11px;color:var(--stone);line-height:1.5;max-width:760px}
+.custom-request-link{display:inline-block;width:max-content;background:var(--gold);color:#fff;border-radius:7px;padding:10px 16px;text-decoration:none;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;white-space:nowrap}
+.custom-request-link:hover{background:var(--gold-h)}
 .tour-strip{display:grid;grid-template-columns:120px 1fr;gap:22px;padding:24px;border-bottom:0.5px solid var(--line);background:linear-gradient(135deg,#fff,var(--gold-faint))}
 .tour-img{width:120px;height:120px;border-radius:10px;object-fit:cover;filter:sepia(10%) brightness(0.96)}
 .tour-name{font-family:Georgia,serif;font-size:26px;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:8px}
@@ -169,6 +175,8 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
   .chooser-grid{grid-template-columns:1fr}
   .tour-img{width:92px;height:92px}
   .tour-name{font-size:22px}
+  .custom-request-card{grid-template-columns:1fr;padding:18px}
+  .custom-request-link{text-align:center}
   .steps{padding:22px}
   .form-grid{grid-template-columns:1fr}
   .summary{position:static}
@@ -192,6 +200,7 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
   .steps{padding:18px}
 }
 </style>
+<script src="/analytics-consent.js" defer></script>
 </head>
 <body>
 <nav>
@@ -221,6 +230,14 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
         <h2 class="chooser-title">Choose your experience</h2>
         <p class="chooser-note">Select the tour you would like to reserve.</p>
         <div class="chooser-grid" id="chooser-grid"></div>
+        <div class="custom-request-card">
+          <div>
+            <div class="custom-request-kicker">Custom private experience</div>
+            <h3 class="custom-request-title">Need something more personal?</h3>
+            <p class="custom-request-copy">Tell me your date, group and the kind of day you want. I can design something private around Genoa and Liguria.</p>
+          </div>
+          <a class="custom-request-link" href="/custom-request/">Request a custom experience</a>
+        </div>
       </div>
       <div class="tour-strip">
         <img class="tour-img" id="tour-image" src="/images/genoa must see/img_8480.jpg" alt="Selected experience"/>
@@ -452,6 +469,7 @@ let infants=0;
 let cinqueLogistics=false;
 let paymentMode='deposit';
 let promoCode='';
+let promoAppliedTracked=false;
 let dateAvailability=null;
 let checkingAvailability=false;
 let monthBlockedDates=new Set();
@@ -566,6 +584,7 @@ function renderCalendar(){
       renderCalendar();
       renderSlots();
       updateSummary();
+      trackBookingEvent('date_selected',{selected_date:isoDate(date)});
       checkingAvailability=true;
       try{
         const res=await fetch('/.netlify/functions/check-availability?date='+isoDate(date)+'&tour='+tour.id);
@@ -614,7 +633,7 @@ function renderSlots(){
       btn.disabled=!slotFree;
       btn.className='slot'+(selectedTime===time?' selected':'')+(!slotFree?' disabled':'');
       btn.textContent=slotFree?time:time+' — taken';
-      if(slotFree)btn.onclick=()=>{selectedTime=time;renderSlots();updateSummary();};
+      if(slotFree)btn.onclick=()=>{selectedTime=time;renderSlots();updateSummary();trackBookingEvent('time_selected',{selected_time:time});};
       list.appendChild(btn);
     });
     group.appendChild(list);
@@ -654,6 +673,47 @@ function normalizedPromoCode(){
 function setPromoCode(value){
   promoCode=value;
   updateSummary();
+  if(normalizedPromoCode()==='FRIEND26'&&!promoAppliedTracked){
+    promoAppliedTracked=true;
+    const t=totals();
+    trackBookingEvent('promo_applied',{
+      coupon:'FRIEND26',
+      discount:t.discount,
+      value:t.discount,
+      discounted_value:t.total
+    });
+  }
+}
+function bookingItem(t){
+  return {
+    item_id:tour.id,
+    item_name:tour.name,
+    item_category:'tours',
+    price:t?t.subtotal:tour.base,
+    quantity:1
+  };
+}
+function trackBookingEvent(name,params){
+  const t=totals();
+  const payload=Object.assign({
+    currency:'EUR',
+    tour_id:tour.id,
+    tour_name:tour.name,
+    payment_type:paymentMode,
+    value:t.total,
+    discount:t.discount,
+    guests:totalGuests(),
+    adults,
+    children,
+    infants,
+    items:[bookingItem(t)]
+  },params||{});
+  if(window.trackGenoaEvent){
+    window.trackGenoaEvent(name,payload);
+  }else{
+    window.genoaPendingAnalyticsEvents=window.genoaPendingAnalyticsEvents||[];
+    window.genoaPendingAnalyticsEvents.push({name:name,params:payload});
+  }
 }
 function totals(){
   const extras=Math.max(0,adults-tour.includedAdults);
@@ -743,6 +803,12 @@ function validateBooking(){
 async function goToConfirmation(){
   if(!validateBooking())return;
   const t=totals();
+  trackBookingEvent('begin_checkout',{
+    payment_amount:t.dueToday,
+    total_value:t.total,
+    remaining_balance:t.remaining,
+    coupon:t.discountActive?'FRIEND26':''
+  });
   const btn=document.getElementById('pay-button');
   const mobileBtn=document.querySelector('.mobile-bar .btn-pay');
   const originalText=btn.textContent;
