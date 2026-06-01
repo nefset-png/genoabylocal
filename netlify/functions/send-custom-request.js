@@ -123,6 +123,7 @@ exports.handler = async (event) => {
     await resend.emails.send({
       from: FROM_EMAIL,
       to: HOST_EMAIL,
+      replyTo: request.email,
       subject: `Custom request: ${request.name}${request.date ? ' — ' + request.date : ''}`,
       html: hostEmailHtml(request)
     });
@@ -130,6 +131,7 @@ exports.handler = async (event) => {
     await resend.emails.send({
       from: FROM_EMAIL,
       to: request.email,
+      replyTo: HOST_EMAIL,
       subject: 'I received your custom experience request',
       html: customerEmailHtml(request)
     });

@@ -299,6 +299,7 @@ exports.handler = async (event) => {
       await resend.emails.send({
         from: FROM_EMAIL,
         to: HOST_EMAIL,
+        replyTo: customerEmail || HOST_EMAIL,
         subject: `New booking: ${m.tourName} — ${m.date} — ${m.customerName}`,
         html: hostEmailHtml(m)
       });
@@ -306,6 +307,7 @@ exports.handler = async (event) => {
         await resend.emails.send({
           from: FROM_EMAIL,
           to: customerEmail,
+          replyTo: HOST_EMAIL,
           subject: `Booking confirmed — ${m.tourName} on ${m.date}`,
           html: customerEmailHtml(m)
         });
