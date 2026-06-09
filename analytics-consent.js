@@ -58,7 +58,7 @@
 
   function tourFromPath(path){
     var tours={
-      '/tours/genoa-must-see/':{id:'genoa',name:'Genoa Must-Sees & Tastings',price:240},
+      '/tours/genoa-must-see/':{id:'genoa-half',name:'Genoa Highlights & Hidden Corners · Half Day',price:240},
       '/tours/portofino-beyond/':{id:'portofino',name:'Portofino & Beyond',price:650},
       '/tours/cinque-terre-experience/':{id:'cinque',name:'Cinque Terre Day Experience',price:650}
     };
@@ -68,9 +68,10 @@
   function tourFromBookingUrl(url){
     try{
       var parsed=new URL(url,window.location.origin);
-      var id=parsed.searchParams.get('tour')||'genoa';
-      var names={genoa:'Genoa Must-Sees & Tastings',portofino:'Portofino & Beyond',cinque:'Cinque Terre Day Experience'};
-      var prices={genoa:240,portofino:650,cinque:650};
+      var id=parsed.searchParams.get('tour')||'genoa-half';
+      if(id==='genoa')id='genoa-half';
+      var names={'genoa-half':'Genoa Highlights & Hidden Corners · Half Day','genoa-full':'Genoa Highlights & Hidden Corners · Full Day',portofino:'Portofino & Beyond',cinque:'Cinque Terre Day Experience'};
+      var prices={'genoa-half':240,'genoa-full':440,portofino:650,cinque:650};
       return {id:id,name:names[id]||id,price:prices[id]||0};
     }catch(e){
       return null;
@@ -153,21 +154,21 @@
 
     var style=document.createElement('style');
     style.textContent=
-      '#cookie-consent{position:fixed;left:18px;right:18px;bottom:18px;z-index:9999;max-width:560px;margin:0 auto;background:#fff;border:1px solid #ece6dd;border-radius:10px;box-shadow:0 18px 48px rgba(23,18,12,.14);padding:16px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;color:#17120c}'+
-      '#cookie-consent p{margin:0;font-size:13px;line-height:1.55;color:#7a7268}'+
+      '#cookie-consent{position:fixed;left:18px;bottom:18px;z-index:9999;max-width:440px;background:#fff;border:1px solid #ece6dd;border-radius:12px;box-shadow:0 18px 48px rgba(23,18,12,.14);padding:14px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;color:#17120c}'+
+      '#cookie-consent p{margin:0;font-size:12px;line-height:1.45;color:#7a7268}'+
       '#cookie-consent a{color:#b8935a;text-decoration:none}'+
       '#cookie-consent a:hover{text-decoration:underline}'+
-      '#cookie-consent strong{display:block;margin-bottom:3px;font-family:Georgia,serif;font-size:16px;font-weight:400;color:#17120c}'+
+      '#cookie-consent strong{display:block;margin-bottom:2px;font-size:13px;font-weight:750;color:#17120c}'+
       '#cookie-consent .cookie-actions{display:flex;gap:8px;align-items:center}'+
-      '#cookie-consent button{border:1px solid #ece6dd;border-radius:8px;background:#fff;color:#17120c;padding:10px 14px;font:inherit;font-size:12px;font-weight:650;cursor:pointer;white-space:nowrap}'+
+      '#cookie-consent button{border:1px solid #ece6dd;border-radius:8px;background:#fff;color:#17120c;padding:9px 12px;font:inherit;font-size:12px;font-weight:650;cursor:pointer;white-space:nowrap}'+
       '#cookie-consent button[data-accept]{background:#b8935a;border-color:#b8935a;color:#fff}'+
-      '@media(max-width:640px){#cookie-consent{grid-template-columns:1fr;left:12px;right:12px;bottom:12px}.cookie-actions{justify-content:stretch}#cookie-consent button{flex:1}}';
+      '@media(max-width:640px){#cookie-consent{grid-template-columns:1fr auto;left:12px;right:12px;bottom:10px;max-width:none;padding:12px}.cookie-actions{flex-direction:column;align-items:stretch}#cookie-consent button{width:92px;padding:8px 10px}}';
     document.head.appendChild(style);
 
     var banner=document.createElement('div');
     banner.id='cookie-consent';
     banner.innerHTML=
-      '<p><strong>Analytics cookies</strong>We use Google Analytics only if you accept, to understand visits and improve the booking experience. <a href="/privacy-policy/">Privacy Policy</a></p>'+
+      '<p><strong>Analytics cookies</strong>Optional analytics help improve the booking experience. <a href="/privacy-policy/">Privacy Policy</a></p>'+
       '<div class="cookie-actions"><button type="button" data-decline>Decline</button><button type="button" data-accept>Accept</button></div>';
     document.body.appendChild(banner);
 

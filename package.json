@@ -2,8 +2,11 @@
   "name": "genoabylocal",
   "version": "1.0.0",
   "dependencies": {
-    "stripe": "^16.0.0",
+    "googleapis": "173.0.0",
     "resend": "^4.0.0",
-    "googleapis": "^144.0.0"
+    "stripe": "^16.0.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.60.0"
   }
 }

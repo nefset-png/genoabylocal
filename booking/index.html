@@ -3,78 +3,80 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
-<title>Reserve Your Experience | Genoa Local Experiences</title>
+<title>Reserve Your Experience | Genoa by Local</title>
 <meta name="description" content="Choose your date, start time and group size. Reserve your private Genoa or Liguria experience with a small deposit."/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --gold:#b8935a;--gold-h:#c9a46e;--gold-pale:#f5efe6;--gold-faint:#faf6f0;
+  --gold:#b8935a;--gold-h:#9f7840;--gold-active:#7f5c2f;--gold-pale:#f5efe6;--gold-faint:#faf6f0;
   --ink:#17120c;--ink-warm:#2a2018;--ink-mid:#3d3025;
-  --stone:#7a7268;--stone-light:#a09890;
+  --stone:#5f564c;--stone-light:#7c7268;
   --line:#ece6dd;--cream:#faf7f3;--white:#fff;--success:#6f8f70;
 }
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);font-size:16px;line-height:1.6}
 a{color:inherit}
 nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:0.5px solid var(--line);background:rgba(255,255,255,0.97);position:sticky;top:0;z-index:20}
 .logo{text-decoration:none}
-.logo-name{font-family:Georgia,serif;font-size:16px;font-weight:400;color:var(--ink)}
-.logo-loc{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--stone);margin-top:2px}
-.nav-back{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone);text-decoration:none}
+.logo-name{font-size:16px;font-weight:760;color:var(--ink)}
+.logo-loc{font-size:12px;letter-spacing:0;text-transform:none;color:var(--stone);margin-top:2px}
+.nav-back{font-size:14px;letter-spacing:0;text-transform:none;color:var(--stone);text-decoration:none;font-weight:650}
 .nav-back:hover{color:var(--ink)}
 .page{max-width:1180px;margin:0 auto;padding:54px 40px 96px}
 .hero{display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:end;margin-bottom:36px}
 .eyebrow{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-h1{font-family:Georgia,serif;font-size:44px;font-weight:400;line-height:1.08;color:var(--ink);margin-bottom:16px}
-.lead{max-width:690px;font-size:15px;color:var(--stone);line-height:1.85}
+h1{font-size:46px;font-weight:780;letter-spacing:0;line-height:1.04;color:var(--ink);margin-bottom:16px}
+.lead{max-width:720px;font-size:17px;color:var(--stone);line-height:1.72}
 .direct-card{background:var(--white);border:0.5px solid var(--line);border-radius:12px;padding:22px;box-shadow:0 12px 32px rgba(35,22,10,0.06)}
-.direct-card-title{font-family:Georgia,serif;font-size:18px;color:var(--ink);margin-bottom:8px}
-.direct-card p{font-size:13px;color:var(--stone);line-height:1.7}
+.direct-card-title{font-size:18px;font-weight:760;color:var(--ink);margin-bottom:8px}
+.direct-card p{font-size:15px;color:var(--stone);line-height:1.65}
 .booking-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:36px;align-items:start}
 .panel,.summary{background:var(--white);border:0.5px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgba(35,22,10,0.06)}
 .panel{overflow:hidden}
 .tour-chooser{display:none;padding:24px;border-bottom:0.5px solid var(--line);background:#fff}
 .tour-chooser.on{display:block}
-.chooser-title{font-family:Georgia,serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:6px}
-.chooser-note{font-size:13px;color:var(--stone);margin-bottom:16px}
+.chooser-title{font-size:22px;font-weight:760;color:var(--ink);margin-bottom:6px}
+.chooser-note{font-size:15px;color:var(--stone);margin-bottom:16px}
 .chooser-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .chooser-card{border:0.5px solid var(--line);border-radius:10px;background:var(--white);padding:16px;text-align:left;cursor:pointer;transition:border-color 0.2s,background 0.2s,transform 0.15s}
 .chooser-card:hover,.chooser-card.selected{border-color:var(--gold);background:var(--gold-faint);transform:translateY(-1px)}
-.chooser-card-name{font-family:Georgia,serif;font-size:17px;color:var(--ink);line-height:1.25;margin-bottom:8px}
-.chooser-card-meta{font-size:12px;color:var(--stone);line-height:1.5}
+.chooser-card-name{font-size:17px;font-weight:760;color:var(--ink);line-height:1.25;margin-bottom:8px}
+.chooser-card-meta{font-size:14px;color:var(--stone);line-height:1.5}
 .custom-request-card{margin-top:14px;background:linear-gradient(135deg,#fff,var(--gold-faint));border:0.5px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:12px;align-items:start}
-.custom-request-kicker{font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
-.custom-request-title{font-family:Georgia,serif;font-size:16px;font-weight:400;color:var(--ink);line-height:1.25;margin-bottom:3px}
-.custom-request-copy{font-size:11px;color:var(--stone);line-height:1.5;max-width:760px}
-.custom-request-link{display:inline-block;width:max-content;background:var(--gold);color:#fff;border-radius:7px;padding:10px 16px;text-decoration:none;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;white-space:nowrap}
+.custom-request-kicker{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.custom-request-title{font-size:18px;font-weight:760;color:var(--ink);line-height:1.25;margin-bottom:5px}
+.custom-request-copy{font-size:14px;color:var(--stone);line-height:1.58;max-width:760px}
+.custom-request-link{display:inline-block;width:max-content;background:var(--gold);color:#fff;border-radius:8px;padding:12px 17px;text-decoration:none;font-size:12px;letter-spacing:0.07em;text-transform:uppercase;font-weight:700;white-space:nowrap}
 .custom-request-link:hover{background:var(--gold-h)}
+.custom-request-link:active{background:var(--gold-active)}
 .tour-strip{display:grid;grid-template-columns:120px 1fr;gap:22px;padding:24px;border-bottom:0.5px solid var(--line);background:linear-gradient(135deg,#fff,var(--gold-faint))}
 .tour-img{width:120px;height:120px;border-radius:10px;object-fit:cover;filter:sepia(10%) brightness(0.96)}
-.tour-name{font-family:Georgia,serif;font-size:26px;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:8px}
+.tour-name{font-size:26px;font-weight:780;color:var(--ink);line-height:1.15;margin-bottom:8px}
 .tour-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
 .pill{border:0.5px solid var(--line);background:rgba(255,255,255,0.72);border-radius:999px;padding:5px 9px;font-size:11px;color:var(--stone)}
-.tour-copy{font-size:13px;color:var(--stone);line-height:1.7;max-width:620px}
+.tour-copy{font-size:15px;color:var(--stone);line-height:1.65;max-width:640px}
 .steps{padding:28px}
 .step{padding:0 0 32px;margin-bottom:32px;border-bottom:0.5px solid var(--line)}
 .step:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
 .step-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}
 .step-num{width:28px;height:28px;border-radius:50%;background:var(--gold-pale);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
-.step-title{font-family:Georgia,serif;font-size:22px;font-weight:400;color:var(--ink);line-height:1.25}
-.step-note{font-size:12px;color:var(--stone);margin-top:4px}
+.step-title{font-size:22px;font-weight:760;color:var(--ink);line-height:1.25}
+.step-note{font-size:14px;color:#4f463d;margin-top:4px}
 .calendar-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.month-title{font-family:Georgia,serif;font-size:20px;color:var(--ink)}
+.month-title{font-size:22px;font-weight:760;color:var(--ink)}
 .month-controls{display:flex;gap:8px}
 .icon-btn{width:36px;height:36px;border:0.5px solid var(--line);background:var(--white);border-radius:50%;cursor:pointer;color:var(--ink);font-size:18px;transition:background 0.2s,border-color 0.2s}
 .icon-btn:hover{background:var(--gold-faint);border-color:var(--gold)}
 .calendar{border:0.5px solid var(--line);border-radius:10px;padding:18px;background:#fff}
 .dow,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.dow div{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone-light);text-align:center;padding-bottom:8px;border-bottom:0.5px solid var(--line)}
+.dow div{font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:var(--stone);text-align:center;padding-bottom:8px;border-bottom:0.5px solid var(--line);font-weight:650}
 .days{padding-top:12px}
-.day{aspect-ratio:1;border:0;border-radius:8px;background:transparent;font-size:14px;color:var(--ink-mid);cursor:pointer;transition:background 0.2s,color 0.2s}
+.day{aspect-ratio:1;border:0;border-radius:10px;background:transparent;font-size:18px;font-weight:560;color:var(--ink-mid);cursor:pointer;transition:background 0.2s,color 0.2s}
 .day:hover{background:var(--gold-faint)}
-.day.selected{background:var(--gold);color:#fff}
+.day.selected{background:var(--gold);color:#fff;font-weight:700}
 .day.today{box-shadow:inset 0 0 0 1px var(--gold)}
 .day.blank{pointer-events:none}
 .day.disabled{color:#d2cbc3;cursor:not-allowed;background:transparent;text-decoration:line-through}
@@ -85,11 +87,11 @@ h1{font-family:Georgia,serif;font-size:44px;font-weight:400;line-height:1.08;col
 .slot:hover{border-color:var(--gold);background:var(--gold-faint)}
 .slot.selected{background:var(--ink-warm);border-color:var(--ink-warm);color:#fff}
 .slot.disabled{color:#d2cbc3;cursor:not-allowed;background:transparent;border-color:var(--line);font-size:13px}
-.guest-control{display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--gold-faint);border:0.5px solid var(--line);border-radius:10px;padding:18px}
-.guest-title{font-family:Georgia,serif;font-size:18px;color:var(--ink)}
-.guest-sub{font-size:12px;color:var(--stone);line-height:1.65;margin-top:4px}
+.guest-control{display:flex;align-items:center;justify-content:space-between;gap:20px;background:#fff;border:0.5px solid #dfd5c8;border-radius:10px;padding:18px}
+.guest-title{font-size:18px;font-weight:760;color:var(--ink)}
+.guest-sub{font-size:14px;color:#4f463d;line-height:1.6;margin-top:4px}
 .guest-stack{display:grid;gap:12px}
-.guest-row{display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--gold-faint);border:0.5px solid var(--line);border-radius:10px;padding:18px}
+.guest-row{display:flex;align-items:center;justify-content:space-between;gap:20px;background:#fff;border:0.5px solid #dfd5c8;border-radius:10px;padding:18px}
 .guest-row-main{min-width:0}
 .addon-box{display:none;background:#fff;border:0.5px solid var(--line);border-radius:10px;padding:18px;margin-top:16px}
 .addon-box.on{display:block}
@@ -98,8 +100,8 @@ h1{font-family:Georgia,serif;font-size:44px;font-weight:400;line-height:1.08;col
 .addon-content{min-width:0}
 .addon-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
 .addon-kicker{display:block;font-size:12px;color:var(--gold);letter-spacing:0;text-transform:none;margin-bottom:3px}
-.addon-title{display:block;font-family:Georgia,serif;font-size:18px;font-weight:400;color:var(--ink);line-height:1.28;letter-spacing:0;text-transform:none}
-.addon-copy{display:block;font-size:13px;color:var(--stone);line-height:1.65;margin-top:7px;letter-spacing:0;text-transform:none;max-width:680px}
+.addon-title{display:block;font-size:18px;font-weight:760;color:var(--ink);line-height:1.28;letter-spacing:0;text-transform:none}
+.addon-copy{display:block;font-size:14px;color:var(--stone);line-height:1.6;margin-top:7px;letter-spacing:0;text-transform:none;max-width:680px}
 .addon-price{background:var(--gold-faint);border:0.5px solid var(--line);border-radius:999px;padding:7px 10px;font-size:12px;color:var(--ink);white-space:nowrap;margin-top:1px;letter-spacing:0;text-transform:none}
 .counter{display:flex;align-items:center;gap:16px}
 .counter-btn{width:44px;height:44px;border:0.5px solid var(--line);border-radius:50%;background:#fff;color:var(--ink);font-size:20px;font-weight:700;cursor:pointer}
@@ -109,67 +111,82 @@ h1{font-family:Georgia,serif;font-size:44px;font-weight:400;line-height:1.08;col
 .field{display:flex;flex-direction:column;gap:7px}
 .field.full{grid-column:1/-1}
 .field.error input{border-color:#b14d3a;box-shadow:0 0 0 3px rgba(177,77,58,0.08)}
-.field-error{display:none;font-size:11px;color:#b14d3a;line-height:1.35}
+.field-error{display:none;font-size:13px;color:#b14d3a;line-height:1.35}
 .field.error .field-error{display:block}
 .step-error{display:none;font-size:11px;color:#b14d3a;line-height:1.45;margin-top:10px}
 .step-error.on{display:block}
-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone)}
-input,textarea{width:100%;border:0.5px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:14px;padding:13px 14px;outline:none;transition:border-color 0.2s,box-shadow 0.2s}
+label{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#4b4238;font-weight:700}
+input,textarea{width:100%;border:1px solid #d8cfc2;border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-size:16px;padding:14px 15px;outline:none;transition:border-color 0.2s,box-shadow 0.2s}
+input::placeholder,textarea::placeholder{color:#8b8176;opacity:1}
 textarea{min-height:92px;resize:vertical}
 input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,147,90,0.11)}
 .summary{position:sticky;top:104px;padding:26px}
 .summary-host{display:flex;align-items:center;gap:14px;padding-bottom:18px;margin-bottom:18px;border-bottom:0.5px solid var(--line)}
 .host-img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-pale)}
 .host-kicker{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)}
-.host-name{font-family:Georgia,serif;font-size:18px;color:var(--ink);line-height:1.2}
-.summary-title{font-family:Georgia,serif;font-size:24px;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:16px}
+.host-name{font-size:18px;font-weight:760;color:var(--ink);line-height:1.2}
+.summary-title{font-size:24px;font-weight:780;color:var(--ink);line-height:1.18;margin-bottom:16px}
 .summary-lines{display:flex;flex-direction:column;gap:9px;border-bottom:0.5px solid var(--line);padding-bottom:18px;margin-bottom:18px}
-.summary-line{display:flex;justify-content:space-between;gap:18px;font-size:13px;color:var(--stone)}
+.summary-line{display:flex;justify-content:space-between;gap:18px;font-size:15px;color:var(--stone)}
 .summary-line strong{color:var(--ink);font-weight:600;text-align:right}
+.per-person-card{background:linear-gradient(135deg,#fff,var(--gold-faint));border:0.5px solid var(--line);border-radius:12px;padding:18px;margin-bottom:16px;text-align:center}
+.per-person-kicker{font-size:12px;font-weight:700;color:var(--gold);margin-bottom:4px}
+.per-person-price{font-size:38px;font-weight:780;color:var(--ink);line-height:1}
+.per-person-price span{font-size:16px;font-weight:650;color:var(--stone)}
+.per-person-note{font-size:13px;color:var(--stone);line-height:1.45;margin-top:8px}
 .price-block{border-bottom:0.5px solid var(--line);padding-bottom:18px;margin-bottom:18px}
-.price-row{display:flex;justify-content:space-between;gap:18px;font-size:13px;color:var(--stone);margin-bottom:9px}
+.price-row{display:flex;justify-content:space-between;gap:18px;font-size:15px;color:var(--stone);margin-bottom:9px}
 .price-row strong{color:var(--ink);font-weight:600;text-align:right}
 .discount-row{color:#2f7d46}
 .discount-row strong{color:#2f7d46}
 .total-row{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-top:14px;padding-top:14px;border-top:0.5px solid var(--line)}
-.total-row span{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone)}
-.total-row strong{font-family:Georgia,serif;font-size:30px;font-weight:400;color:var(--ink)}
+.total-row span{font-size:14px;color:var(--stone)}
+.total-row strong{font-size:18px;font-weight:760;color:var(--ink)}
+.tax-note{font-size:12px;color:var(--stone);line-height:1.45;margin-top:8px;text-align:right}
 .promo-box{border-bottom:0.5px solid var(--line);padding-bottom:18px;margin-bottom:18px}
 .promo-input{margin-top:8px;text-transform:uppercase;letter-spacing:0.04em}
 .promo-message{display:none;margin-top:8px;font-size:12px;color:#2f7d46;font-weight:600}
 .promo-message.on{display:block}
-.deposit-box{background:var(--gold-faint);border:0.5px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
-.deposit-row{display:flex;justify-content:space-between;gap:14px;font-size:13px;color:var(--stone);margin-bottom:7px}
-.deposit-row:last-child{margin-bottom:0}
-.deposit-row strong{color:var(--ink)}
-.payment-choice{display:grid;gap:9px;margin-bottom:13px}
-.payment-option{display:grid;grid-template-columns:18px 1fr auto;gap:10px;align-items:center;background:#fff;border:0.5px solid var(--line);border-radius:8px;padding:11px 12px;cursor:pointer;color:var(--stone);font-size:12px;letter-spacing:0;text-transform:none}
-.payment-option input{width:16px;height:16px;accent-color:var(--gold);padding:0}
-.payment-option strong{font-family:Georgia,serif;font-size:15px;font-weight:400;color:var(--ink)}
-.payment-option span{color:var(--stone)}
-.payment-option:has(input:checked){border-color:rgba(184,147,90,0.65);background:#fffaf4}
+.payment-switch{border-bottom:0.5px solid var(--line);padding-bottom:18px;margin:10px 0 18px;text-align:center}
+.payment-switch-note{font-size:13px;color:var(--stone);line-height:1.45;margin-bottom:10px}
+.payment-switch-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:12px 14px;width:100%;font:inherit;font-size:14px;font-weight:760;cursor:pointer}
+.payment-switch-btn:hover{border-color:var(--gold);background:var(--gold-faint)}
 .included-box{border-bottom:0.5px solid var(--line);padding-bottom:18px;margin-bottom:18px}
+.included-details{border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden}
+.included-details summary{list-style:none;cursor:pointer;padding:14px 15px;font-size:15px;font-weight:760;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.included-details summary::-webkit-details-marker{display:none}
+.included-details summary::after{content:'+';font-size:20px;line-height:1;color:var(--gold);font-weight:600}
+.included-details[open] summary::after{content:'−'}
+.included-details-body{padding:0 15px 15px}
 .included-title{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
 .included-group{margin-bottom:14px}
-.included-subtitle{font-family:Georgia,serif;font-size:15px;color:var(--ink);margin-bottom:8px}
+.included-subtitle{font-size:15px;font-weight:760;color:var(--ink);margin-bottom:8px}
 .included-list{display:grid;gap:7px}
-.included-item{display:grid;grid-template-columns:18px 1fr;gap:8px;font-size:12px;color:var(--stone);line-height:1.55}
+.included-item{display:grid;grid-template-columns:18px 1fr;gap:8px;font-size:14px;color:var(--stone);line-height:1.55}
 .included-mark{width:18px;height:18px;border-radius:50%;background:var(--gold-pale);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1;margin-top:1px}
 .included-mark.no{background:#f8f1ec;color:#9d6c55}
-.included-note{font-size:12px;color:var(--stone);line-height:1.6;background:var(--gold-faint);border:0.5px solid var(--line);border-radius:8px;padding:10px 12px}
-.btn-pay{width:100%;border:0;background:var(--gold);color:#fff;border-radius:8px;padding:16px 18px;font-size:12px;letter-spacing:0.09em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:background 0.2s,transform 0.15s;text-align:center;text-decoration:none;display:block}
+.included-note{font-size:14px;color:var(--stone);line-height:1.6;background:var(--gold-faint);border:0.5px solid var(--line);border-radius:8px;padding:11px 13px}
+.btn-pay{width:100%;border:0;background:var(--gold);color:#fff;border-radius:9px;padding:17px 18px;font-size:13px;letter-spacing:0.07em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:background 0.2s,transform 0.15s,box-shadow 0.2s;text-align:center;text-decoration:none;display:block}
 .btn-pay:hover{background:var(--gold-h);transform:translateY(-1px)}
-.trust{font-size:11px;color:var(--stone-light);text-align:center;line-height:1.55;margin-top:12px}
-.whatsapp-link{display:block;text-align:center;font-size:12px;color:var(--gold);text-decoration:none;margin-top:12px}
+.btn-pay:active{background:var(--gold-active);transform:translateY(0)}
+.btn-pay:focus-visible,.custom-request-link:focus-visible,.whatsapp-link:focus-visible,.icon-btn:focus-visible,.slot:focus-visible,.day:focus-visible{outline:3px solid rgba(184,147,90,0.42);outline-offset:3px}
+.trust{font-size:13px;color:var(--stone);text-align:center;line-height:1.55;margin-top:12px}
+.secure-note{background:#fff;border:0.5px solid var(--line);border-radius:9px;padding:12px 13px;margin-top:12px;text-align:left}
+.secure-note strong{display:block;color:var(--ink);font-size:14px;margin-bottom:4px}
+.secure-note span{display:block;color:var(--stone);font-size:13px;line-height:1.5}
+.secure-note + .included-box{margin-top:18px}
+.whatsapp-link{display:block;text-align:center;font-size:14px;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:12px 14px;text-decoration:none;margin-top:12px;font-weight:700}
+.whatsapp-link:hover{border-color:var(--gold);background:var(--gold-faint);text-decoration:none}
 .whatsapp-link:hover{text-decoration:underline}
-.mobile-bar{display:none}
+.mobile-price-bar{display:none}
 @media(max-width:900px){
   nav{padding:14px 20px}
-  .nav-back{font-size:10px}
-  .page{padding:34px 20px 120px}
+  .nav-back{font-size:14px}
+  .page{padding:24px 20px 148px}
   .hero,.booking-layout{grid-template-columns:1fr;gap:24px}
-  .hero{margin-bottom:24px}
+  .hero{margin-bottom:22px}
   h1{font-size:34px}
+  .lead{font-size:16px;line-height:1.55}
   .direct-card{display:none}
   .tour-strip{grid-template-columns:92px 1fr;gap:16px;padding:18px}
   .chooser-grid{grid-template-columns:1fr}
@@ -185,42 +202,114 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
   .addon-price{width:max-content}
   .counter{width:100%;justify-content:flex-end}
   .slot{flex:1;min-width:92px}
-  .mobile-bar{display:flex;position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,0.98);border-top:0.5px solid var(--line);box-shadow:0 -10px 28px rgba(35,22,10,0.08);padding:12px 16px;gap:12px;align-items:center;z-index:30}
-  .mobile-bar-price{flex:1;line-height:1.25}
-  .mobile-bar-price strong{display:block;font-family:Georgia,serif;font-size:19px;color:var(--ink);font-weight:400}
-  .mobile-bar-price span{font-size:11px;color:var(--stone)}
-  .mobile-bar .btn-pay{width:auto;padding:14px 18px;white-space:nowrap}
+  .mobile-price-bar{position:fixed;left:0;right:0;bottom:0;z-index:300;display:flex;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,0.94);border-top:1px solid var(--line);box-shadow:0 -12px 34px rgba(35,22,10,0.12);backdrop-filter:blur(18px)}
+  .mobile-price-main{min-width:0;flex:1;display:grid;gap:2px}
+  .mobile-price-pp{font-size:24px;font-weight:820;color:var(--ink);line-height:1.05}
+  .mobile-price-pp span{font-size:14px;font-weight:760;color:var(--stone)}
+  .mobile-price-total{font-size:13px;color:var(--stone);line-height:1.25}
+  .mobile-price-pay{border:0;background:var(--gold);color:#fff;border-radius:14px;padding:14px 17px;font:inherit;font-size:16px;font-weight:800;line-height:1.1;white-space:nowrap;cursor:pointer}
+  .mobile-price-pay:active{background:var(--gold-active)}
 }
+
+/* Apple-like readability refinements */
+.eyebrow,.custom-request-kicker,.slot-label,.host-kicker,.included-title{font-size:14px;letter-spacing:0;text-transform:none;font-weight:760}
+label{font-size:14px;letter-spacing:0;text-transform:none;color:#4b4238;font-weight:760}
+.custom-request-link,.btn-pay{font-size:16px;letter-spacing:0;text-transform:none;border-radius:12px;font-weight:760}
+.pill{font-size:13px}
+.step-error{font-size:13px}
+.promo-input{text-transform:none;letter-spacing:0}
+.included-details summary{font-size:16px}
+.lead,.chooser-note,.custom-request-copy,.tour-copy,.step-note,.guest-sub,.addon-copy,.per-person-note,.tax-note,.payment-switch-note,.included-item,.included-note,.trust,.secure-note span{font-size:16px;line-height:1.6}
+.secure-note strong,.promo-message{font-size:15px;line-height:1.45}
+.price-row,.summary-line{font-size:16px}
+
+/* Calm checkout hierarchy */
+.summary{padding:24px}
+.summary-host{gap:12px;padding-bottom:14px;margin-bottom:16px}
+.summary .host-img{width:52px;height:52px}
+.summary .host-kicker{font-size:12px;line-height:1.25}
+.summary .host-name{font-size:17px}
+.summary-title{font-size:21px;line-height:1.2;margin-bottom:14px}
+.summary-lines{gap:8px;padding-bottom:15px;margin-bottom:15px}
+.summary-line,.price-row{font-size:14px;line-height:1.45}
+.per-person-card{padding:16px;margin-bottom:14px}
+.per-person-kicker{font-size:12px;line-height:1.35;margin-bottom:5px}
+.per-person-price{font-size:34px}
+.per-person-price span{font-size:14px}
+.summary .per-person-note{font-size:13px;line-height:1.45;margin:7px auto 0;max-width:250px}
+.price-block{padding-bottom:15px;margin-bottom:15px}
+.total-row{margin-top:11px;padding-top:11px}
+.total-row span{font-size:14px}
+.total-row strong{font-size:18px}
+.summary .tax-note{font-size:13px;line-height:1.4;margin-top:6px}
+.promo-box{padding-bottom:15px;margin-bottom:15px}
+.summary label{font-size:13px}
+.summary input{font-size:15px;padding:12px 13px}
+.btn-pay{display:flex;align-items:center;justify-content:center;min-height:50px;padding:10px 16px;font-family:inherit;font-size:16px;line-height:1.2}
+.payment-switch{padding-bottom:15px;margin:9px 0 15px}
+.summary .payment-switch-note{font-size:13px;line-height:1.4;margin-bottom:8px}
+.payment-switch-btn{display:flex;align-items:center;justify-content:center;min-height:46px;padding:9px 13px;font-family:inherit;font-size:14px;line-height:1.2}
+.summary .trust{font-size:12.5px;line-height:1.5}
+.secure-note{padding:11px 12px;margin-top:11px}
+.summary .secure-note strong{font-size:13px;line-height:1.4;margin-bottom:2px}
+.summary .secure-note span{font-size:12.5px;line-height:1.45}
+.secure-note + .included-box{margin-top:14px}
+.included-box{padding-bottom:15px;margin-bottom:15px}
+.summary .included-details summary{padding:12px 13px;font-size:14px}
+.summary .included-item,.summary .included-note{font-size:13px;line-height:1.5}
+.whatsapp-link{display:flex;align-items:center;justify-content:center;min-height:46px;font-size:14px;line-height:1.2;padding:9px 13px;margin-top:10px}
+
 @media(max-width:520px){
   .page{padding-left:14px;padding-right:14px}
-  .tour-strip{grid-template-columns:1fr}
-  .tour-img{width:100%;height:190px}
+  .eyebrow{display:none}
+  h1{font-size:30px;margin-bottom:10px}
+  .lead{font-size:16px;line-height:1.55}
+  .tour-strip{grid-template-columns:74px 1fr;gap:12px;padding:12px}
+  .tour-img{width:74px;height:74px}
+  .tour-name{font-size:19px}
+  .tour-copy{display:none}
+  .pill{font-size:10px;padding:4px 8px}
+  .step-head{margin-bottom:14px}
+  .step-title{font-size:21px}
+  .step-note{font-size:15px}
   .calendar{padding:12px}
-  .day{font-size:13px}
+  .dow,.days{gap:3px}
+  .day{font-size:18px;border-radius:9px}
   .steps{padding:18px}
 }
+
+/* Brand mark in header */
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:0 0 auto;box-shadow:0 1px 2px rgba(0,0,0,0.06)}
+.logo-copy{display:block;min-width:0}
+.logo-loc{white-space:nowrap}
+.nav-back{white-space:nowrap;line-height:1.2}
+@media(max-width:900px){.logo-mark{width:30px;height:30px}}
 </style>
 <script src="/analytics-consent.js" defer></script>
 </head>
 <body>
 <nav>
   <a class="logo" href="/">
-    <div class="logo-name">Genoa Local Experiences</div>
-    <div class="logo-loc">Genoa &amp; Liguria</div>
+    <img class="logo-mark" src="/favicon.png" alt="" aria-hidden="true"/>
+    <div class="logo-copy">
+      <div class="logo-name">Genoa by Local</div>
+      <div class="logo-loc">Genoa · Portofino · Cinque Terre</div>
+    </div>
   </a>
-  <a class="nav-back" id="back-link" href="/">Back to experience</a>
 </nav>
 
 <main class="page">
   <section class="hero">
     <div>
-      <div class="eyebrow">Private booking</div>
+      <div class="eyebrow">Private booking with Nefset</div>
       <h1>Reserve your private experience</h1>
-      <p class="lead">Choose your date, start time and group size. You can secure your booking with a €100 deposit or pay the full amount now. If you choose the deposit, the remaining balance is paid online before the experience.</p>
+      <p class="lead">Choose your date, start time and group size. Reserve online with a secure Stripe deposit or full payment.</p>
     </div>
     <aside class="direct-card">
       <div class="direct-card-title">Direct booking with Nefset</div>
       <p>No platform service fees, no public group. You are booking a private experience directly with your local host.</p>
+      <p style="margin-top:10px">Card details are handled by Stripe, not stored on this website.</p>
     </aside>
   </section>
 
@@ -228,21 +317,21 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
     <div class="panel">
       <div class="tour-chooser" id="tour-chooser">
         <h2 class="chooser-title">Choose your experience</h2>
-        <p class="chooser-note">Select the tour you would like to reserve.</p>
+        <p class="chooser-note" id="chooser-note">Select the tour you would like to reserve.</p>
         <div class="chooser-grid" id="chooser-grid"></div>
         <div class="custom-request-card">
           <div>
-            <div class="custom-request-kicker">Custom private experience</div>
-            <h3 class="custom-request-title">Need something more personal?</h3>
-            <p class="custom-request-copy">Tell me your date, group and the kind of day you want. I can design something private around Genoa and Liguria.</p>
+            <div class="custom-request-kicker">Personalized experience</div>
+            <h3 class="custom-request-title">Need a different pace, date or plan?</h3>
+            <p class="custom-request-copy">Send a request and I will shape a private day around your timing, group and interests.</p>
           </div>
-          <a class="custom-request-link" href="/custom-request/">Request a custom experience</a>
+          <a class="custom-request-link" href="/custom-request/">Request a personalized experience</a>
         </div>
       </div>
       <div class="tour-strip">
         <img class="tour-img" id="tour-image" src="/images/genoa must see/img_8480.jpg" alt="Selected experience"/>
         <div>
-          <h2 class="tour-name" id="tour-name">Genoa Must-Sees &amp; Tastings</h2>
+          <h2 class="tour-name" id="tour-name">Genoa Highlights &amp; Hidden Corners</h2>
           <div class="tour-meta" id="tour-meta"></div>
           <p class="tour-copy" id="tour-copy"></p>
         </div>
@@ -251,10 +340,10 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
       <div class="steps">
         <div class="step">
           <div class="step-head">
-            <div class="step-num">1</div>
+            <div class="step-num" id="date-step-num">1</div>
             <div>
               <h3 class="step-title">Choose a date</h3>
-              <p class="step-note">Unavailable days will be disabled once Google Calendar is connected.</p>
+              <p class="step-note">Select an available date.</p>
             </div>
           </div>
           <div class="calendar">
@@ -271,7 +360,7 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
 
         <div class="step">
           <div class="step-head">
-            <div class="step-num">2</div>
+            <div class="step-num" id="time-step-num">2</div>
             <div>
               <h3 class="step-title">Choose a start time</h3>
               <p class="step-note" id="slot-note">Select a date first, then pick one of the available start times.</p>
@@ -283,17 +372,16 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
 
         <div class="step">
           <div class="step-head">
-            <div class="step-num">3</div>
+            <div class="step-num" id="guests-step-num">3</div>
             <div>
               <h3 class="step-title">Guests</h3>
-              <p class="step-note">Private groups can include up to 12 guests total.</p>
+              <p class="step-note">Private groups can include up to 12 guests total, including children.</p>
             </div>
           </div>
           <div class="guest-stack">
             <div class="guest-row">
               <div class="guest-row-main">
                 <div class="guest-title">Adults</div>
-                <div class="guest-sub" id="guest-sub"></div>
               </div>
               <div class="counter">
                 <button class="counter-btn" id="adult-minus" type="button" onclick="changeAdults(-1)">-</button>
@@ -303,24 +391,13 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
             </div>
             <div class="guest-row">
               <div class="guest-row-main">
-                <div class="guest-title">Children 4-11</div>
-                <div class="guest-sub">Children 4-11 join the experience free. Transport tickets, meals and extras are paid separately when needed.</div>
+                <div class="guest-title">Children under 12</div>
+                <div class="guest-sub">Children under 12 are free. The walk is family-friendly, but not a kids' activity.</div>
               </div>
               <div class="counter">
                 <button class="counter-btn" id="child-minus" type="button" onclick="changeChildren(-1)">-</button>
                 <div class="guest-count" id="child-count">0</div>
                 <button class="counter-btn" id="child-plus" type="button" onclick="changeChildren(1)">+</button>
-              </div>
-            </div>
-            <div class="guest-row">
-              <div class="guest-row-main">
-                <div class="guest-title">Infants 0-3</div>
-                <div class="guest-sub">Infants 0-3 join free, including transport tickets when they are free for this age group.</div>
-              </div>
-              <div class="counter">
-                <button class="counter-btn" id="infant-minus" type="button" onclick="changeInfants(-1)">-</button>
-                <div class="guest-count" id="infant-count">0</div>
-                <button class="counter-btn" id="infant-plus" type="button" onclick="changeInfants(1)">+</button>
               </div>
             </div>
           </div>
@@ -331,9 +408,9 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
                 <span class="addon-top">
                   <span>
                     <span class="addon-kicker">Cinque Terre add-on</span>
-                    <span class="addon-title">Let me handle the transport</span>
+                    <span class="addon-title">Add train tickets in advance</span>
                   </span>
-                  <span class="addon-price">+€100 per adult / child 4+</span>
+                  <span class="addon-price">+€100 per adult / child</span>
                 </span>
                 <span class="addon-copy">Round-trip train tickets from Genoa, plus the best local option for your date: Cinque Terre Card between villages, or a scenic boat segment when weather and schedules allow.</span>
               </span>
@@ -343,7 +420,7 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
 
         <div class="step">
           <div class="step-head">
-            <div class="step-num">4</div>
+            <div class="step-num" id="details-step-num">4</div>
             <div>
               <h3 class="step-title">Your details</h3>
               <p class="step-note">These details will be sent with your confirmation email.</p>
@@ -374,63 +451,71 @@ input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(18
         <div class="summary-line"><span>Start time</span><strong id="summary-time">Choose a time</strong></div>
         <div class="summary-line"><span>Guests</span><strong id="summary-guests">4 adults</strong></div>
       </div>
+      <div class="per-person-card">
+        <div class="per-person-kicker">Price per paying adult</div>
+        <div class="per-person-price" id="per-person-hero">— <span>pp</span></div>
+        <div class="per-person-note" id="per-person-note">Based on 4 paying adults. Private group price, taxes included.</div>
+      </div>
       <div class="price-block">
-        <div class="price-row"><span id="base-label">Base price, up to 4 adults</span><strong id="base-price">€240</strong></div>
-        <div class="price-row"><span id="extra-label">Additional adults</span><strong id="extra-price">€0</strong></div>
-        <div class="price-row"><span>Children 4-11</span><strong>Free</strong></div>
-        <div class="price-row"><span>Infants 0-3</span><strong>Free</strong></div>
-        <div class="price-row" id="logistics-row" style="display:none"><span id="logistics-label">Train-ticket logistics</span><strong id="logistics-price">€0</strong></div>
-        <div class="price-row"><span>Approx. per paying adult</span><strong id="per-person">€60</strong></div>
+        <div class="price-row" id="children-free-row" style="display:none"><span>Children under 12</span><strong>Free</strong></div>
+        <div class="price-row" id="logistics-row" style="display:none"><span id="logistics-label">Train tickets</span><strong id="logistics-price">€0</strong></div>
         <div class="price-row discount-row" id="discount-row" style="display:none"><span>FRIEND26 discount</span><strong id="discount-price">-€0</strong></div>
-        <div class="total-row"><span>Total</span><strong id="total-price">€240</strong></div>
+        <div class="total-row"><span>Private group total</span><strong id="total-price">—</strong></div>
+        <div class="tax-note">Includes all taxes and booking fees.</div>
       </div>
       <div class="promo-box">
         <label for="promo-code">Promo Code</label>
         <input class="promo-input" id="promo-code" type="text" autocomplete="off" spellcheck="false" placeholder="Enter code" oninput="setPromoCode(this.value)"/>
         <div class="promo-message" id="promo-message">10% discount applied ✓</div>
       </div>
-      <div class="deposit-box">
-        <div class="payment-choice" aria-label="Payment today">
-          <label class="payment-option">
-            <input type="radio" name="payment-choice" value="deposit" checked onchange="setPaymentMode(this.value)"/>
-            <span>Pay deposit today</span>
-            <strong>€100</strong>
-          </label>
-          <label class="payment-option">
-            <input type="radio" name="payment-choice" value="full" onchange="setPaymentMode(this.value)"/>
-            <span>Pay full amount now</span>
-            <strong id="full-payment-option">€240</strong>
-          </label>
-        </div>
-        <div class="deposit-row"><span id="due-today-label">Due today</span><strong id="due-today">€100</strong></div>
-        <div class="deposit-row"><span>Remaining balance</span><strong id="remaining">€140</strong></div>
+      <button class="btn-pay" id="pay-button" type="button" onclick="goToConfirmation()">Continue to payment</button>
+      <div class="payment-switch">
+        <div class="payment-switch-note" id="payment-switch-note">Prefer to reserve first?</div>
+        <button class="payment-switch-btn" id="payment-switch-btn" type="button" onclick="togglePaymentMode()">Pay €100 deposit instead</button>
+      </div>
+      <div class="trust" id="payment-note">Your date is confirmed after payment. A confirmation email is sent right away.</div>
+      <div class="secure-note">
+        <strong>Secure payment by Stripe</strong>
+        <span>Card details are handled by Stripe and are not stored on this website.</span>
       </div>
       <div class="included-box" id="included-box"></div>
-      <button class="btn-pay" id="pay-button" type="button" onclick="goToConfirmation()">Pay €100 deposit</button>
-      <div class="trust" id="payment-note">The remaining balance is paid online via a secure payment link sent by email, no later than 7 days before the experience. A reminder will be sent.</div>
-      <a class="whatsapp-link" href="https://wa.me/393203723453" target="_blank">Ask a question on WhatsApp</a>
+      <a class="whatsapp-link" href="https://wa.me/393203723453" target="_blank">Questions? Chat on WhatsApp</a>
       <div class="trust" style="margin-top:16px">By completing your booking you agree to our <a href="/privacy-policy/" style="color:var(--gold)">Privacy Policy</a>.</div>
     </aside>
   </section>
 </main>
 
-<div class="mobile-bar">
-  <div class="mobile-bar-price"><strong id="mobile-total">€240 total</strong><span id="mobile-payment">€100 deposit today</span></div>
-  <button class="btn-pay" type="button" onclick="document.querySelector('.summary').scrollIntoView({behavior:'smooth'})">Review</button>
+<div class="mobile-price-bar" aria-live="polite">
+  <div class="mobile-price-main">
+    <div class="mobile-price-pp" id="mobile-price-pp">— <span>pp</span></div>
+    <div class="mobile-price-total" id="mobile-price-total">Calculating total…</div>
+  </div>
+  <button class="mobile-price-pay" id="mobile-price-pay" type="button" onclick="goToConfirmation()">Continue to payment</button>
 </div>
 
 <script>
 const tours={
-  genoa:{
-    id:'genoa',name:'Genoa Must-Sees & Tastings',duration:'3 hours',base:240,extra:30,deposit:100,includedAdults:4,max:12,
+  'genoa-half':{
+    id:'genoa-half',name:'Genoa Highlights & Hidden Corners · Half Day',duration:'3.5 hours',base:240,extra:30,deposit:100,includedAdults:4,max:12,
     image:'/images/genoa must see/img_8480.jpg',back:'/tours/genoa-must-see/',
-    copy:'A private walk through Genoa with hidden streets, local tastings, viewpoints and flexible pacing.',
-    includedItems:['Fresh pesto tasting','Gelato or a secret Genoese dessert with coffee','Panoramic elevator tickets'],
-    notIncludedItems:['Transport to the meeting point','Full meal','Extra food or drinks beyond the included tastings'],
-    reassurance:'No required extra costs during the walk.',
-    meta:['3 hours','Private experience','Flexible meeting point'],
+    copy:'The essential Genoa experience: the old town, hidden corners, panoramic views and authentic local food recommendations.',
+    includedItems:['Private walk hosted by Nefset','Flexible route planning around your pace and timing','Local food, viewpoint and neighborhood recommendations'],
+    notIncludedItems:['Food and drinks','Transport to the meeting point or between neighborhoods','Entrance, elevator or public transport tickets if you choose them'],
+    reassurance:'This keeps the day flexible: I suggest the best local stops and options, and you only pay separately for what you actually choose.',
+    meta:['3.5 hours','Private experience','Genoa essentials'],
     meeting:'Via della Mercanzia, 2, 16124 Genova GE',
-    slots:{Morning:['09:30'],Afternoon:['14:30'],Evening:['18:00']}
+    slots:{Morning:['09:30'],Afternoon:['14:30']}
+  },
+  'genoa-full':{
+    id:'genoa-full',name:'Genoa Highlights & Hidden Corners · Full Day',duration:'7 hours',base:440,extra:50,deposit:100,includedAdults:4,max:12,
+    image:'/images/genoa must see/img_8762.avif',back:'/tours/genoa-must-see/',
+    copy:'Everything included in Half Day, plus Genoa’s seaside: Boccadasse, Corso Italia or Nervi, with more viewpoints, local stops and a relaxed pace.',
+    includedItems:['Private walk hosted by Nefset','Flexible route planning around your pace and timing','Local food, viewpoint and neighborhood recommendations'],
+    notIncludedItems:['Food and drinks','Transport to the meeting point or between neighborhoods','Entrance, elevator or public transport tickets if you choose them'],
+    reassurance:'This keeps the day flexible: I suggest the best local stops and options, and you only pay separately for what you actually choose.',
+    meta:['7 hours','Private experience','Old town + seaside Genoa'],
+    meeting:'Via della Mercanzia, 2, 16124 Genova GE',
+    slots:{Morning:['09:30']}
   },
   portofino:{
     id:'portofino',name:'Portofino & Beyond',duration:'Full day',base:650,extra:100,deposit:100,includedAdults:4,max:12,
@@ -438,7 +523,7 @@ const tours={
     copy:'A full day along the Ligurian Riviera with Portofino, San Fruttuoso and Camogli at your own pace.',
     includedItems:['Ferry tickets for the planned route','Private experience with Nefset','Flexible route pacing'],
     notIncludedItems:['Transport to the meeting point in Genoa','Food and drinks','Optional extras'],
-    reassurance:'Your ferry logistics are already part of the experience price.',
+    reassurance:'Ferry tickets are already part of the experience price.',
     meta:['Full day','Private experience','Ferry day'],
     meeting:'Via della Mercanzia, 2, 16124 Genova GE',
     slots:{Morning:['09:30']}
@@ -457,23 +542,25 @@ const tours={
 };
 let params=new URLSearchParams(window.location.search);
 let requestedTour=params.get('tour');
-let tour=tours[requestedTour]||tours.genoa;
-let showChooser=!requestedTour||!tours[requestedTour];
+let bookingScope=requestedTour==='genoa'?'genoa':null;
+if(bookingScope==='genoa')requestedTour='genoa-half';
+let tour=tours[requestedTour]||tours['genoa-half'];
+let showChooser=bookingScope==='genoa'||!requestedTour||!tours[requestedTour];
 let now=new Date();
 let viewDate=new Date(now.getFullYear(),now.getMonth(),1);
 let selectedDate=null;
 let selectedTime=null;
 let adults=4;
 let children=0;
-let infants=0;
 let cinqueLogistics=false;
-let paymentMode='deposit';
+let paymentMode='full';
 let promoCode='';
 let promoAppliedTracked=false;
 let dateAvailability=null;
 let checkingAvailability=false;
 let monthBlockedDates=new Set();
 let loadingMonth=false;
+let availabilityUnavailable=false;
 const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
 function euro(value){
   const amount=Number(value);
@@ -486,14 +573,15 @@ function prettyDate(date){
 }
 function initTour(){
   renderTourChooser();
+  updateStepNumbers();
+  document.querySelector('.tour-strip').style.display=showChooser?'none':'grid';
   document.getElementById('tour-name').textContent=tour.name;
   document.getElementById('tour-copy').textContent=tour.copy;
   document.getElementById('tour-image').src=tour.image;
-  document.getElementById('back-link').href=tour.back;
+  const backLink=document.getElementById('back-link');
+  if(backLink)backLink.href=tour.back;
   document.getElementById('tour-meta').innerHTML=tour.meta.map(item=>'<span class="pill">'+item+'</span>').join('');
-  document.getElementById('guest-sub').textContent='Up to '+tour.includedAdults+' adults are included. Additional adults are '+euro(tour.extra)+' each.';
   document.getElementById('summary-title').textContent=tour.name;
-  document.getElementById('base-label').textContent='Base price, up to '+tour.includedAdults+' adults';
   if(tour.id!=='cinque')cinqueLogistics=false;
   renderAddOns();
   renderSlots();
@@ -512,20 +600,33 @@ function toggleCinqueLogistics(checked){
 function renderTourChooser(){
   const chooser=document.getElementById('tour-chooser');
   const grid=document.getElementById('chooser-grid');
+  const title=document.querySelector('.chooser-title');
+  const note=document.getElementById('chooser-note');
+  const custom=document.querySelector('.custom-request-card');
+  const tourOptions=bookingScope==='genoa'
+    ? [tours['genoa-half'],tours['genoa-full']]
+    : Object.values(tours);
+  title.textContent=bookingScope==='genoa'?'Choose Half Day or Full Day':'Choose your experience';
+  note.textContent=bookingScope==='genoa'
+    ? 'Start with the format that fits your day. You can review the date, guests and total before payment.'
+    : 'Select the tour you would like to reserve.';
+  if(custom)custom.style.display=bookingScope==='genoa'?'none':'grid';
   chooser.classList.toggle('on',showChooser);
   grid.innerHTML='';
-  Object.values(tours).forEach(item=>{
+  tourOptions.forEach(item=>{
     const card=document.createElement('button');
     card.type='button';
     card.className='chooser-card'+(item.id===tour.id?' selected':'');
-    card.innerHTML='<div class="chooser-card-name">'+item.name+'</div><div class="chooser-card-meta">'+item.duration+' · from '+euro(item.base)+' per private group</div>';
+    card.innerHTML='<div class="chooser-card-name">'+item.name+'</div><div class="chooser-card-meta">'+chooserMeta(item)+'</div>';
     card.onclick=()=>{
       tour=item;
       showChooser=true;
+      selectedDate=null;
       selectedTime=null;
+      dateAvailability=null;
+      availabilityUnavailable=false;
       adults=4;
       children=0;
-      infants=0;
       cinqueLogistics=false;
       try{history.replaceState(null,'','/booking/?tour='+tour.id);}catch(e){}
       initTour();
@@ -537,6 +638,18 @@ function renderTourChooser(){
     grid.appendChild(card);
   });
 }
+function chooserMeta(item){
+  if(item.id==='genoa-half')return '3.5 hours · from €40 pp · €240 for 1-4 adults';
+  if(item.id==='genoa-full')return '7 hours · from €70 pp · €440 for 1-4 adults';
+  return item.duration+' · from '+euro(item.base)+' per private group';
+}
+function updateStepNumbers(){
+  const start=showChooser?2:1;
+  document.getElementById('date-step-num').textContent=start;
+  document.getElementById('time-step-num').textContent=start+1;
+  document.getElementById('guests-step-num').textContent=start+2;
+  document.getElementById('details-step-num').textContent=start+3;
+}
 async function loadMonthAvailability(){
   if(loadingMonth)return;
   loadingMonth=true;
@@ -544,13 +657,17 @@ async function loadMonthAvailability(){
   const m=viewDate.getMonth()+1;
   try{
     const res=await fetch('/.netlify/functions/get-month-availability?year='+y+'&month='+m+'&tour='+tour.id);
+    if(!res.ok)throw new Error('Availability unavailable');
     const json=await res.json();
     monthBlockedDates=new Set(json.blockedDates||[]);
+    availabilityUnavailable=false;
   }catch(e){
     monthBlockedDates=new Set();
+    availabilityUnavailable=true;
   }
   loadingMonth=false;
   renderCalendar();
+  renderSlots();
 }
 function renderCalendar(){
   document.getElementById('month-title').textContent=monthNames[viewDate.getMonth()]+' '+viewDate.getFullYear();
@@ -573,6 +690,7 @@ function renderCalendar(){
     btn.className='day';
     const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
     if(date<today)btn.classList.add('disabled');
+    if(availabilityUnavailable)btn.classList.add('disabled');
     if(monthBlockedDates.has(isoDate(date)))btn.classList.add('disabled');
     if(isoDate(date)===isoDate(today))btn.classList.add('today');
     if(selectedDate&&isoDate(date)===isoDate(selectedDate))btn.classList.add('selected');
@@ -581,6 +699,8 @@ function renderCalendar(){
       selectedDate=date;
       selectedTime=null;
       dateAvailability=null;
+      setStepError('date-error',false);
+      setStepError('time-error',false);
       renderCalendar();
       renderSlots();
       updateSummary();
@@ -588,9 +708,10 @@ function renderCalendar(){
       checkingAvailability=true;
       try{
         const res=await fetch('/.netlify/functions/check-availability?date='+isoDate(date)+'&tour='+tour.id);
+        if(!res.ok)throw new Error('Availability unavailable');
         dateAvailability=await res.json();
       }catch(e){
-        dateAvailability={available:true};
+        dateAvailability={available:false,error:true};
       }
       checkingAvailability=false;
       renderSlots();
@@ -608,6 +729,10 @@ function renderSlots(){
   const wrap=document.getElementById('slots');
   const note=document.getElementById('slot-note');
   wrap.innerHTML='';
+  if(availabilityUnavailable||(dateAvailability&&dateAvailability.error)){
+    note.textContent='Availability is temporarily unavailable. Please refresh the page or ask me on WhatsApp.';
+    return;
+  }
   if(!selectedDate){
     note.textContent='Select a date first, then pick one of the available start times.';
     return;
@@ -633,39 +758,35 @@ function renderSlots(){
       btn.disabled=!slotFree;
       btn.className='slot'+(selectedTime===time?' selected':'')+(!slotFree?' disabled':'');
       btn.textContent=slotFree?time:time+' — taken';
-      if(slotFree)btn.onclick=()=>{selectedTime=time;renderSlots();updateSummary();trackBookingEvent('time_selected',{selected_time:time});};
+      if(slotFree)btn.onclick=()=>{selectedTime=time;setStepError('time-error',false);renderSlots();updateSummary();trackBookingEvent('time_selected',{selected_time:time});};
       list.appendChild(btn);
     });
     group.appendChild(list);
     wrap.appendChild(group);
   });
 }
-function totalGuests(){return adults+children+infants}
+function totalGuests(){return adults+children}
 function ticketedGuests(){return adults+children}
 function changeAdults(delta){setAdults(adults+delta)}
 function changeChildren(delta){setChildren(children+delta)}
-function changeInfants(delta){setInfants(infants+delta)}
 function setAdults(value){
   const next=Number(value);
-  const maxAdults=Math.max(1,tour.max-children-infants);
+  const maxAdults=Math.max(1,tour.max-children);
   adults=Math.max(1,Math.min(maxAdults,Number.isFinite(next)?next:adults));
   updateSummary();
 }
 function setChildren(value){
   const next=Number(value);
-  const maxChildren=Math.max(0,tour.max-adults-infants);
+  const maxChildren=Math.max(0,tour.max-adults);
   children=Math.max(0,Math.min(maxChildren,Number.isFinite(next)?next:children));
-  updateSummary();
-}
-function setInfants(value){
-  const next=Number(value);
-  const maxInfants=Math.max(0,tour.max-adults-children);
-  infants=Math.max(0,Math.min(maxInfants,Number.isFinite(next)?next:infants));
   updateSummary();
 }
 function setPaymentMode(mode){
   paymentMode=mode==='full'?'full':'deposit';
   updateSummary();
+}
+function togglePaymentMode(){
+  setPaymentMode(paymentMode==='full'?'deposit':'full');
 }
 function normalizedPromoCode(){
   return promoCode.trim().toUpperCase();
@@ -705,7 +826,6 @@ function trackBookingEvent(name,params){
     guests:totalGuests(),
     adults,
     children,
-    infants,
     items:[bookingItem(t)]
   },params||{});
   if(window.trackGenoaEvent){
@@ -730,52 +850,51 @@ function totals(){
 function guestSummary(){
   const adultText=adults+' '+(adults===1?'adult':'adults');
   const parts=[adultText];
-  if(children)parts.push(children+' '+(children===1?'child':'children')+' 4-11');
-  if(infants)parts.push(infants+' '+(infants===1?'infant':'infants')+' 0-3');
+  if(children)parts.push(children+' '+(children===1?'child':'children')+' under 12');
   return parts.join(', ');
 }
 function updateSummary(){
   const t=totals();
+  const payingAdults=Math.max(1,adults);
   document.getElementById('adult-count').textContent=adults;
   document.getElementById('child-count').textContent=children;
-  document.getElementById('infant-count').textContent=infants;
   document.getElementById('summary-date').textContent=prettyDate(selectedDate);
   document.getElementById('summary-time').textContent=selectedTime||'Choose a time';
   document.getElementById('summary-guests').textContent=guestSummary();
-  document.getElementById('base-price').textContent=euro(tour.base);
-  document.getElementById('extra-label').textContent=t.extras? t.extras+' additional '+(t.extras===1?'adult':'adults'):'Additional adults';
-  document.getElementById('extra-price').textContent=euro(t.extraTotal);
+  document.getElementById('children-free-row').style.display=children?'flex':'none';
   document.getElementById('logistics-row').style.display=t.logisticsTotal?'flex':'none';
-  document.getElementById('logistics-label').textContent='Transport logistics ('+ticketedGuests()+' '+(ticketedGuests()===1?'ticketed guest':'ticketed guests')+')';
+  document.getElementById('logistics-label').textContent='Train tickets ('+ticketedGuests()+' '+(ticketedGuests()===1?'ticketed guest':'ticketed guests')+')';
   document.getElementById('logistics-price').textContent=euro(t.logisticsTotal);
-  document.getElementById('per-person').textContent=euro(t.perPerson);
+  document.getElementById('per-person-hero').innerHTML=euro(t.perPerson)+' <span>pp</span>';
+  document.getElementById('per-person-note').textContent='Based on '+payingAdults+' paying '+(payingAdults===1?'adult':'adults')+'. Private group price, taxes included.';
+  document.getElementById('mobile-price-pp').innerHTML=euro(t.perPerson)+' <span>pp</span>';
+  document.getElementById('mobile-price-total').textContent=euro(t.total)+' total · '+guestSummary()+' · taxes included';
   document.getElementById('discount-row').style.display=t.discountActive?'flex':'none';
   document.getElementById('discount-price').textContent='-'+euro(t.discount);
   document.getElementById('promo-message').classList.toggle('on',t.discountActive);
   document.getElementById('total-price').textContent=euro(t.total);
-  document.getElementById('full-payment-option').textContent=euro(t.total);
-  document.getElementById('due-today').textContent=euro(t.dueToday);
-  document.getElementById('remaining').textContent=euro(t.remaining);
-  document.getElementById('mobile-total').textContent=euro(t.total)+' total';
-  document.getElementById('mobile-payment').textContent=paymentMode==='full'?'Full payment today':euro(tour.deposit)+' deposit today';
-  document.getElementById('pay-button').textContent=paymentMode==='full'?'Pay '+euro(t.total)+' now':'Pay '+euro(tour.deposit)+' deposit';
-  document.getElementById('payment-note').textContent=paymentMode==='full'
-    ? 'Your experience is fully paid. No remaining balance is due before the tour.'
-    : 'The remaining balance is paid online via a secure payment link sent by email, no later than 7 days before the experience. A reminder will be sent. A reminder will be sent by email.';
+  document.getElementById('pay-button').textContent=paymentMode==='full'?'Pay '+euro(t.total):'Pay '+euro(tour.deposit)+' deposit';
+  document.getElementById('mobile-price-pay').textContent=paymentMode==='full'?'Pay '+euro(t.total):'Pay '+euro(tour.deposit)+' deposit';
+  document.getElementById('payment-switch-note').textContent=paymentMode==='full'?'Prefer to reserve first?':'Prefer to pay everything now?';
+  document.getElementById('payment-switch-btn').textContent=paymentMode==='full'?'Pay '+euro(tour.deposit)+' deposit instead':'Pay full amount '+euro(t.total)+' instead';
+  const paymentNote=document.getElementById('payment-note');
+  paymentNote.style.display=paymentMode==='full'?'none':'block';
+  paymentNote.textContent='The remaining balance is paid online via a secure payment link sent by email before the experience.';
   const included=tour.id==='cinque'&&cinqueLogistics?[...tour.includedItems,'Round-trip train tickets from Genoa','Best local transport setup for your date: Cinque Terre Card or scenic boat segment']:tour.includedItems;
   const notIncluded=tour.id==='cinque'&&cinqueLogistics?['Meals and drinks','Optional extras']:tour.notIncludedItems;
-  const reassurance=tour.id==='cinque'&&cinqueLogistics?'Transport logistics add-on: '+euro(tour.logisticsPerGuest)+' per adult / child 4+. Infants 0-3 are not charged when transport tickets are free for this age group. Boat segments depend on sea conditions and seasonal schedules.':tour.reassurance;
+  const reassurance=tour.id==='cinque'&&cinqueLogistics?'Ticket add-on: '+euro(tour.logisticsPerGuest)+' per adult / child. Boat segments depend on sea conditions and seasonal schedules.':tour.reassurance;
   document.getElementById('included-box').innerHTML=
-    '<div class="included-title">Included / not included</div>'+
+    '<details class="included-details">'+
+    '<summary>What is included?</summary>'+
+    '<div class="included-details-body">'+
     '<div class="included-group"><div class="included-subtitle">Included</div><div class="included-list">'+included.map(item=>'<div class="included-item"><span class="included-mark">✓</span><span>'+item+'</span></div>').join('')+'</div></div>'+
     '<div class="included-group"><div class="included-subtitle">Not included</div><div class="included-list">'+notIncluded.map(item=>'<div class="included-item"><span class="included-mark no">–</span><span>'+item+'</span></div>').join('')+'</div></div>'+
-    '<div class="included-note">'+reassurance+'</div>';
+    '<div class="included-note">'+reassurance+'</div>'+
+    '</div></details>';
   document.getElementById('adult-minus').disabled=adults<=1;
   document.getElementById('adult-plus').disabled=totalGuests()>=tour.max;
   document.getElementById('child-minus').disabled=children<=0;
   document.getElementById('child-plus').disabled=totalGuests()>=tour.max;
-  document.getElementById('infant-minus').disabled=infants<=0;
-  document.getElementById('infant-plus').disabled=totalGuests()>=tour.max;
 }
 function setStepError(id,on){
   document.getElementById(id).classList.toggle('on',on);
@@ -810,11 +929,9 @@ async function goToConfirmation(){
     coupon:t.discountActive?'FRIEND26':''
   });
   const btn=document.getElementById('pay-button');
-  const mobileBtn=document.querySelector('.mobile-bar .btn-pay');
   const originalText=btn.textContent;
   btn.textContent='Processing…';
   btn.disabled=true;
-  if(mobileBtn){mobileBtn.textContent='Processing…';mobileBtn.disabled=true;}
   try{
     const res=await fetch('/.netlify/functions/create-checkout',{
       method:'POST',
@@ -825,7 +942,6 @@ async function goToConfirmation(){
         time:selectedTime||'',
         adults:String(adults),
         children:String(children),
-        infants:String(infants),
         logistics:cinqueLogistics?'yes':'no',
         paymentMode,
         name:document.getElementById('name').value.trim(),
@@ -845,7 +961,6 @@ async function goToConfirmation(){
   }catch(err){
     btn.textContent=originalText;
     btn.disabled=false;
-    if(mobileBtn){mobileBtn.textContent='Review';mobileBtn.disabled=false;}
     alert('Something went wrong. Please try again or contact us on WhatsApp.');
     console.error(err);
   }

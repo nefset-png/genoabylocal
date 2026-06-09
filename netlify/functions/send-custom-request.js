@@ -18,6 +18,10 @@ function escapeHtml(value) {
     .replace(/\n/g, '<br>');
 }
 
+function safeSubject(value) {
+  return clean(value, 200).replace(/[\r\n]+/g, ' ');
+}
+
 function row(label, value) {
   if (!value) return '';
   return `<tr><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;color:#7a7268">${label}</td><td style="padding:10px 0;border-bottom:1px solid #ece6dd;font-size:13px;font-weight:600;text-align:right;color:#17120c">${escapeHtml(value)}</td></tr>`;
@@ -29,10 +33,10 @@ function hostEmailHtml(data) {
 <div style="max-width:620px;margin:32px auto;background:#fff;border:1px solid #ece6dd;border-radius:12px;overflow:hidden">
   <div style="background:#b8935a;padding:24px 32px">
     <p style="color:#fff;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 6px">New custom request</p>
-    <h1 style="color:#fff;font-size:28px;font-weight:400;margin:0;font-family:Georgia,serif">${escapeHtml(data.name || 'New lead')}</h1>
+    <h1 style="color:#fff;font-size:28px;font-weight:400;margin:0;font-family:inherit">${escapeHtml(data.name || 'New lead')}</h1>
   </div>
   <div style="padding:32px">
-    <h2 style="font-family:Georgia,serif;font-size:18px;font-weight:400;margin:0 0 12px">Client</h2>
+    <h2 style="font-family:inherit;font-size:18px;font-weight:400;margin:0 0 12px">Client</h2>
     <table style="width:100%;border-collapse:collapse">
       ${row('Name', data.name)}
       ${row('Email', data.email)}
@@ -40,7 +44,7 @@ function hostEmailHtml(data) {
       ${row('Preferred contact', data.contactMethod)}
     </table>
 
-    <h2 style="font-family:Georgia,serif;font-size:18px;font-weight:400;margin:24px 0 12px">Trip idea</h2>
+    <h2 style="font-family:inherit;font-size:18px;font-weight:400;margin:24px 0 12px">Trip idea</h2>
     <table style="width:100%;border-collapse:collapse">
       ${row('Preferred date', data.date)}
       ${row('Timing flexibility', data.flexibility)}
@@ -64,13 +68,13 @@ function customerEmailHtml(data) {
 <div style="max-width:580px;margin:32px auto;background:#fff;border:1px solid #ece6dd;border-radius:12px;overflow:hidden">
   <div style="padding:34px 38px;background:linear-gradient(135deg,#fff,#faf6f0);border-bottom:1px solid #ece6dd">
     <p style="margin:0 0 12px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#b8935a">Request received</p>
-    <h1 style="font-family:Georgia,serif;font-size:28px;font-weight:400;line-height:1.2;margin:0 0 12px;color:#17120c">Thank you${firstName ? ', ' + escapeHtml(firstName) : ''}.</h1>
+    <h1 style="font-family:inherit;font-size:28px;font-weight:400;line-height:1.2;margin:0 0 12px;color:#17120c">Thank you${firstName ? ', ' + escapeHtml(firstName) : ''}.</h1>
     <p style="margin:0;font-size:14px;color:#7a7268;line-height:1.75">I received your custom experience request and will reply within 24 hours. If your timing is urgent, message me directly on WhatsApp.</p>
   </div>
   <div style="padding:28px 38px">
     <p style="margin:0 0 18px;font-size:14px;color:#7a7268;line-height:1.75">I'll look at your date, group size and interests, then suggest the best private route or experience for you.</p>
 
-    <h2 style="font-family:Georgia,serif;font-size:18px;font-weight:400;margin:22px 0 12px;color:#17120c">Your request summary</h2>
+    <h2 style="font-family:inherit;font-size:18px;font-weight:400;margin:22px 0 12px;color:#17120c">Your request summary</h2>
     <table style="width:100%;border-collapse:collapse;margin-bottom:20px">
       ${row('Preferred date', data.date)}
       ${row('Group size', data.groupSize)}
@@ -86,7 +90,7 @@ function customerEmailHtml(data) {
     </div>` : ''}
 
     <a href="https://wa.me/393203723453" style="display:inline-block;background:#b8935a;color:#fff;text-decoration:none;border-radius:8px;padding:14px 28px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700">Message on WhatsApp</a>
-    <p style="margin:18px 0 0;font-size:12px;color:#a09890">Genoa Local Experiences · nefset@proton.me · +39 320 372 3453</p>
+    <p style="margin:18px 0 0;font-size:12px;color:#a09890">Genoa by Local · nefset@proton.me · +39 320 372 3453</p>
   </div>
 </div></body></html>`;
 }
@@ -116,7 +120,8 @@ exports.handler = async (event) => {
       consent: Boolean(data.consent)
     };
 
-    if (!request.name || !request.email || !request.message || !request.consent) {
+    const emailOk = request.email.length <= 160 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(request.email);
+    if (!request.name || !emailOk || !request.message || !request.consent) {
       return { statusCode: 400, body: JSON.stringify({ error: 'Missing required fields' }) };
     }
 
@@ -124,7 +129,7 @@ exports.handler = async (event) => {
       from: FROM_EMAIL,
       to: HOST_EMAIL,
       replyTo: request.email,
-      subject: `Custom request: ${request.name}${request.date ? ' — ' + request.date : ''}`,
+      subject: safeSubject(`Custom request: ${request.name}${request.date ? ' — ' + request.date : ''}`),
       html: hostEmailHtml(request)
     });
 

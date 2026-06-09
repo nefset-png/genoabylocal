@@ -6,3 +6,6 @@
 node_modules/
 .netlify/
 *.log
+_pgbackup/
+_pginfo/
+pinegrow.json

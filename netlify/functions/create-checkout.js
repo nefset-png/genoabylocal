@@ -1,12 +1,14 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const { createTentativeEvent } = require('./lib/calendar');
+const { getEventsForDate, createTentativeEvent, deleteEvent } = require('./lib/calendar');
+const { normalizeTourId, isBookableDate, getAvailability, isAllowedSlot } = require('./lib/availability');
 
 const DEPOSIT = 100;
 const PROMO_CODE = 'FRIEND26';
 const PROMO_DISCOUNT_RATE = 0.1;
 
 const TOURS = {
-  genoa: { name: 'Genoa Must-Sees & Tastings', base: 240, extra: 30, includedAdults: 4, max: 12 },
+  'genoa-half': { name: 'Genoa Highlights & Hidden Corners · Half Day', base: 240, extra: 30, includedAdults: 4, max: 12 },
+  'genoa-full': { name: 'Genoa Highlights & Hidden Corners · Full Day', base: 440, extra: 50, includedAdults: 4, max: 12 },
   portofino: { name: 'Portofino & Beyond', base: 650, extra: 100, includedAdults: 4, max: 12 },
   cinque: { name: 'Cinque Terre Day Experience', base: 650, extra: 130, includedAdults: 4, max: 12, logisticsPerGuest: 100 }
 };
@@ -16,17 +18,53 @@ exports.handler = async (event) => {
 
   try {
     const data = JSON.parse(event.body);
-    const { tourId, date, time, adults, children, infants, logistics, paymentMode, name, email, phone, stay, requests, promoCode } = data;
+    const { tourId, date, time, adults, children, logistics, paymentMode, name, email, phone, stay, requests, promoCode } = data;
+    const normalizedTourId = normalizeTourId(tourId);
 
-    const tour = TOURS[tourId];
+    const tour = TOURS[normalizedTourId];
     if (!tour) return { statusCode: 400, body: JSON.stringify({ error: 'Invalid tour' }) };
 
-    const adultsNum = Math.max(1, parseInt(adults) || 1);
-    const childrenNum = Math.max(0, parseInt(children) || 0);
-    const infantsNum = Math.max(0, parseInt(infants) || 0);
+    const adultsNum = Number(adults);
+    const childrenNum = Number(children);
+    const totalGuests = adultsNum + childrenNum;
+    const customerName = String(name || '').trim();
+    const customerEmail = String(email || '').trim();
+    const customerPhone = String(phone || '').trim();
+    const customerStay = String(stay || '').trim();
+    const customerRequests = String(requests || '').trim();
+    const emailOk = customerEmail.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail);
+
+    if (!isBookableDate(date) || !isAllowedSlot(normalizedTourId, time)) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Invalid date or start time' }) };
+    }
+    if (!Number.isInteger(adultsNum) || adultsNum < 1 || !Number.isInteger(childrenNum) || childrenNum < 0 || totalGuests > tour.max) {
+      return { statusCode: 400, body: JSON.stringify({ error: `Private groups can include up to ${tour.max} guests` }) };
+    }
+    if (!customerName || customerName.length > 100 || !emailOk || !customerPhone || customerPhone.length > 50) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Missing or invalid customer details' }) };
+    }
+    if (customerStay.length > 200 || customerRequests.length > 500) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Some booking details are too long' }) };
+    }
+    if (!['full', 'deposit'].includes(paymentMode)) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Invalid payment option' }) };
+    }
+
+    let events;
+    try {
+      events = await getEventsForDate(date);
+    } catch (calendarError) {
+      console.error('Availability check failed:', calendarError.message);
+      return { statusCode: 503, body: JSON.stringify({ error: 'Availability is temporarily unavailable' }) };
+    }
+    const availability = getAvailability(date, normalizedTourId, events);
+    const selectedSlotAvailable = normalizedTourId !== 'genoa-half' || availability.slots[time] !== false;
+    if (!availability.available || !selectedSlotAvailable) {
+      return { statusCode: 409, body: JSON.stringify({ error: 'This date or start time is no longer available' }) };
+    }
 
     const extras = Math.max(0, adultsNum - tour.includedAdults);
-    const logisticsTotal = tourId === 'cinque' && logistics === 'yes'
+    const logisticsTotal = normalizedTourId === 'cinque' && logistics === 'yes'
       ? (adultsNum + childrenNum) * tour.logisticsPerGuest
       : 0;
     const subtotal = tour.base + extras * tour.extra + logisticsTotal;
@@ -40,29 +78,29 @@ exports.handler = async (event) => {
     const siteUrl = process.env.URL || 'https://genoabylocal.com';
 
     const guestParts = [`${adultsNum} adult${adultsNum !== 1 ? 's' : ''}`];
-    if (childrenNum) guestParts.push(`${childrenNum} child${childrenNum !== 1 ? 'ren' : ''} 4-11`);
-    if (infantsNum) guestParts.push(`${infantsNum} infant${infantsNum !== 1 ? 's' : ''} 0-3`);
+    if (childrenNum) guestParts.push(`${childrenNum} child${childrenNum !== 1 ? 'ren' : ''} under 12`);
     const guestDesc = guestParts.join(', ');
 
     // Create tentative calendar hold first so we get the event ID
-    let calendarEventId = null;
+    let calendarEventId;
     try {
-      // Stripe session ID not available yet — use a temp placeholder, will use session ID after
-      // We create with a temp ID and store the event ID in Stripe metadata
       calendarEventId = await createTentativeEvent({
-        date, time, tourId,
+        date, time, tourId: normalizedTourId,
         tourName: tour.name,
-        customerName: name,
+        customerName,
         sessionId: 'pending'
       });
     } catch (calErr) {
-      console.error('Calendar hold failed (non-fatal):', calErr.message);
+      console.error('Calendar hold failed:', calErr.message);
+      return { statusCode: 503, body: JSON.stringify({ error: 'Could not reserve this time. Please try again.' }) };
     }
 
-    const session = await stripe.checkout.sessions.create({
+    let session;
+    try {
+      session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
-      customer_email: email,
+      customer_email: customerEmail,
       line_items: [{
         price_data: {
           currency: 'eur',
@@ -75,20 +113,24 @@ exports.handler = async (event) => {
         quantity: 1
       }],
       metadata: {
-        tourId, tourName: tour.name, date, time,
-        adults: String(adultsNum), children: String(childrenNum), infants: String(infantsNum),
+        tourId: normalizedTourId, tourName: tour.name, date, time,
+        adults: String(adultsNum), children: String(childrenNum), infants: '0',
         logistics: logistics === 'yes' ? 'yes' : 'no',
         paymentMode,
         subtotal: String(subtotal), discount: String(discount),
         promoCode: discountApplied ? PROMO_CODE : '',
         total: String(total), paid: String(amountToPay), remaining: String(remaining),
-        customerName: name, phone,
-        stay: stay || '', requests: requests || '',
+        customerName, phone: customerPhone,
+        stay: customerStay, requests: customerRequests,
         calendarEventId: calendarEventId || ''
       },
       success_url: `${siteUrl}/booking-confirmed/?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${siteUrl}/booking/?tour=${tourId}`
-    });
+      cancel_url: `${siteUrl}/booking/?tour=${normalizedTourId}`
+      });
+    } catch (stripeError) {
+      await deleteEvent(calendarEventId);
+      throw stripeError;
+    }
 
     return {
       statusCode: 200,
