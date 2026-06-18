@@ -19,127 +19,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="One Day in Genoa: Walking Itinerary for Cruise &amp; Train Travelers"/>
 <meta name="twitter:description" content="A relaxed walking itinerary from the Genoa cruise port or Piazza Principe station, with palaces, viewpoints, focaccia and hidden corners."/>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --gold:#b8935a;--gold-h:#c9a46e;--gold-pale:#f5efe6;--gold-faint:#faf6f0;
-  --ink:#17120c;--ink-warm:#2a2018;--ink-mid:#3d3025;
-  --stone:#7a7268;--stone-light:#a09890;
-  --line:#ece6dd;--cream:#faf7f3;--white:#fff;
-  --soft-white:rgba(255,255,255,0.86);
-}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--white);color:var(--ink);line-height:1.6}
-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:0.5px solid var(--line);background:rgba(255,255,255,0.97);position:sticky;top:0;z-index:200}
-.logo{cursor:pointer;text-decoration:none}
-.logo-name{font-family:inherit;font-size:16px;font-weight:400;color:var(--ink)}
-.logo-loc{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--stone);margin-top:2px}
-.nav-links{display:flex;align-items:center;gap:32px}
-.nav-links a{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone);text-decoration:none;cursor:pointer;transition:color 0.2s}
-.nav-links a:hover{color:var(--ink)}
-.nav-contact>a{display:block}
-
-.nav-toggle{display:none}
-.art-hero{background:linear-gradient(135deg,#3a2614,#1e1208);padding:80px 40px 64px;text-align:center;position:relative;overflow:hidden}
-.art-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,147,90,0.6),transparent)}
-.art-eyebrow{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
-.art-h1{font-family:inherit;font-size:38px;font-weight:400;color:var(--soft-white);line-height:1.2;max-width:720px;margin:0 auto 16px}
-.art-sub{font-size:15px;color:rgba(255,255,255,0.5);max-width:560px;margin:0 auto}
-.art-wrap{max-width:740px;margin:0 auto;padding:64px 40px 80px}
-.art-intro{font-size:16px;color:var(--ink-mid);line-height:1.8;margin-bottom:48px;padding-bottom:48px;border-bottom:0.5px solid var(--line)}
-.step{margin-bottom:56px}
-.step-num{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
-.step-title{font-family:inherit;font-size:24px;font-weight:400;color:var(--ink);margin-bottom:16px;line-height:1.25}
-.step p{font-size:15px;color:var(--ink-mid);line-height:1.78;margin-bottom:14px}
-.step p:last-child{margin-bottom:0}
-.step-tip{background:var(--gold-faint);border-left:2px solid var(--gold);padding:16px 20px;margin:20px 0;border-radius:0 6px 6px 0}
-.step-tip strong{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
-.step-tip p{font-size:14px;color:var(--ink-mid);margin:0}
-.step-meta{font-size:12px;color:var(--stone-light);margin-top:12px !important;font-style:italic}
-.step-divider{border:none;border-top:0.5px solid var(--line);margin:0 0 56px}
-.art-photo{width:100%;border-radius:10px;overflow:hidden;margin:28px 0;background:var(--cream)}
-.art-photo img{width:100%;height:400px;object-fit:cover;display:block}
-.art-photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
-.art-photo-pair .art-photo{margin:0}
-.art-photo-pair .art-photo img{height:240px}
-.route-box{background:var(--gold-faint);border:0.5px solid var(--line);border-radius:10px;padding:32px;margin:48px 0}
-.route-box h3{font-family:inherit;font-size:18px;color:var(--ink);margin-bottom:16px}
-.route-box p{font-size:13px;color:var(--ink-mid);line-height:1.9}
-.art-cta{background:linear-gradient(135deg,rgba(42,32,24,0.97),rgba(24,17,11,0.94));border-radius:12px;padding:48px 40px;text-align:center;margin-top:56px;position:relative;overflow:hidden}
-.art-cta::before{content:'';position:absolute;top:0;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(184,147,90,0.6),transparent)}
-.art-cta h3{font-family:inherit;font-size:26px;color:var(--soft-white);margin-bottom:14px;font-weight:400}
-.art-cta p{font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto}
-.btn-gold{display:inline-block;background:var(--gold);color:#fff;text-decoration:none;padding:14px 32px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;border-radius:7px;font-weight:500;transition:background 0.2s;margin-bottom:14px}
-.btn-gold:hover{background:var(--gold-h)}
-.art-cta-note{font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px}
-.faq-section{margin-top:56px;padding-top:48px;border-top:0.5px solid var(--line)}
-.faq-section h2{font-family:inherit;font-size:26px;font-weight:400;color:var(--ink);margin-bottom:32px}
-.faq-item{border-bottom:0.5px solid var(--line);padding:20px 0}
-.faq-item:first-of-type{border-top:0.5px solid var(--line)}
-.faq-q{font-family:inherit;font-size:17px;font-weight:400;color:var(--ink);margin-bottom:8px;line-height:1.35}
-.faq-a{font-size:14px;color:var(--stone);line-height:1.75}
-.related-link{margin-top:56px;padding-top:40px;border-top:0.5px solid var(--line)}
-.related-link h2{font-family:inherit;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:12px}
-.related-link p{font-size:15px;color:var(--ink-mid);line-height:1.78}
-.related-link a{color:var(--gold);text-decoration:none;font-weight:500}
-.related-link a:hover{text-decoration:underline}
-footer{background:var(--white);border-top:0.5px solid var(--line);padding:32px 40px;text-align:center}
-.foot-copy{font-size:11px;color:var(--stone-light);letter-spacing:0.04em}
-@media(max-width:900px){
-  nav{padding:14px 20px;position:relative}
-  .nav-toggle{display:block;border:none;background:transparent;color:var(--ink);font-size:24px;cursor:pointer;padding:10px 8px}
-  .nav-links{display:flex;flex-direction:column;align-items:stretch;gap:18px;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:18px 20px;border-bottom:0.5px solid var(--line);max-height:0;overflow:hidden;opacity:0;transition:max-height 0.35s ease,opacity 0.28s ease;box-shadow:0 12px 32px rgba(0,0,0,0.08)}
-  nav.open .nav-links{max-height:400px;opacity:1}
-  .nav-links a{padding:10px 0}
-  #contact-drop{display:none;position:static !important;box-shadow:none !important;border:none !important;border-top:0.5px solid var(--line) !important;border-radius:0 !important;padding:4px 0 4px 12px !important;margin-top:4px;min-width:unset !important}
-  #contact-drop a{border-bottom:none !important;padding:8px 0 !important;color:var(--stone) !important;font-size:11px !important;letter-spacing:0.08em !important;text-transform:uppercase !important}
-  .art-hero{padding:56px 24px 48px}
-  .art-h1{font-size:26px}
-  .art-wrap{padding:40px 24px 64px}
-  .art-intro{font-size:15px}
-  .art-photo img{height:240px}
-  .art-photo-pair{grid-template-columns:1fr}
-  .art-photo-pair .art-photo img{height:200px}
-  .art-cta{padding:36px 24px}
-  .art-cta h3{font-size:22px}
-  footer{padding:24px 20px}
-}
-/* Apple-like readability pass */
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',sans-serif;font-size:17px;line-height:1.55}
-.logo-name{font-family:inherit;font-size:17px;font-weight:760}
-.logo-loc{font-size:12px;letter-spacing:0;text-transform:none;color:var(--stone)}
-.nav-links a{font-size:14px;letter-spacing:0;text-transform:none;font-weight:650}
-.art-eyebrow,.step-num,.step-tip strong{font-size:14px;letter-spacing:0;text-transform:none;font-weight:760}
-.art-h1{font-family:inherit;font-size:42px;font-weight:800;line-height:1.08}
-.art-sub{font-size:17px;line-height:1.55;color:rgba(255,255,255,0.72)}
-.art-intro{font-size:18px;line-height:1.7}
-.step-title,.route-box h3,.art-cta h3,.faq-section h2,.faq-q,.related-link h2{font-family:inherit;font-style:normal}
-.step-title{font-size:28px;font-weight:780;line-height:1.12}
-.step p{font-size:17px;line-height:1.7}
-.step-tip,.route-box,.art-cta,.art-photo{border-radius:16px}
-.step-tip p,.route-box p{font-size:16px;line-height:1.65}
-.step-meta{font-size:15px;line-height:1.55}
-.btn-gold{font-size:16px;letter-spacing:0;text-transform:none;border-radius:12px;font-weight:760}
-.art-cta h3{font-size:30px;font-weight:780}
-.faq-section h2{font-size:30px;font-weight:800;letter-spacing:0;margin-bottom:24px}
-.faq-q{font-size:18px;font-weight:780;line-height:1.35}
-.faq-a{font-size:16px;line-height:1.65;color:var(--stone)}
-.related-link p{font-size:17px;line-height:1.7}
-.art-cta p{font-size:16px;line-height:1.55;color:rgba(255,255,255,0.72)}
-.foot-copy{font-size:13px;letter-spacing:0}
-@media(max-width:900px){
-  .art-h1{font-size:34px}
-  .art-sub,.step p,.route-box p{font-size:17px}
-  .step-title{font-size:25px}
-}
-
-/* Brand mark in header */
-.logo{display:flex;align-items:center;gap:10px}
-.logo-mark{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:0 0 auto;box-shadow:0 1px 2px rgba(0,0,0,0.06)}
-.logo-copy{display:block;min-width:0}
-.logo-loc{white-space:nowrap}
-.nav-back{white-space:nowrap;line-height:1.2}
-@media(max-width:900px){.logo-mark{width:30px;height:30px}}
-</style>
+<link rel="stylesheet" href="/assets/css/site.css"/>
+<link rel="stylesheet" href="/assets/css/pages/article-genoa-cruise-itinerary.css"/>
 <script src="/assets/js/site.js" defer></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Article","headline":"One Day in Genoa: Walking Itinerary for Cruise & Train Travelers","description":"One day in Genoa: follow a relaxed walking itinerary from the cruise port or train station to palaces, viewpoints, focaccia and hidden corners.","author":{"@type":"Person","name":"Nefset","url":"https://genoabylocal.com"},"publisher":{"@type":"Organization","name":"Genoa by Local","url":"https://genoabylocal.com"},"datePublished":"2026-05-18","dateModified":"2026-06-11","image":"https://genoabylocal.com/images/travel%20tips/belvedere%20castelletto.jpg"}
@@ -176,11 +57,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',sans-
     <a href="/#tours">Experiences</a>
     <a href="/#about">About</a>
     <a href="/travel-tips/">Travel Tips</a>
-    <div class="nav-contact" style="position:relative"><a onclick="toggleContact(event)">Contact</a>
-      <div id="contact-drop" style="display:none;position:absolute;top:calc(100% + 14px);right:0;background:#fff;border:0.5px solid var(--line);border-radius:10px;padding:20px 24px;min-width:220px;box-shadow:0 12px 32px rgba(0,0,0,0.10);text-align:left;z-index:300">
-        <a href="mailto:nefset@proton.me" style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink);text-decoration:none;letter-spacing:0;text-transform:none;padding:8px 0;border-bottom:0.5px solid var(--line)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>nefset@proton.me</a>
-        <a href="https://wa.me/393203723453" target="_blank" style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink);text-decoration:none;letter-spacing:0;text-transform:none;padding:8px 0;border-bottom:0.5px solid var(--line)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
-        <a href="https://www.instagram.com/nefset/" target="_blank" style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink);text-decoration:none;letter-spacing:0;text-transform:none;padding:8px 0"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Follow on Instagram</a>
+    <div class="nav-contact"><a class="contact-trigger" onclick="toggleContact(event)">Contact</a>
+      <div id="contact-drop" class="contact-dropdown">
+        <a href="mailto:nefset@proton.me" class="contact-dropdown-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>nefset@proton.me</a>
+        <a href="https://wa.me/393203723453" target="_blank" class="contact-dropdown-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+        <a href="https://www.instagram.com/nefset/" target="_blank" class="contact-dropdown-link contact-dropdown-link-last"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Follow on Instagram</a>
       </div>
     </div>
   </div>

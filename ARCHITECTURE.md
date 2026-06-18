@@ -11,13 +11,15 @@ This is a custom static website hosted on Netlify. The public pages are plain HT
 - /booking-confirmed/ - payment success page.
 - /custom-request/ - custom experience request form.
 - /images/ - local image assets.
+- /assets/css/site.css - shared site-wide component styles.
+- /assets/css/pages/ - page-specific stylesheets extracted from HTML.
 - /assets/js/site.js - shared frontend behavior used across public pages.
 - /analytics-consent.js - analytics consent behavior.
 - /netlify/functions/ - serverless backend for Stripe, Resend, Google Calendar and Sheets.
 
 ## Current styling approach
 
-Most page-specific CSS still lives inside each HTML file in a single style block. This is valid and works for SEO, but it is not ideal long term. The next architecture step should be extracting shared design tokens, header, buttons, cards, typography and footer styles into a common CSS file.
+Large CSS blocks have been extracted from HTML into external stylesheets. Shared site-wide component styles live in /assets/css/site.css. Page-specific CSS lives in /assets/css/pages/. Some inline style attributes still exist for small one-off or dynamic states; these should be reduced gradually when touching those sections.
 
 ## Refactor rules
 
