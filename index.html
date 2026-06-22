@@ -24,64 +24,139 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "TouristTrip",
-  "name": "Private Tours in Genoa & Liguria",
-  "description": "Private tours in Genoa, Portofino and Cinque Terre for families, groups and cruise passengers. Hidden gems, authentic food, personal touch.",
-  "touristType": ["Family", "Group", "Cruise Passengers", "Seniors"],
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "Genoa by Local",
-    "url": "https://genoabylocal.com",
-    "telephone": "+393203723453",
-    "email": "nefset@proton.me",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Genoa",
-      "addressCountry": "IT"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://genoabylocal.com/#website",
+      "name": "Genoa by Local",
+      "url": "https://genoabylocal.com/",
+      "publisher": {
+        "@id": "https://genoabylocal.com/#business"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://genoabylocal.com/#business",
+      "name": "Genoa by Local",
+      "url": "https://genoabylocal.com/",
+      "hasMap": "https://www.google.com/maps?cid=15977984871319580256",
+      "logo": "https://genoabylocal.com/android-chrome-192x192.png",
+      "image": "https://genoabylocal.com/images/genoa%20must%20see/IMG_8480.JPG",
+      "description": "Genoa by Local creates private local experiences in Genoa, Portofino, Cinque Terre and the Ligurian Riviera, hosted by Nefset for private groups, families and cruise travelers.",
+      "founder": {
+        "@id": "https://genoabylocal.com/#nefset"
+      },
+      "telephone": "+393203723453",
+      "email": "nefset@proton.me",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Genoa",
+        "addressRegion": "Liguria",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "44.4056",
+        "longitude": "8.9463"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Genoa"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Liguria"
+        },
+        {
+          "@type": "Place",
+          "name": "Portofino"
+        },
+        {
+          "@type": "Place",
+          "name": "Cinque Terre"
+        },
+        {
+          "@type": "Place",
+          "name": "Ligurian Riviera"
+        }
+      ],
+      "priceRange": "€€",
+      "currenciesAccepted": "EUR",
+      "paymentAccepted": "Credit Card, Apple Pay, Google Pay",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "20:00"
+      },
+      "sameAs": [
+        "https://www.instagram.com/nefset/",
+        "https://maps.app.goo.gl/Ss8S97V6rVRMCZny7"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://genoabylocal.com/#nefset",
+      "name": "Nefset Tsiku",
+      "givenName": "Nefset",
+      "jobTitle": "Local host",
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Genoa, Liguria, Italy"
+      },
+      "worksFor": {
+        "@id": "https://genoabylocal.com/#business"
+      },
+      "founderOf": {
+        "@id": "https://genoabylocal.com/#business"
+      },
+      "knowsAbout": [
+        "Genoa",
+        "Liguria",
+        "Portofino",
+        "Cinque Terre",
+        "Ligurian Riviera",
+        "Local food in Liguria",
+        "Private local experiences",
+        "Cruise-friendly experiences from Genoa"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/nefset/",
+        "https://maps.app.goo.gl/Ss8S97V6rVRMCZny7"
+      ]
+    },
+    {
+      "@type": "TouristTrip",
+      "@id": "https://genoabylocal.com/#private-local-experiences",
+      "name": "Private Local Experiences in Genoa & Liguria",
+      "description": "Private local experiences in Genoa, Portofino and Cinque Terre with Nefset, shaped around your group, pace, food interests and timing.",
+      "touristType": [
+        "Couples",
+        "Families",
+        "Private groups",
+        "Cruise travelers"
+      ],
+      "provider": {
+        "@id": "https://genoabylocal.com/#business"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "EUR",
+        "price": "40",
+        "availability": "https://schema.org/InStock",
+        "url": "https://genoabylocal.com/booking/"
+      }
     }
-  },
-  "offers": {
-    "@type": "Offer",
-    "priceCurrency": "EUR",
-    "price": "40",
-    "availability": "https://schema.org/InStock"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Genoa by Local",
-  "url": "https://genoabylocal.com",
-  "logo": "https://genoabylocal.com/android-chrome-192x192.png",
-  "image": "https://genoabylocal.com/images/genoa%20must%20see/IMG_8480.JPG",
-  "description": "Private tours in Genoa, Portofino and Cinque Terre for families, groups and cruise passengers. Hidden gems, authentic food, personal touch.",
-  "telephone": "+393203723453",
-  "email": "nefset@proton.me",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Genoa",
-    "addressRegion": "Liguria",
-    "addressCountry": "IT"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": "44.4056",
-    "longitude": "8.9463"
-  },
-  "areaServed": ["Genoa", "Portofino", "Cinque Terre", "Liguria"],
-  "priceRange": "€€",
-  "currenciesAccepted": "EUR",
-  "paymentAccepted": "Cash, Credit Card",
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-    "opens": "08:00",
-    "closes": "20:00"
-  },
-  "sameAs": [
-    "https://www.instagram.com/nefset/"
   ]
 }
 </script>
@@ -251,6 +326,7 @@
       <h2 class="about-h2">Hi, I'm Nefset — your local host in Genoa.</h2>
       <p class="about-p">I've been living in Genoa since 2015 — long enough to know the city the way a local does, short enough to still remember what it feels like to discover it for the first time. I share both.</p>
       <p class="about-p">Each experience is private, flexible, and shaped around you — hidden streets, real food, local stories and the kind of places you would rarely find on your first visit. No script, no shared group, no rush.</p>
+      <p class="about-p">Genoa by Local is my independent local experience brand for private days in Genoa, Portofino, Cinque Terre and the Ligurian Riviera.</p>
       <p class="about-p" style="margin-bottom:32px">Whether you have a few hours from a cruise ship or a full day to spend — I'll make sure you leave knowing a side of Liguria most visitors never see.</p>
     </div>
   </div>
