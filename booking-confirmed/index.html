@@ -52,11 +52,11 @@
         <section class="section">
           <h2>Payment summary</h2>
           <div class="detail-row" id="logistics-row" style="display:none"><span>Train tickets</span><strong id="logistics">Included</strong></div>
-          <div class="detail-row"><span>Total price</span><strong id="total">€240</strong></div>
+          <div class="detail-row"><span>Total price</span><strong id="total">€170</strong></div>
           <div class="detail-row"><span id="paid-label">Paid online</span><strong id="paid">€100</strong></div>
-          <div class="detail-row" id="remaining-row"><span>Remaining balance</span><strong id="remaining">€140</strong></div>
-          <div class="detail-row"><span id="per-guest-label">Approx. per guest</span><strong id="per-guest">€60</strong></div>
-          <div class="detail-row" id="remaining-per-guest-row"><span id="remaining-per-guest-label">Remaining per guest</span><strong id="remaining-per-guest">€35</strong></div>
+          <div class="detail-row" id="remaining-row"><span>Remaining balance</span><strong id="remaining">€70</strong></div>
+          <div class="detail-row"><span id="per-guest-label">Approx. per guest</span><strong id="per-guest">€42.50</strong></div>
+          <div class="detail-row" id="remaining-per-guest-row"><span id="remaining-per-guest-label">Remaining per guest</span><strong id="remaining-per-guest">€17.50</strong></div>
           <p class="note" id="payment-summary-note">If you chose the deposit option, the remaining balance is paid online before the experience. A secure payment link will be sent by email in advance.</p>
         </section>
 
@@ -132,16 +132,16 @@ const TOURS={
   portofino:{
     meeting:'Via della Mercanzia, 2, 16124 Genova GE',
     mapQuery:'Via della Mercanzia 2, 16124 Genova GE',
-    includedItems:['Ferry tickets for the planned route','Private experience with Nefset','Flexible route pacing throughout the day'],
-    notIncludedItems:['Transport to the meeting point in Genoa','Food and drinks','Optional extras'],
-    reassurance:'Ferry tickets are already part of the experience price.'
+    includedItems:['Private experience with Nefset','Route planning around the seasonal ferry schedule','Flexible route pacing throughout the day'],
+    notIncludedItems:['Ferry / boat tickets, usually around €30 per person','Transport to the meeting point in Genoa','Food and drinks'],
+    reassurance:'Ferry or boat tickets are paid separately, usually around €30 per person depending on the seasonal route. Children and teenagers may have lower fares, and I will help you choose and book the right tickets for your date.'
   },
   cinque:{
     meeting:'Genova Brignole Railway Station',
     mapQuery:'Genova Brignole Railway Station',
     includedItems:['Private experience with Nefset','Route planning and flexible pacing'],
-    notIncludedItems:['Train tickets','Meals and drinks','Optional extras'],
-    reassurance:'I will help you choose the best train ticket option after booking.'
+    notIncludedItems:['Train, Cinque Terre Card or boat tickets','Meals and drinks','Optional extras'],
+    reassurance:'Transport tickets are paid separately, usually around €50-70 per person depending on season and route. Children and teenagers may have lower fares, and I will help you choose and book the right option.'
   }
 };
 function euro(value){
@@ -162,10 +162,10 @@ function guestSummary(m){
 }
 function renderIncludedBox(m){
   const tourData=TOURS[m.tourId]||TOURS.genoa;
-  const hasLogistics=m.tourId==='cinque'&&m.logistics==='yes';
+  const hasLogistics=false;
   const included=hasLogistics?[...tourData.includedItems,'Round-trip train tickets from Genoa','Best local transport setup for your date: Cinque Terre Card or scenic boat segment']:tourData.includedItems;
   const notIncluded=hasLogistics?['Meals and drinks','Optional extras']:tourData.notIncludedItems;
-  const reassurance=hasLogistics?'Ticket add-on: €100 per adult / child. Boat segments depend on sea conditions and seasonal schedules.':tourData.reassurance;
+  const reassurance=tourData.reassurance;
   const renderItems=(items,type)=>items.map(item=>'<div class="included-item"><span class="included-mark '+(type==='no'?'no':'')+'">'+(type==='no'?'–':'✓')+'</span><span>'+item+'</span></div>').join('');
   document.getElementById('included-box').innerHTML=
     '<div class="included-group"><div class="included-subtitle">Included</div><div class="included-list">'+renderItems(included,'yes')+'</div></div>'+
@@ -235,7 +235,7 @@ function populatePage(m){
   document.getElementById('meeting-map').src='https://www.google.com/maps?q='+encodeURIComponent(tourData.mapQuery)+'&output=embed';
   document.getElementById('map-link').href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(tourData.mapQuery);
   document.getElementById('logistics-row').style.display=hasLogistics?'flex':'none';
-  document.getElementById('logistics').textContent=hasLogistics?'€100 per adult / child':'Not selected';
+  document.getElementById('logistics').textContent='Paid separately';
   document.getElementById('stamp-title').textContent=paymentMode==='full'?'Fully paid':'Deposit received';
   document.getElementById('stamp-sub').textContent=euro(paid)+' paid online';
   document.getElementById('total').textContent=euro(total);

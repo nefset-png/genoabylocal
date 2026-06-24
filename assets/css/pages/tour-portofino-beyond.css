@@ -55,6 +55,15 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 4
 .exp-icon{width:36px;height:36px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .exp-title{font-family:inherit;font-size:15px;color:var(--ink);margin-bottom:4px}
 .exp-desc{font-size:12px;color:var(--stone);line-height:1.55}
+.pricing-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px}
+.p-card{border:0.5px solid var(--line);border-radius:8px;padding:22px 20px}
+.p-card.feat{border-color:rgba(184,147,90,0.4);background:var(--gold-faint)}
+.p-label{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--stone);margin-bottom:8px}
+.p-price{font-family:inherit;font-size:21px;color:var(--ink);margin-bottom:4px;line-height:1.2}
+.p-price span{font-size:11px;color:var(--stone)}
+.p-desc{font-size:12px;color:var(--stone);line-height:1.55;margin:8px 0 14px}
+.p-row{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--stone);margin-bottom:6px}
+.p-row.no{color:#b0a898}
 .included-panel{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
 .included-card{background:var(--cream);border:0.5px solid var(--line);border-radius:8px;padding:22px}
 .included-card.soft{background:var(--gold-faint)}
@@ -164,7 +173,7 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
   .slider-nav{left:24px}
   .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:160px 160px 160px}
   .gallery-img.big{grid-row:auto}
-  .exp-grid,.included-panel{grid-template-columns:1fr}
+  .exp-grid,.pricing-cards,.included-panel{grid-template-columns:1fr}
   .addon-card{flex-direction:column}
   .tab-inner{padding:0 24px}
   .foot-inner{grid-template-columns:1fr;text-align:center;padding:32px 24px}
@@ -185,7 +194,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',sans-
 .slide-meta-item{font-size:15px;color:rgba(255,255,255,0.82)}
 .slider-arrow{display:none}
 .tab{font-size:15px;letter-spacing:0;text-transform:none;font-weight:650;border-bottom-width:2px}
-.exp-item,.included-card,.addon-card,.booking-card{border-radius:16px}
+.exp-item,.included-card,.p-card,.addon-card,.booking-card{border-radius:16px}
 .exp-title,.included-heading,.addon-title{font-family:inherit;font-size:18px;font-weight:760}
 .exp-desc,.addon-desc{font-size:16px;line-height:1.65}
 .included-item{font-size:16px;line-height:1.6}

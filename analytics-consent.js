@@ -58,9 +58,9 @@
 
   function tourFromPath(path){
     var tours={
-      '/tours/genoa-must-see/':{id:'genoa-half',name:'Genoa Highlights & Hidden Corners · Half Day',price:240},
-      '/tours/portofino-beyond/':{id:'portofino',name:'Portofino & Beyond',price:650},
-      '/tours/cinque-terre-experience/':{id:'cinque',name:'Cinque Terre Day Experience',price:650}
+      '/tours/genoa-must-see/':{id:'genoa-half',name:'Genoa Highlights & Hidden Corners · Half Day',price:170},
+      '/tours/portofino-beyond/':{id:'portofino',name:'Portofino & Beyond',price:490},
+      '/tours/cinque-terre-experience/':{id:'cinque',name:'Cinque Terre Day Experience',price:590}
     };
     return tours[path]||null;
   }
@@ -71,7 +71,7 @@
       var id=parsed.searchParams.get('tour')||'genoa-half';
       if(id==='genoa')id='genoa-half';
       var names={'genoa-half':'Genoa Highlights & Hidden Corners · Half Day','genoa-full':'Genoa Highlights & Hidden Corners · Full Day',portofino:'Portofino & Beyond',cinque:'Cinque Terre Day Experience'};
-      var prices={'genoa-half':240,'genoa-full':440,portofino:650,cinque:650};
+      var prices={'genoa-half':170,'genoa-full':330,portofino:490,cinque:590};
       return {id:id,name:names[id]||id,price:prices[id]||0};
     }catch(e){
       return null;

@@ -105,6 +105,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 4
 .tour-price{font-family:inherit;font-size:17px;color:var(--gold);margin-bottom:22px}
 .tour-btn{width:100%;padding:14px;border:1px solid var(--gold);background:#fff;color:var(--ink);font-size:12px;letter-spacing:0.07em;font-weight:700;text-transform:uppercase;border-radius:8px;cursor:pointer;transition:all 0.15s}
 .tour-btn:hover,.tour-card:hover .tour-btn{background:var(--gold);color:#fff}
+.shore-request-card{margin-top:28px;background:linear-gradient(135deg,#fff,var(--gold-faint));border:0.5px solid rgba(184,147,90,0.34);border-radius:18px;padding:30px 32px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px;box-shadow:0 12px 36px rgba(55,34,12,0.06)}
+.shore-request-kicker{font-size:14px;font-weight:760;color:var(--gold);margin-bottom:8px}
+.shore-request-title{font-size:28px;font-weight:780;line-height:1.1;color:var(--ink);margin-bottom:8px}
+.shore-request-copy{font-size:17px;color:var(--stone);line-height:1.58;max-width:780px}
+.shore-request-link{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:16px 30px;border-radius:12px;background:var(--gold);color:#fff;font-size:16px;font-weight:780;text-decoration:none;white-space:nowrap;box-shadow:0 10px 28px rgba(184,147,90,0.24);transition:background 0.18s,transform 0.18s,box-shadow 0.18s}
+.shore-request-link:hover{background:var(--gold-h);transform:translateY(-1px);box-shadow:0 14px 34px rgba(184,147,90,0.30)}
 .custom-request-card{margin-top:28px;background:linear-gradient(135deg,#fff,var(--gold-faint));border:0.5px solid var(--line);border-radius:10px;padding:30px;display:block}
 .custom-request-kicker{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
 .custom-request-title{font-family:inherit;font-size:26px;font-weight:400;color:var(--ink);line-height:1.22;margin-bottom:8px}
@@ -299,6 +305,10 @@ footer{background:var(--white);border-top:0.5px solid var(--line)}
   .rating-card-top{flex-direction:column;gap:20px;padding:28px 24px}
   .rct-div{width:60px;height:0.5px}
   .reviews-grid,.tours-grid{grid-template-columns:1fr}
+  .shore-request-card{grid-template-columns:1fr;gap:18px;padding:24px}
+  .shore-request-title{font-size:24px}
+  .shore-request-copy{font-size:16px;line-height:1.55;max-width:none}
+  .shore-request-link{width:100%;min-height:52px}
   .custom-request-card{padding:24px}
   .custom-request-card .btn-gold{width:100%;padding:14px 18px;font-size:11px;letter-spacing:0.07em;line-height:1.35;white-space:normal}
   .why-grid{grid-template-columns:1fr}

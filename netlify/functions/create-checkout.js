@@ -3,14 +3,14 @@ const { getEventsForDate, createTentativeEvent, deleteEvent } = require('./lib/c
 const { normalizeTourId, isBookableDate, getAvailability, isAllowedSlot } = require('./lib/availability');
 
 const DEPOSIT = 100;
-const PROMO_CODE = 'FRIEND26';
+const PROMO_CODES = new Set(['FRIEND26', 'SMOL']);
 const PROMO_DISCOUNT_RATE = 0.1;
 
 const TOURS = {
-  'genoa-half': { name: 'Genoa Highlights & Hidden Corners · Half Day', base: 240, extra: 30, includedAdults: 4, max: 12 },
-  'genoa-full': { name: 'Genoa Highlights & Hidden Corners · Full Day', base: 440, extra: 50, includedAdults: 4, max: 12 },
-  portofino: { name: 'Portofino & Beyond', base: 650, extra: 100, includedAdults: 4, max: 12 },
-  cinque: { name: 'Cinque Terre Day Experience', base: 650, extra: 130, includedAdults: 4, max: 12, logisticsPerGuest: 100 }
+  'genoa-half': { name: 'Genoa Highlights & Hidden Corners · Half Day', base: 170, extra: 15, includedAdults: 4, max: 12 },
+  'genoa-full': { name: 'Genoa Highlights & Hidden Corners · Full Day', base: 330, extra: 20, includedAdults: 4, max: 12 },
+  portofino: { name: 'Portofino & Beyond', base: 490, extra: 20, maxTotal: 650, includedAdults: 4, max: 12 },
+  cinque: { name: 'Cinque Terre Day Experience', base: 590, extra: 13, maxTotal: 690, includedAdults: 4, max: 12, logisticsPerGuest: 0 }
 };
 
 exports.handler = async (event) => {
@@ -64,12 +64,11 @@ exports.handler = async (event) => {
     }
 
     const extras = Math.max(0, adultsNum - tour.includedAdults);
-    const logisticsTotal = normalizedTourId === 'cinque' && logistics === 'yes'
-      ? (adultsNum + childrenNum) * tour.logisticsPerGuest
-      : 0;
-    const subtotal = tour.base + extras * tour.extra + logisticsTotal;
+    const logisticsTotal = 0;
+    const cappedGroupTotal = tour.maxTotal ? Math.min(tour.maxTotal, tour.base + extras * tour.extra) : tour.base + extras * tour.extra;
+    const subtotal = cappedGroupTotal + logisticsTotal;
     const normalizedPromoCode = String(promoCode || '').trim().toUpperCase();
-    const discountApplied = normalizedPromoCode === PROMO_CODE;
+    const discountApplied = PROMO_CODES.has(normalizedPromoCode);
     const discount = discountApplied ? Math.round(subtotal * PROMO_DISCOUNT_RATE) : 0;
     const total = Math.max(0, subtotal - discount);
     const amountToPay = paymentMode === 'full' ? total : DEPOSIT;
@@ -106,7 +105,7 @@ exports.handler = async (event) => {
           currency: 'eur',
           product_data: {
             name: paymentMode === 'full' ? `${tour.name} — Full payment` : `${tour.name} — Deposit`,
-            description: `${date} at ${time} · ${guestDesc}${discountApplied ? ' · FRIEND26 discount applied' : ''}`
+            description: `${date} at ${time} · ${guestDesc}${discountApplied ? ` · ${normalizedPromoCode} discount applied` : ''}`
           },
           unit_amount: amountToPay * 100
         },
@@ -118,7 +117,7 @@ exports.handler = async (event) => {
         logistics: logistics === 'yes' ? 'yes' : 'no',
         paymentMode,
         subtotal: String(subtotal), discount: String(discount),
-        promoCode: discountApplied ? PROMO_CODE : '',
+        promoCode: discountApplied ? normalizedPromoCode : '',
         total: String(total), paid: String(amountToPay), remaining: String(remaining),
         customerName, phone: customerPhone,
         stay: customerStay, requests: customerRequests,

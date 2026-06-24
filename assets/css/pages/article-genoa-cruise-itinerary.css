@@ -118,3 +118,5 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',sans-
 .logo-loc{white-space:nowrap}
 .nav-back{white-space:nowrap;line-height:1.2}
 @media(max-width:900px){.logo-mark{width:30px;height:30px}}
+
+.art-cta-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.btn-soft{background:transparent;border:1px solid rgba(255,255,255,0.34);color:#fff}.btn-soft:hover{background:rgba(255,255,255,0.08)}@media(max-width:700px){.art-cta-actions{display:grid}.art-cta-actions .btn-gold{width:100%;margin-bottom:0}}

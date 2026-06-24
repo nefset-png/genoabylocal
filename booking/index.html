@@ -29,12 +29,13 @@
     <div>
       <div class="eyebrow">Private booking with Nefset</div>
       <h1>Reserve your private experience</h1>
-      <p class="lead">Choose your date, start time and group size. Reserve online with a secure Stripe deposit or full payment.</p>
+      <p class="lead">Choose your date, start time and group size. Reserve online with a secure Stripe deposit or full payment and receive instant confirmation by email.</p>
     </div>
     <aside class="direct-card">
       <div class="direct-card-title">Direct booking with Nefset</div>
       <p>No platform service fees, no public group. You are booking a private experience directly with your local host.</p>
-      <p style="margin-top:10px">Card details are handled by Stripe, not stored on this website.</p>
+      <p style="margin-top:10px">Instant confirmation after online payment. Card details are handled by Stripe, not stored on this website.</p>
+      <p style="margin-top:10px">Questions? I usually reply on WhatsApp within 1 hour. Urgent same-day request? <a href="tel:+393203723453" style="color:var(--gold);text-decoration:none;font-weight:700">Call me</a>.</p>
     </aside>
   </section>
 
@@ -133,11 +134,11 @@
                 <span class="addon-top">
                   <span>
                     <span class="addon-kicker">Cinque Terre add-on</span>
-                    <span class="addon-title">Add train tickets in advance</span>
+                    <span class="addon-title">Transport tickets paid separately</span>
                   </span>
-                  <span class="addon-price">+€100 per adult / child</span>
+                  <span class="addon-price">Not included</span>
                 </span>
-                <span class="addon-copy">Round-trip train tickets from Genoa, plus the best local option for your date: Cinque Terre Card between villages, or a scenic boat segment when weather and schedules allow.</span>
+                <span class="addon-copy">Train, Cinque Terre Card or boat tickets are paid separately. I will help you choose and book the right option for your date.</span>
               </span>
             </label>
           </div>
@@ -184,7 +185,7 @@
       <div class="price-block">
         <div class="price-row" id="children-free-row" style="display:none"><span>Children under 12</span><strong>Free</strong></div>
         <div class="price-row" id="logistics-row" style="display:none"><span id="logistics-label">Train tickets</span><strong id="logistics-price">€0</strong></div>
-        <div class="price-row discount-row" id="discount-row" style="display:none"><span>FRIEND26 discount</span><strong id="discount-price">-€0</strong></div>
+        <div class="price-row discount-row" id="discount-row" style="display:none"><span id="discount-label">Promo discount</span><strong id="discount-price">-€0</strong></div>
         <div class="total-row"><span>Private group total</span><strong id="total-price">—</strong></div>
         <div class="tax-note">Includes all taxes and booking fees.</div>
       </div>
@@ -200,12 +201,18 @@
       </div>
       <div class="trust" id="payment-note">Your date is confirmed after payment. A confirmation email is sent right away.</div>
       <div class="secure-note">
-        <strong>Secure payment by Stripe</strong>
+        <strong><span class="secure-check" aria-hidden="true">✓</span>Secure payment by Stripe</strong>
         <span>Card details are handled by Stripe and are not stored on this website.</span>
       </div>
       <div class="included-box" id="included-box"></div>
-      <a class="whatsapp-link" href="https://wa.me/393203723453" target="_blank">Questions? Chat on WhatsApp</a>
-      <div class="trust" style="margin-top:16px">By completing your booking you agree to our <a href="/privacy-policy/" style="color:var(--gold)">Privacy Policy</a>.</div>
+      <div class="booking-help">
+        <div class="booking-help-title">Need help?</div>
+        <div class="booking-help-actions">
+          <a class="booking-help-link" href="https://wa.me/393203723453" target="_blank">WhatsApp <span>usually within 1 hour</span></a>
+          <a class="booking-help-link muted" href="tel:+393203723453">Call if urgent</a>
+        </div>
+      </div>
+      <div class="trust booking-legal">By completing your booking you agree to our <a href="/privacy-policy/">Privacy Policy</a>.</div>
     </aside>
   </section>
 </main>
@@ -221,7 +228,7 @@
 <script>
 const tours={
   'genoa-half':{
-    id:'genoa-half',name:'Genoa Highlights & Hidden Corners · Half Day',duration:'3.5 hours',base:240,extra:30,deposit:100,includedAdults:4,max:12,
+    id:'genoa-half',name:'Genoa Highlights & Hidden Corners · Half Day',duration:'3.5 hours',base:170,extra:15,deposit:100,includedAdults:4,max:12,
     image:'/images/genoa must see/img_8480.jpg',back:'/tours/genoa-must-see/',
     copy:'The essential Genoa experience: the old town, hidden corners, panoramic views and authentic local food recommendations.',
     includedItems:['Private walk hosted by Nefset','Flexible route planning around your pace and timing','Local food, viewpoint and neighborhood recommendations'],
@@ -232,7 +239,7 @@ const tours={
     slots:{Morning:['09:30'],Afternoon:['14:30']}
   },
   'genoa-full':{
-    id:'genoa-full',name:'Genoa Highlights & Hidden Corners · Full Day',duration:'7 hours',base:440,extra:50,deposit:100,includedAdults:4,max:12,
+    id:'genoa-full',name:'Genoa Highlights & Hidden Corners · Full Day',duration:'7 hours',base:330,extra:20,deposit:100,includedAdults:4,max:12,
     image:'/images/genoa must see/img_8762.avif',back:'/tours/genoa-must-see/',
     copy:'Everything included in Half Day, plus Genoa’s seaside: Boccadasse, Corso Italia or Nervi, with more viewpoints, local stops and a relaxed pace.',
     includedItems:['Private walk hosted by Nefset','Flexible route planning around your pace and timing','Local food, viewpoint and neighborhood recommendations'],
@@ -243,24 +250,24 @@ const tours={
     slots:{Morning:['09:30']}
   },
   portofino:{
-    id:'portofino',name:'Portofino & Beyond',duration:'Full day',base:650,extra:100,deposit:100,includedAdults:4,max:12,
+    id:'portofino',name:'Portofino & Beyond',duration:'Full day',base:490,extra:20,maxTotal:650,deposit:100,includedAdults:4,max:12,
     image:'/images/portofino/portofino-panoramic.jpg',back:'/tours/portofino-beyond/',
     copy:'A full day along the Ligurian Riviera with Portofino, San Fruttuoso and Camogli at your own pace.',
-    includedItems:['Ferry tickets for the planned route','Private experience with Nefset','Flexible route pacing'],
-    notIncludedItems:['Transport to the meeting point in Genoa','Food and drinks','Optional extras'],
-    reassurance:'Ferry tickets are already part of the experience price.',
-    meta:['Full day','Private experience','Ferry day'],
+    includedItems:['Private experience with Nefset','Route planning around the seasonal ferry schedule','Flexible route pacing throughout the day'],
+    notIncludedItems:['Ferry / boat tickets, usually around €30 per person','Transport to the meeting point in Genoa','Food and drinks'],
+    reassurance:'Ferry or boat tickets are paid separately, usually around €30 per person depending on the seasonal route. Children and teenagers may have lower fares, and I will help you choose and book the right tickets for your date.',
+    meta:['Full day','Private experience','Ferry paid separately'],
     meeting:'Via della Mercanzia, 2, 16124 Genova GE',
     slots:{Morning:['09:30']}
   },
   cinque:{
-    id:'cinque',name:'Cinque Terre Day Experience',duration:'Full day',base:650,extra:130,deposit:100,includedAdults:4,max:12,logisticsPerGuest:100,
+    id:'cinque',name:'Cinque Terre Day Experience',duration:'Full day',base:590,extra:13,maxTotal:690,deposit:100,includedAdults:4,max:12,logisticsPerGuest:0,
     image:'/images/5 terre/sami-hobbs-ihw2jww6xt4-unsplash.jpg',back:'/tours/cinque-terre-experience/',
     copy:'A relaxed full day by train through Vernazza, Manarola and Riomaggiore, with optional hiking.',
     includedItems:['Private experience with Nefset','Route planning and flexible pacing'],
-    notIncludedItems:['Train tickets','Meals and drinks','Optional extras'],
-    reassurance:'I will help you choose the best train ticket option after booking.',
-    meta:['Full day','Private experience','Train day'],
+    notIncludedItems:['Train, Cinque Terre Card or boat tickets','Meals and drinks','Optional extras'],
+    reassurance:'Transport tickets are paid separately, usually around €50-70 per person depending on season and route. Children and teenagers may have lower fares, and I will help you choose and book the right option.',
+    meta:['Full day','Private experience','Tickets paid separately'],
     meeting:'Genova Brignole Railway Station',
     slots:{'Early morning':['07:30','08:30']}
   }
@@ -289,7 +296,8 @@ let availabilityUnavailable=false;
 const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
 function euro(value){
   const amount=Number(value);
-  return '€'+Math.round(Number.isFinite(amount)?amount:0);
+  if(!Number.isFinite(amount))return '€0';
+  return '€'+(Number.isInteger(amount)?String(amount):amount.toFixed(2));
 }
 function isoDate(date){return date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0')}
 function prettyDate(date){
@@ -314,7 +322,7 @@ function initTour(){
 function renderAddOns(){
   const box=document.getElementById('cinque-logistics-box');
   const input=document.getElementById('cinque-logistics');
-  const show=tour.id==='cinque';
+  const show=false;
   box.classList.toggle('on',show);
   input.checked=show&&cinqueLogistics;
 }
@@ -364,8 +372,8 @@ function renderTourChooser(){
   });
 }
 function chooserMeta(item){
-  if(item.id==='genoa-half')return '3.5 hours · from €40 pp · €240 for 1-4 adults';
-  if(item.id==='genoa-full')return '7 hours · from €70 pp · €440 for 1-4 adults';
+  if(item.id==='genoa-half')return '3.5 hours · €170-€290 private group total';
+  if(item.id==='genoa-full')return '7 hours · €330-€490 private group total';
   return item.duration+' · from '+euro(item.base)+' per private group';
 }
 function updateStepNumbers(){
@@ -516,14 +524,17 @@ function togglePaymentMode(){
 function normalizedPromoCode(){
   return promoCode.trim().toUpperCase();
 }
+function isPromoCodeActive(){
+  return ['FRIEND26','SMOL'].includes(normalizedPromoCode());
+}
 function setPromoCode(value){
   promoCode=value;
   updateSummary();
-  if(normalizedPromoCode()==='FRIEND26'&&!promoAppliedTracked){
+  if(isPromoCodeActive()&&!promoAppliedTracked){
     promoAppliedTracked=true;
     const t=totals();
     trackBookingEvent('promo_applied',{
-      coupon:'FRIEND26',
+      coupon:normalizedPromoCode(),
       discount:t.discount,
       value:t.discount,
       discounted_value:t.total
@@ -563,9 +574,10 @@ function trackBookingEvent(name,params){
 function totals(){
   const extras=Math.max(0,adults-tour.includedAdults);
   const extraTotal=extras*tour.extra;
-  const logisticsTotal=tour.id==='cinque'&&cinqueLogistics?ticketedGuests()*(tour.logisticsPerGuest||0):0;
-  const subtotal=tour.base+extraTotal+logisticsTotal;
-  const discountActive=normalizedPromoCode()==='FRIEND26';
+  const cappedGroupTotal=tour.maxTotal?Math.min(tour.maxTotal,tour.base+extraTotal):tour.base+extraTotal;
+  const logisticsTotal=0;
+  const subtotal=cappedGroupTotal+logisticsTotal;
+  const discountActive=isPromoCodeActive();
   const discount=discountActive?Math.round(subtotal*0.1):0;
   const total=Math.max(0,subtotal-discount);
   const dueToday=paymentMode==='full'?total:tour.deposit;
@@ -595,6 +607,7 @@ function updateSummary(){
   document.getElementById('mobile-price-pp').innerHTML=euro(t.perPerson)+' <span>pp</span>';
   document.getElementById('mobile-price-total').textContent=euro(t.total)+' total · '+guestSummary()+' · taxes included';
   document.getElementById('discount-row').style.display=t.discountActive?'flex':'none';
+  document.getElementById('discount-label').textContent=normalizedPromoCode()+' discount';
   document.getElementById('discount-price').textContent='-'+euro(t.discount);
   document.getElementById('promo-message').classList.toggle('on',t.discountActive);
   document.getElementById('total-price').textContent=euro(t.total);
@@ -605,9 +618,9 @@ function updateSummary(){
   const paymentNote=document.getElementById('payment-note');
   paymentNote.style.display=paymentMode==='full'?'none':'block';
   paymentNote.textContent='The remaining balance is paid online via a secure payment link sent by email before the experience.';
-  const included=tour.id==='cinque'&&cinqueLogistics?[...tour.includedItems,'Round-trip train tickets from Genoa','Best local transport setup for your date: Cinque Terre Card or scenic boat segment']:tour.includedItems;
-  const notIncluded=tour.id==='cinque'&&cinqueLogistics?['Meals and drinks','Optional extras']:tour.notIncludedItems;
-  const reassurance=tour.id==='cinque'&&cinqueLogistics?'Ticket add-on: '+euro(tour.logisticsPerGuest)+' per adult / child. Boat segments depend on sea conditions and seasonal schedules.':tour.reassurance;
+  const included=tour.includedItems;
+  const notIncluded=tour.notIncludedItems;
+  const reassurance=tour.reassurance;
   document.getElementById('included-box').innerHTML=
     '<details class="included-details">'+
     '<summary>What is included?</summary>'+
@@ -651,7 +664,7 @@ async function goToConfirmation(){
     payment_amount:t.dueToday,
     total_value:t.total,
     remaining_balance:t.remaining,
-    coupon:t.discountActive?'FRIEND26':''
+    coupon:t.discountActive?normalizedPromoCode():''
   });
   const btn=document.getElementById('pay-button');
   const originalText=btn.textContent;
