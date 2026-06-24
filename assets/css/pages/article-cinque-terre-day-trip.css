@@ -27,7 +27,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 4
 .art-intro{font-size:16px;color:var(--ink-mid);line-height:1.8;margin-bottom:48px;padding-bottom:48px;border-bottom:0.5px solid var(--line)}
 .comparison-section{margin:0 0 56px}
 .comparison-section h2{font-family:inherit;font-size:24px;font-weight:780;color:var(--ink);margin-bottom:18px;line-height:1.25}
-.comparison-scroll{overflow-x:auto;border:0.5px solid var(--line);border-radius:16px;background:var(--white);-webkit-overflow-scrolling:touch}
+.comparison-scroll{position:relative;overflow-x:auto;border:0.5px solid var(--line);border-radius:16px;background:var(--white);-webkit-overflow-scrolling:touch}
+.scroll-hint{display:none}
 .comparison-table{width:100%;min-width:640px;border-collapse:collapse;text-align:left}
 .comparison-table th{background:var(--gold-faint);color:var(--ink);font-size:14px;font-weight:750;padding:14px 16px;border-bottom:0.5px solid var(--line)}
 .comparison-table td{font-size:15px;color:var(--ink-mid);line-height:1.5;padding:14px 16px;border-bottom:0.5px solid var(--line);vertical-align:top}
@@ -59,11 +60,19 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 4
 .art-list li{font-size:15px;color:var(--ink-mid);line-height:1.7;padding:10px 0 10px 20px;border-bottom:0.5px solid var(--line);position:relative}
 .art-list li:last-child{border-bottom:none}
 .art-list li::before{content:'—';position:absolute;left:0;color:var(--gold)}
+.comparison-note{font-size:15px;color:var(--stone);line-height:1.6;margin-top:14px}
+.step a,.step-tip a,.art-list a{color:var(--gold);text-decoration:none;font-weight:600}
+.step a:hover,.step-tip a:hover,.art-list a:hover{text-decoration:underline}
 .faq-section{margin-top:56px;padding-top:48px;border-top:0.5px solid var(--line)}
 .faq-section h2{font-family:inherit;font-size:26px;font-weight:400;color:var(--ink);margin-bottom:32px}
 .faq-item{border-bottom:0.5px solid var(--line);padding:20px 0}
 .faq-item:first-of-type{border-top:0.5px solid var(--line)}
-.faq-q{font-family:inherit;font-size:17px;font-weight:400;color:var(--ink);margin-bottom:8px;line-height:1.35}
+.faq-q{font-family:inherit;font-size:17px;font-weight:400;color:var(--ink);line-height:1.35;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:0}
+.faq-toggle{flex:0 0 auto;color:var(--gold);font-size:20px;line-height:1;font-weight:400;transition:transform 0.25s ease}
+.faq-item.open .faq-toggle{transform:rotate(45deg)}
+.faq-a-wrap{max-height:0;overflow:hidden;transition:max-height 0.3s ease}
+.faq-item.open .faq-a-wrap{max-height:600px}
+.faq-a-wrap .faq-a{margin-top:8px}
 .faq-a{font-size:14px;color:var(--stone);line-height:1.75}
 .faq-a a{color:var(--gold);text-decoration:none}
 .related-link{margin-top:56px;padding-top:40px;border-top:0.5px solid var(--line)}
@@ -88,6 +97,8 @@ footer{background:var(--white);border-top:0.5px solid var(--line);padding:32px 4
   .art-photo img{height:240px}
   .art-cta{padding:36px 24px}
   .art-cta h2{font-size:22px}
+  .scroll-hint{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:650;color:var(--gold);margin-bottom:8px}
+  .comparison-scroll{background:linear-gradient(to right,var(--white) 70%,var(--gold-faint) 100%)}
   footer{padding:24px 20px}
 }
 /* Apple-like readability pass */
@@ -114,6 +125,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',sans-
 .faq-q{font-size:18px;font-weight:780;line-height:1.35}
 .faq-a{font-size:16px;line-height:1.65;color:var(--stone)}
 .foot-copy{font-size:13px;letter-spacing:0}
+.comparison-table th{font-size:15px;font-weight:760}
+.comparison-table td{font-size:16px;line-height:1.55}
 @media(max-width:900px){
   .art-h1{font-size:34px}
   .art-sub,.step p,.art-list li,.sub-step p,.related-link p{font-size:17px}

@@ -1,8 +1,8 @@
-const GENOA_HALF_SLOTS = ['09:30', '14:30'];
+const GENOA_HALF_SLOTS = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
 const DAY_BLOCKING_TOURS = new Set(['portofino', 'cinque', 'genoa-full']);
 const TOUR_SLOTS = {
   'genoa-half': GENOA_HALF_SLOTS,
-  'genoa-full': ['09:30'],
+  'genoa-full': ['09:00', '10:00', '11:00', '12:00'],
   portofino: ['09:30'],
   cinque: ['07:30', '08:30']
 };

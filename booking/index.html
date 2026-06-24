@@ -236,7 +236,7 @@ const tours={
     reassurance:'This keeps the day flexible: I suggest the best local stops and options, and you only pay separately for what you actually choose.',
     meta:['3.5 hours','Private experience','Genoa essentials'],
     meeting:'Via della Mercanzia, 2, 16124 Genova GE',
-    slots:{Morning:['09:30'],Afternoon:['14:30']}
+    slots:{Morning:['09:00','10:00','11:00'],Afternoon:['12:00','13:00','14:00','15:00','16:00','17:00']}
   },
   'genoa-full':{
     id:'genoa-full',name:'Genoa Highlights & Hidden Corners · Full Day',duration:'7 hours',base:330,extra:20,deposit:100,includedAdults:4,max:12,
@@ -247,27 +247,27 @@ const tours={
     reassurance:'This keeps the day flexible: I suggest the best local stops and options, and you only pay separately for what you actually choose.',
     meta:['7 hours','Private experience','Old town + seaside Genoa'],
     meeting:'Via della Mercanzia, 2, 16124 Genova GE',
-    slots:{Morning:['09:30']}
+    slots:{Morning:['09:00','10:00','11:00','12:00']}
   },
   portofino:{
-    id:'portofino',name:'Portofino & Beyond',duration:'Full day',base:490,extra:20,maxTotal:650,deposit:100,includedAdults:4,max:12,
+    id:'portofino',name:'Portofino & Beyond',duration:'Full day (~8h)',base:490,extra:20,maxTotal:650,deposit:100,includedAdults:4,max:12,
     image:'/images/portofino/portofino-panoramic.jpg',back:'/tours/portofino-beyond/',
     copy:'A full day along the Ligurian Riviera with Portofino, San Fruttuoso and Camogli at your own pace.',
     includedItems:['Private experience with Nefset','Route planning around the seasonal ferry schedule','Flexible route pacing throughout the day'],
     notIncludedItems:['Ferry / boat tickets, usually around €30 per person','Transport to the meeting point in Genoa','Food and drinks'],
     reassurance:'Ferry or boat tickets are paid separately, usually around €30 per person depending on the seasonal route. Children and teenagers may have lower fares, and I will help you choose and book the right tickets for your date.',
-    meta:['Full day','Private experience','Ferry paid separately'],
+    meta:['Full day (~8h)','Private experience','Ferry paid separately'],
     meeting:'Via della Mercanzia, 2, 16124 Genova GE',
     slots:{Morning:['09:30']}
   },
   cinque:{
-    id:'cinque',name:'Cinque Terre Day Experience',duration:'Full day',base:590,extra:13,maxTotal:690,deposit:100,includedAdults:4,max:12,logisticsPerGuest:0,
+    id:'cinque',name:'Cinque Terre Day Experience',duration:'Full day (~8h)',base:590,extra:13,maxTotal:690,deposit:100,includedAdults:4,max:12,logisticsPerGuest:0,
     image:'/images/5 terre/sami-hobbs-ihw2jww6xt4-unsplash.jpg',back:'/tours/cinque-terre-experience/',
     copy:'A relaxed full day by train through Vernazza, Manarola and Riomaggiore, with optional hiking.',
     includedItems:['Private experience with Nefset','Route planning and flexible pacing'],
     notIncludedItems:['Train, Cinque Terre Card or boat tickets','Meals and drinks','Optional extras'],
     reassurance:'Transport tickets are paid separately, usually around €50-70 per person depending on season and route. Children and teenagers may have lower fares, and I will help you choose and book the right option.',
-    meta:['Full day','Private experience','Tickets paid separately'],
+    meta:['Full day (~8h)','Private experience','Tickets paid separately'],
     meeting:'Genova Brignole Railway Station',
     slots:{'Early morning':['07:30','08:30']}
   }
@@ -478,7 +478,8 @@ function renderSlots(){
     note.textContent='This date is not available for '+tour.name+'. Please choose another date.';
     return;
   }
-  note.textContent='Available start times for '+prettyDate(selectedDate)+'.';
+  const flexNote=(tour.id==='genoa-half'||tour.id==='genoa-full')?' Times are flexible by about ±30 minutes — message me on WhatsApp if you need something different.':'';
+  note.textContent='Available start times for '+prettyDate(selectedDate)+'.'+flexNote;
   Object.entries(tour.slots).forEach(([label,times])=>{
     const group=document.createElement('div');
     group.innerHTML='<div class="slot-label">'+label+'</div>';
